@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Ricetta {
@@ -21,6 +22,7 @@ public class Ricetta {
 	/* mettere la possibilità di scrivere tanto*/
 	private String descrizione;
 	
+	@OneToOne
 	private Cuoco cuoco;
 
 	public String getNome() {
