@@ -1,22 +1,63 @@
 <html>
   <head>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 	<meta charset="UTF-8">
 	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Siw-Food - Homepage</title>
 	<link rel="stylesheet" href="/css/style.css">
   </head>
   <body>
-    <nav>
-		<a id="site-title">Siw-Food</a>
-	</nav>
-    <header></header>
-    <section>
-      <!-- main paragraph --> 
-      <p></p>
-      <!-- Two column-type things --> 
-      <div id="flex-container">
-       </div>
-    </section>
-    <footer></footer>
+	<div id="site-wrapper" class="site-wrapper">
+		<header>
+			<!-- Background -->
+			<div class="header-background"></div>
+			<div class="header-display-desktop">
+				<style> .top-bun, .patty, .bottom-bun { height: 1px; } </style>
+			</div>
+			<!-- Title and Nav wrapper-->
+			<div class="header-title-nav-wrapper">
+				<div class="header-title">
+					<div class="header-title-text">
+						<a id="site-title" href="/">Siw-Food</a>
+					</div>
+				</div>
+				<div class="header-nav">
+					<div class="header-nav-wrapper">
+						<nav class="header-nav-list">
+							<div class="header-nav-item">Login</div>
+							<div class="header-nav-item">Ricette</div>
+							<div class="header-nav-item">Cuochi</div>
+						</nav>
+					</div>
+				</div>
+			</div>
+		</header>
+		<main>
+			<article class="sections" id="sections">
+				<!-- inserire sezioni per alcuni articoli presi da database -->
+			</article>
+		</main>
+		<footer id="footer-sections" class="footer">
+			<div class="section-border">
+				<div class="section-background"> </div>
+			</div>
+			<div class="content-wrapper">
+				<div class="content">
+					<div class="socials">
+						<nav class="footer-nav-list">
+							<a href="https://www.instagram.com/edoardopiazzolla/">
+								<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Instagram_logo_2016.svg/2048px-Instagram_logo_2016.svg.png"/>
+							</a>
+							<a href="https://www.youtube.com/channel/UC5LdtlfzoK9pftejCPvzWrg">
+								<img src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Youtube_logo.png"/>
+							</a>
+						</nav>
+					</div>
+				</div>
+			</div>
+		</footer>
+	</div>
   </body>
 </html>
