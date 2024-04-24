@@ -1,12 +1,14 @@
 package it.uniroma3.siw.model;
 
 import java.util.List;
+import java.util.Objects;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Ricetta {
@@ -22,8 +24,11 @@ public class Ricetta {
 	/* mettere la possibilità di scrivere tanto*/
 	private String descrizione;
 	
-	@OneToOne
+	@ManyToOne
 	private Cuoco cuoco;
+	
+	@ManyToMany(mappedBy = "ricette")
+	private List<Ingrediente> ingredientiUtilizzati;
 
 	public String getNome() {
 		return nome;
@@ -56,7 +61,27 @@ public class Ricetta {
 	public void setCuoco(Cuoco cuoco) {
 		this.cuoco = cuoco;
 	}
+	
+	public long getId() {
+		return id;
+	}
 
+	public void setId(long id) {
+		this.id = id;
+	}
+	
+	@Override
+	public int hashCode() {
+	    return Objects.hash(nome, cuoco);
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Ricetta r = (Ricetta) o;
+		return Objects.equals(nome, r.nome) && Objects.equals(cuoco, r.cuoco);
+	}
 
 	
 

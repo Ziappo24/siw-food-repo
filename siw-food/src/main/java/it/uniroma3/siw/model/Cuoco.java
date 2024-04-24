@@ -2,6 +2,7 @@ package it.uniroma3.siw.model;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -66,7 +67,27 @@ public class Cuoco {
 		public void setRicette(List<Ricetta> ricette) {
 			this.ricette = ricette;
 		}
+		
+		public long getId() {
+			return id;
+		}
 
+		public void setId(long id) {
+			this.id = id;
+		}
+		
+		@Override
+		public int hashCode() {
+		    return Objects.hash(nome, cognome);
+		}
+		
+		@Override
+		public boolean equals(Object o) {
+			if (this == o) return true;
+			if (o == null || getClass() != o.getClass()) return false;
+			Cuoco cuoco = (Cuoco) o;
+			return Objects.equals(nome, cuoco.nome) && Objects.equals(cognome, cuoco.cognome);
+		}
 
 		
 		
