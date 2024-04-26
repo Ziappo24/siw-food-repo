@@ -1,0 +1,7 @@
+insert into ricetta (id, nome, url_Image, descrizione) values(nextval('ricetta_seq'), 'Carbonara', 'https://foodwhirl.com/wp-content/uploads/2017/02/spaghetti-carbonara-insta-768x762.jpg', 'pasta con uova');
+insert into ricetta (id, nome, url_Image, descrizione) values(nextval('ricetta_seq'), 'Amatriciana', 'https://www.ntacalabria.it/wp-content/uploads/2015/10/piatto_di_vera_amatriciana-1024x681.jpg', 'pasta con pomodoro');
+insert into ricetta (id, nome, url_Image, descrizione) values(nextval('ricetta_seq'), 'Cacio e Pepe', 'https://i0.wp.com/www.thegrguide.com/wp-content/uploads/2019/11/Cacio-e-Pepe-Dinner.jpg?ssl=1', 'pasta con il formaggio');
+
+insert into cuoco (id, nome, cognome, url_Image, nascita) values(nextval('cuoco_seq'), 'Bruno', 'Barbieri', 'https://www.occhionotizie.it/wp-content/uploads/2019/01/Bruno-Barbieri.jpg','1958-08-25');
+insert into cuoco (id, nome, cognome, url_Image, nascita) values(nextval('cuoco_seq'), 'Antonino', 'Cannavacciuolo', 'https://www.salepepe.it/cdn-cgi/image/width=992/files/2014/04/FOXLIFE_CucineDaIncubo_seconda-stagione_Cannavacciuolo-1.jpg','1990-10-13');
+insert into cuoco (id, nome, cognome, url_Image, nascita) values(nextval('cuoco_seq'), 'Vincenzo', 'Milillo', 'https://th.bing.com/th/id/OIP.EfNjLZJsFSubH_ESUaqUVQHaHa?rs=1&pid=ImgDetMain','2002-09-08');

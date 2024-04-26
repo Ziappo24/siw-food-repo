@@ -1,6 +1,7 @@
 package it.uniroma3.siw.model;
 
 import java.time.LocalDate;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
@@ -23,10 +24,14 @@ public class Cuoco {
 		
 		private String urlImage;
 		
-		private LocalDate dataDiNascita;
+		private LocalDate nascita;
 		
 		@OneToMany(mappedBy = "cuoco")
 		private List<Ricetta> ricette;
+		
+		public Cuoco() {
+			this.ricette = new LinkedList<>();
+		}
 
 		public String getCognome() {
 			return cognome;
@@ -52,13 +57,6 @@ public class Cuoco {
 			this.urlImage = urlImage;
 		}
 
-		public LocalDate getDataDiNascita() {
-			return dataDiNascita;
-		}
-
-		public void setDataDiNascita(LocalDate dataDiNascita) {
-			this.dataDiNascita = dataDiNascita;
-		}
 
 		public List<Ricetta> getRicette() {
 			return ricette;
@@ -75,6 +73,13 @@ public class Cuoco {
 		public void setId(long id) {
 			this.id = id;
 		}
+		public LocalDate getNascita() {
+			return nascita;
+		}
+
+		public void setNascita(LocalDate nascita) {
+			this.nascita = nascita;
+		}
 		
 		@Override
 		public int hashCode() {
@@ -88,6 +93,8 @@ public class Cuoco {
 			Cuoco cuoco = (Cuoco) o;
 			return Objects.equals(nome, cuoco.nome) && Objects.equals(cognome, cuoco.cognome);
 		}
+
+
 
 		
 		

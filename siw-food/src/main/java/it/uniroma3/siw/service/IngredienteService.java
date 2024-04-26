@@ -22,7 +22,7 @@ public class IngredienteService {
 		return ingredienteRepository.save(ingrediente);
 	}
 	
-	public Object findByName(String nome) {
+	public Iterable<Ingrediente> findByName(String nome) {
 		return ingredienteRepository.findByNome(nome);
 	}
 }

@@ -1,5 +1,4 @@
-body {
-	border: solid;
+body {	
 	background-color: rgb(238, 222, 208);
 	overflow-wrap: break-word;
 }
@@ -55,41 +54,93 @@ a {
     }
 }
 footer {
-	border: solid;
 	margin-top: 50px; /* Aggiunge spazio sopra il footer */
     text-align: center; /* Centra il contenuto all'interno del footer */
 }
-
 .socials {
     display: inline-block; /* Imposta il display a inline-block per centrare l'icona */
 }
-
 .socials img {
     display: block; /* Imposta il display a block per centrare l'immagine */
     margin: 0 auto; /* Centra l'immagine orizzontalmente */
 }
-
 .footer-nav-list {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 10px; /* Riduci la distanza tra le immagini */
 }
-
 .footer-nav-list a {
     display: flex;
     align-items: center;
     text-decoration: none;
     margin-right: auto; /* Imposta un margine a destra per spingere il secondo link più a sinistra */
 }
-
 .footer-nav-list img {
     max-width: 100%;
     height: 30px
 }
+.content-wrapper {
+    padding: 20px;
+}
+.section-cuoco {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Aggiunge un'ombra */
+}
 
+.image-block {
+    margin-bottom: 20px;
+}
 
+.html-block {
+    font-size: 1.2em;
+    font-weight: 500;
+    font-family: Poppins;
+    font-style: normal;
+    text-transform: none;
+    letter-spacing: 0em;
+    line-height: 1.4em;
+    margin-bottom: 20px;
+}
 
-
-
-
+.block-content {
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+.list-title {
+    font-size: 1.2em;
+   	font-family: Poppins;
+   	font-style: normal;
+    text-transform: none;
+    letter-spacing: 0em;
+    line-height: 1.4em;
+}
+.cuochi-list {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+.list-checker {
+    font-size: 1.2em;
+   	font-family: Poppins;
+   	font-style: normal;
+    text-transform: none;
+    letter-spacing: 0em;
+    line-height: 1.4em;
+}
+.cuochi-list-item {
+    font-size: 1.2em;
+   	font-family: Poppins;
+   	font-style: normal;
+    text-transform: none;
+    letter-spacing: 0em;
+    line-height: 1.4em;
+	margin-bottom: 10px;
+}
+.cuochi-list-link {
+	text-decoration: none;
+	color: rgb(0, 0, 0);
+	font-weight: bold;
+}

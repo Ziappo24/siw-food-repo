@@ -19,7 +19,8 @@ public class Ricetta {
 	
 	private String nome;
 	
-	private List<String> urlImage;
+	/* poi va modificata come lista di immagini*/
+	private String urlImage;
 	
 	/* mettere la possibilità di scrivere tanto*/
 	private String descrizione;
@@ -38,11 +39,11 @@ public class Ricetta {
 		this.nome = nome;
 	}
 
-	public List<String> getUrlImage() {
+	public String getUrlImage() {
 		return urlImage;
 	}
 
-	public void setUrlImage(List<String> urlImage) {
+	public void setUrlImage(String urlImage) {
 		this.urlImage = urlImage;
 	}
 

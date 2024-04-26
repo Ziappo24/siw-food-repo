@@ -24,7 +24,7 @@ public class RicettaService {
 		return ricettaRepository.save(ricetta);
 	}
 
-	public Object findByCuoco(Cuoco cuoco) {
+	public Iterable<Ricetta> findByCuoco(Cuoco cuoco) {
 		return ricettaRepository.findByCuoco(cuoco);
 	}
 }
