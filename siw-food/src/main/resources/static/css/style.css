@@ -54,7 +54,7 @@ a {
     }
 }
 footer {
-	margin-top: 50px; /* Aggiunge spazio sopra il footer */
+	margin-top: 30px; /* Aggiunge spazio sopra il footer */
     text-align: center; /* Centra il contenuto all'interno del footer */
 }
 .socials {
@@ -81,7 +81,7 @@ footer {
     height: 30px
 }
 .content-wrapper {
-    padding: 20px;
+    padding: 1.5em;
 }
 .section-cuoco {
     background-color: white;
@@ -90,8 +90,10 @@ footer {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Aggiunge un'ombra */
 }
 
-.image-block {
+.image-block img{
     margin-bottom: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); /* Aggiunge un'ombra */
 }
 
 .html-block {
@@ -104,8 +106,14 @@ footer {
     line-height: 1.4em;
     margin-bottom: 20px;
 }
+.block-content-main {
+	font-size: 1.5em;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
 
 .block-content {
+	font-size: 1em;
     margin-right: 20px;
     margin-bottom: 20px;
 }
@@ -118,9 +126,9 @@ footer {
     line-height: 1.4em;
 }
 .cuochi-list {
-	list-style-type: none;
+	list-style-type: decimal;
 	padding: 0;
-	margin: 0;
+	margin-left: 1em;
 }
 .list-checker {
     font-size: 1.2em;
@@ -142,5 +150,55 @@ footer {
 .cuochi-list-link {
 	text-decoration: none;
 	color: rgb(0, 0, 0);
-	font-weight: bold;
+	font-weight: normal;
+}
+
+.section-ricetta {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Aggiunge un'ombra */
+}
+
+.ricette-list {
+	list-style-type: decimal;
+	padding: 0;
+	margin-left: 1em;
+}
+.ricette-list-item {
+    font-size: 1.2em;
+   	font-family: Poppins;
+   	font-style: normal;
+    text-transform: none;
+    letter-spacing: 0em;
+    line-height: 1.4em;
+	margin-bottom: 10px;
+}
+.ricette-list-link {
+	text-decoration: none;
+	color: rgb(0, 0, 0);
+	font-weight: normal;
+}
+.year-text {
+	font-size: 0.9em;
+   	font-family: Poppins;
+   	font-style: normal;
+    text-transform: none;
+    letter-spacing: 0em;
+    line-height: 1.4em;
+	margin-bottom: 10px;
+	font-weight: 400;
+}
+.description-title {
+	font-weight: 600;
+}
+.description-text {
+	font-size: 0.9em;
+   	font-family: Poppins;
+   	font-style: normal;
+    text-transform: none;
+    letter-spacing: 0em;
+    line-height: 1.4em;
+	margin-bottom: 10px;
+	font-weight: 400;
 }
