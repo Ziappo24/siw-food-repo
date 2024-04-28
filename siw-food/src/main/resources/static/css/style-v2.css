@@ -53,36 +53,44 @@ a {
         font-size: 16px; /* Riduci la dimensione del testo per schermi più piccoli */
     }
 }
+
 footer {
 	margin-top: 30px; /* Aggiunge spazio sopra il footer */
     text-align: center; /* Centra il contenuto all'interno del footer */
 }
+
 .socials {
     display: inline-block; /* Imposta il display a inline-block per centrare l'icona */
 }
+
 .socials img {
     display: block; /* Imposta il display a block per centrare l'immagine */
     margin: 0 auto; /* Centra l'immagine orizzontalmente */
 }
+
 .footer-nav-list {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 10px; /* Riduci la distanza tra le immagini */
 }
+
 .footer-nav-list a {
     display: flex;
     align-items: center;
     text-decoration: none;
     margin-right: auto; /* Imposta un margine a destra per spingere il secondo link più a sinistra */
 }
+
 .footer-nav-list img {
     max-width: 100%;
     height: 30px
 }
+
 .content-wrapper {
     padding: 1.5em;
 }
+
 .section-cuoco {
     background-color: white;
     padding: 20px;
@@ -106,6 +114,7 @@ footer {
     line-height: 1.4em;
     margin-bottom: 20px;
 }
+
 .block-content-main {
 	font-size: 1.5em;
     margin-right: 20px;
@@ -117,6 +126,7 @@ footer {
     margin-right: 20px;
     margin-bottom: 20px;
 }
+
 .list-title {
     font-size: 1.2em;
    	font-family: Poppins;
@@ -125,11 +135,13 @@ footer {
     letter-spacing: 0em;
     line-height: 1.4em;
 }
+
 .cuochi-list {
 	list-style-type: decimal;
 	padding: 0;
 	margin-left: 1em;
 }
+
 .list-checker {
     font-size: 1.2em;
    	font-family: Poppins;
@@ -138,6 +150,7 @@ footer {
     letter-spacing: 0em;
     line-height: 1.4em;
 }
+
 .cuochi-list-item {
     font-size: 1.2em;
    	font-family: Poppins;
@@ -147,6 +160,7 @@ footer {
     line-height: 1.4em;
 	margin-bottom: 10px;
 }
+
 .cuochi-list-link {
 	text-decoration: none;
 	color: rgb(0, 0, 0);
@@ -165,6 +179,7 @@ footer {
 	padding: 0;
 	margin-left: 1em;
 }
+
 .ricette-list-item {
     font-size: 1.2em;
    	font-family: Poppins;
@@ -174,11 +189,13 @@ footer {
     line-height: 1.4em;
 	margin-bottom: 10px;
 }
+
 .ricette-list-link {
 	text-decoration: none;
 	color: rgb(0, 0, 0);
 	font-weight: normal;
 }
+
 .year-text {
 	font-size: 0.9em;
    	font-family: Poppins;
@@ -189,9 +206,11 @@ footer {
 	margin-bottom: 10px;
 	font-weight: 400;
 }
+
 .description-title {
 	font-weight: 600;
 }
+
 .description-text {
 	font-size: 0.9em;
    	font-family: Poppins;
@@ -201,4 +220,39 @@ footer {
     line-height: 1.4em;
 	margin-bottom: 10px;
 	font-weight: 400;
+}
+
+.first-section-content {
+    display: flex;
+    justify-content: space-between; /* Allinea gli elementi ai lati opposti */
+    align-items: center;
+    margin-top: 20px;
+}
+
+.first-section-background {
+	background-color:  rgb(238, 222, 208);
+}
+
+.fs-text-block {
+    flex: 1;
+    padding: 0 20px; /* Aggiunge spazio tra l'immagine e il testo */
+}
+
+.fs-image-block img {
+    max-height: 400px; /* Imposta l'altezza massima dell'immagine */
+    width: auto; /* Imposta la larghezza automaticamente in base all'altezza specificata */
+    margin-right: 20px; /* Aggiunge spazio tra l'immagine e il testo */
+}
+
+.fs-text-block h2, p {
+	font-family: Poppins;
+   	font-style: normal;
+    text-transform: none;
+    letter-spacing: 0em;
+    line-height: 1.4em;
+	margin-bottom: 10px;
+    flex: 1; /* Fai espandere il blocco del testo per occupare lo spazio rimanente */
+}
+.fs-text-block p {
+	text-align: justify;
 }
