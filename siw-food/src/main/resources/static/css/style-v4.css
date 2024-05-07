@@ -7,6 +7,7 @@ a {
 	color: black;
 	opacity: 1;
 	font-family: Poppins;
+	text-decoration: none;
 	
 }
 
@@ -293,4 +294,6 @@ footer {
 .fs-text-block p {
 	text-align: justify;
 }
+
+
 

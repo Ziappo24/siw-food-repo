@@ -30,6 +30,6 @@ public class CuocoController {
 	}
 	@GetMapping("/login")
 	public String getLogin() {
-		return "cuochi.html";
+		return "login.html";
 	}
 }

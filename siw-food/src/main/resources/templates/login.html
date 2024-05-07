@@ -1,61 +1,78 @@
 <html>
-  <head>
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-	<meta charset="UTF-8">
-	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Siw-Food - Login</title>
-	<link rel="stylesheet" href="/css/style-v4.css">
-	
-  </head>
-  <body>
-		<div class="container" id="continer">
-			<div class="form-container sign-up">
-				<form>
-					<h1>Create Account</h1>
-					<span>USe your email for registration</span>
-					<input type="text"
-					 placeholder="Name">
-					<input type="email"
-					 placeholder="E-mail">
-					 <input type="password"
-					  placeholder="Password">
-					  <button>Sign Up</button>					
-				</form>
-			</div>
-			<div class="form-container sign-in">
-							<form>
-								<h1>Sign In</h1>
-								<span>USe your email and password</span>
-								<input type="email"
-								 placeholder="E-mail">
-								 <input type="password"
-								  placeholder="Password">
-								  <a href="#">Forget Your Password?</a>
-								 <button>Sign In</button>					
-							</form>
-						</div> 
-						<div class="toggle-container">
-							<div class="toggle">
-								<div class="toggle-panel toggle-left">
-									<h1>Welcome Back!</h1>
-									<p>Enter your personal details 
-									to use all of site features</p>
-									<button class="hidden"
-									id="login">Sign In</button>
-								</div>
-								<div class="toggle-panel toggle-right">
-									<h1>Hello, Friend!</h1>
-									<p>Register with your personal details 
-									to use all of site features</p>
-									<button class="hidden"
-									id="register">Sign Up</button>
-								</div>
+	<head>
+    	<link rel="preconnect" href="https://fonts.googleapis.com">
+   	 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    	<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    	<meta charset="UTF-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    	<title>Siw-Food - Login</title>
+    	<link rel="stylesheet" href="/css/login.css">
+	</head>
+	<body>
+		<header>
+			<!-- Title and Nav wrapper-->
+			<div class="header-title-nav-wrapper">
+				<div class="header-title">
+					<div class="header-title-text">
+						<a id="site-title" href="/">Siw-Food</a>
+					</div>
+				</div>
+				<div class="header-nav">
+					<div class="header-nav-wrapper">
+						<nav class="header-nav-list">
+							<div class="header-nav-item">
+								<a class="no-underline" href="/login">Login</a>
 							</div>
-						</div>
-					</div> 
-		</div>
+							<div class="header-nav-item">							
+								<a class="no-underline" href="/ricette">Ricette</a>
+							</div>
+							<div class="header-nav-item">
+								<a class="no-underline" href="/cuochi">Cuochi</a>
+							</div>
+							<div class="header-nav-item">
+								<a class="no-underline" href="/ingredienti">Ingredienti</a>
+							</div>
+						</nav>
+					</div>
+				</div>
+			</div>
+		</header>
+		<div class="container" id="container">
+		        <div class="form-container sign-up">
+		            <form>
+		                <h1>Create Account</h1>
+		                <span>Use your email for registeration</span>
+		                <input type="text" placeholder="Name">
+		                <input type="email" placeholder="Email">
+		                <input type="password" placeholder="Password">
+		                <button>Sign Up</button>
+		            </form>
+		        </div>
+		        <div class="form-container sign-in">
+		            <form>
+		                <h1>Sign In</h1>
+		                <span>Use your email password</span>
+		                <input type="email" placeholder="Email">
+		                <input type="password" placeholder="Password">
+		                <a href="#">Forget Your Password?</a>
+		                <button>Sign In</button>
+		            </form>
+		        </div>
+		        <div class="toggle-container">
+		            <div class="toggle">
+		                <div class="toggle-panel toggle-left">
+		                    <h1>Welcome Back!</h1>
+		                    <p>Enter your personal details to use all of site features</p>
+		                    <button class="hidden" id="login">Sign In</button>
+		                </div>
+		                <div class="toggle-panel toggle-right">
+		                    <h1>Hello, Friend!</h1>
+		                    <p>Register with your personal details to use all of site features</p>
+		                    <button class="hidden" id="register">Sign Up</button>
+		                </div>
+		            </div>
+		        </div>
+		    </div>
 		<footer id="footer-sections" class="footer">
 			<div class="section-border">
 				<div class="section-background"> </div>
@@ -73,7 +90,8 @@
 						</nav>
 					</div>
 				</div>
-	</div>
-	<script src="script.js"></script>
-  </body>
+			</div>
+		</footer>
+		<script src="/js/script.js"></script>
+	</body>
 </html>
