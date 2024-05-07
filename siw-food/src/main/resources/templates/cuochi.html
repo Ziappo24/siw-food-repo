@@ -6,7 +6,7 @@
 	<meta charset="UTF-8">
 	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Siw-Food - Lista Cuochi</title>
-	<link rel="stylesheet" href="/css/style-v2.css">
+	<link rel="stylesheet" href="/css/style-v3.css">
   </head>
   <body>
 	<div id="site-wrapper" class="site-wrapper">
@@ -61,7 +61,7 @@
 										<ul class="cuochi-list">
 											<li class="cuochi-list-item" th:each="cuoco : ${cuochi}">
 												<a class="cuochi-list-link" th:href="@{'/cuoco' + '/' + ${cuoco.id}}"
-												   th:text="${cuoco.nome} + ' (' + ${cuoco.cognome} + ')'"></a>
+												   th:text="${cuoco.nome} + ' ' + ${cuoco.cognome}"></a>
 											</li>
 										</ul>
 									</div>
@@ -81,10 +81,10 @@
 					<div class="socials">
 						<nav class="footer-nav-list">
 							<a href="https://www.instagram.com/edoardopiazzolla/">
-								<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Instagram_logo_2016.svg/2048px-Instagram_logo_2016.svg.png"/>
+								<img src="/images/Instagram.png"/>
 							</a>
 							<a href="https://www.youtube.com/channel/UC5LdtlfzoK9pftejCPvzWrg">
-								<img src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Youtube_logo.png"/>
+								<img src="/images/youtube.png"/>
 							</a>
 						</nav>
 					</div>

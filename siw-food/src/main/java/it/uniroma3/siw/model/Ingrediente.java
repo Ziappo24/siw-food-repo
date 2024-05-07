@@ -20,7 +20,11 @@ public class Ingrediente {
 
 	private Float quantita;
 
+	private String urlImage;
+	
 	private String udm;
+	
+	
 
 	@ManyToMany
 	private List<Ricetta> ricette;
@@ -69,6 +73,14 @@ public class Ingrediente {
 		if (o == null || getClass() != o.getClass()) return false;
 		Ingrediente i = (Ingrediente) o;
 		return Objects.equals(nome, i.nome) && Objects.equals(quantita, i.quantita);
+	}
+
+	public String getUrlImage() {
+		return urlImage;
+	}
+
+	public void setUrlImage(String urlImage) {
+		this.urlImage = urlImage;
 	}
 
 }
