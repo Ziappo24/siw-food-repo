@@ -10,5 +10,5 @@ public interface IngredienteRepository extends CrudRepository<Ingrediente, Long>
 	
 	public List<Ingrediente> findByNome(String nome);
 	
-	public List<Ingrediente> findByQuantitaAndUdm(Float quantita, String udm);
+	public List<Ingrediente> findByQuantita(Float quantita);
 }

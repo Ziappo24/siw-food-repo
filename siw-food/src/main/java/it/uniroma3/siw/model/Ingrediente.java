@@ -3,6 +3,7 @@ package it.uniroma3.siw.model;
 import java.util.List;
 import java.util.Objects;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,7 +23,9 @@ public class Ingrediente {
 
 	private String urlImage;
 	
-	private String udm;
+	// private String udm;
+	@Column(length = 2000)
+	private String descrizione;
 	
 	
 
@@ -46,13 +49,13 @@ public class Ingrediente {
 		this.quantita = quantita;
 	}
 
-	public String getUdm() {
-		return udm;
-	}
-
-	public void setUdm(String udm) {
-		this.udm = udm;
-	}
+//	public String getUdm() {
+//		return udm;
+//	}
+//
+//	public void setUdm(String udm) {
+//		this.udm = udm;
+//	}
 	
 	public long getId() {
 		return id;
@@ -81,6 +84,14 @@ public class Ingrediente {
 
 	public void setUrlImage(String urlImage) {
 		this.urlImage = urlImage;
+	}
+
+	public String getDescrizione() {
+		return descrizione;
+	}
+
+	public void setDescrizione(String descrizione) {
+		this.descrizione = descrizione;
 	}
 
 }

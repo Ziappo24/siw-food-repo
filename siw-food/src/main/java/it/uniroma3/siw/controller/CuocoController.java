@@ -28,4 +28,8 @@ public class CuocoController {
 		model.addAttribute("cuochi", this.cuocoService.findAll());
 		return "cuochi.html";
 	}
+	@GetMapping("/login")
+	public String getLogin() {
+		return "cuochi.html";
+	}
 }

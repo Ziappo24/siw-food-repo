@@ -256,6 +256,7 @@ footer {
     line-height: 1.4em;
 	margin-bottom: 10px;
 	font-weight: 400;
+	text-align: justify;
 }
 
 .first-section-content {
@@ -292,3 +293,4 @@ footer {
 .fs-text-block p {
 	text-align: justify;
 }
+
