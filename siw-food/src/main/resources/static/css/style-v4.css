@@ -260,6 +260,7 @@ footer {
 	text-align: justify;
 }
 
+
 .first-section-content {
     display: flex;
     justify-content: space-between; /* Allinea gli elementi ai lati opposti */
@@ -280,6 +281,8 @@ footer {
     max-height: 400px; /* Imposta l'altezza massima dell'immagine */
     width: auto; /* Imposta la larghezza automaticamente in base all'altezza specificata */
     margin-right: 20px; /* Aggiunge spazio tra l'immagine e il testo */
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .fs-text-block h2, p {
@@ -293,6 +296,56 @@ footer {
 }
 .fs-text-block p {
 	text-align: justify;
+}
+
+.second-section {
+    background-color: white; /* Sovrascrive il colore di sfondo della sezione */
+}
+
+.second-section-content {
+    display: flex;
+    justify-content: space-between; /* Disponi le immagini con spazio tra di loro */
+}
+
+.ss-image-block {
+    flex: 1; /* Le immagini occupano lo stesso spazio disponibile */
+    margin: 10px; /* Aggiungi margine tra le immagini */
+    display: flex; /* Abilita il layout flessibile per le immagini */
+    justify-content: center; /* Centra le immagini lungo l'asse orizzontale */
+    align-items: center; /* Centra le immagini lungo l'asse verticale */
+    
+}
+
+.ss-block-content {
+    width: 100%; /* Imposta la larghezza delle immagini al 100% del contenitore */
+    text-align: center; /* Centra il contenuto all'interno del blocco dell'immagine */
+}
+
+.ss-block-content img {
+    max-width: 80%; /* Imposta la larghezza massima dell'immagine al 100% */
+    height: auto; /* Imposta l'altezza automaticamente in base alla larghezza specificata */
+}
+
+.links {
+    display: flex;
+    flex-direction: row; /* Disponi i link in riga */
+    justify-content: center; /* Centra i link lungo l'asse orizzontale */
+    align-items: center; /* Centra i link lungo l'asse verticale */
+    margin-top: 10px; /* Aggiungi spazio superiore tra le immagini e i link */
+}
+
+.links a {
+    color: black; /* Colore del testo dei link */
+    text-decoration: none; /* Rimuovi il sottolineato dai link */
+    padding: 5px 10px; /* Aggiungi spazio intorno ai link */
+    border: 1px solid black; /* Aggiungi un bordo ai link */
+    border-radius: 5px; /* Rendi i link arrotondati */
+    margin: 0 10px; /* Aggiungi spazio tra i link */
+}
+
+.links a:hover {
+    background-color: black; /* Cambia il colore di sfondo dei link al passaggio del mouse */
+    color: white; /* Cambia il colore del testo dei link al passaggio del mouse */
 }
 
 

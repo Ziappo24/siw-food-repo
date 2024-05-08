@@ -4,8 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
+import it.uniroma3.siw.model.Cuoco;
 import it.uniroma3.siw.repository.CuocoRepository;
 import it.uniroma3.siw.service.CuocoService;
 
@@ -31,5 +34,23 @@ public class CuocoController {
 	@GetMapping("/login")
 	public String getLogin() {
 		return "login.html";
+	}
+	
+	@GetMapping("/formNewCuoco")
+	public String formNewCuoco(Model model) {
+		model.addAttribute("cuoco", new Cuoco());
+		return "/formNewCuoco.html";
+	}
+	
+	@PostMapping("/cuochi")
+	public String newCuoco(@ModelAttribute("cuoco") Cuoco cuoco, Model model) {
+		if (!cuocoRepository.existsByNomeAndCognome(cuoco.getNome(), cuoco.getCognome())) {
+			this.cuocoService.save(cuoco);
+			model.addAttribute("cuoco", cuoco);
+			return "redirect:cuoco/"+cuoco.getId();
+		} else {
+			model.addAttribute("messaggioErrore", "Questo cuoco esiste già");
+			return "formNewCuoco.html";
+		}
 	}
 }

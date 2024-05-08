@@ -5,7 +5,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-
 import it.uniroma3.siw.repository.RicettaRepository;
 import it.uniroma3.siw.service.RicettaService;
 
@@ -28,5 +27,5 @@ public class RicettaController {
 		model.addAttribute("ricette", this.ricettaService.findAll());
 		return "ricette.html";
 	}
-	
+
 }
