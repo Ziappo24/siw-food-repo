@@ -1,3 +1,8 @@
+.mate-sc-regular {
+  font-family: "Mate SC", serif;
+  font-weight: 400;
+  font-style: normal;
+}
 
 .header-title-nav-wrapper {
     display: flex;
@@ -7,11 +12,11 @@
 }
 
 .header-title-text {
-    font-size: 30px;
-    font-weight: 500;
+    font-size: 40px;
+    font-weight: 550;
     margin-right: 20px;
     margin-left: 20px;
-   	font-family: Poppins;
+   	font-family: "Mate SC";
    	font-style: normal;
     text-transform: none;
     letter-spacing: 0em;
@@ -22,22 +27,20 @@
     display: inline-flex;
     flex-wrap: wrap;
     align-items: center;
-    font-family: "Poppins";
+    font-family: "Mate SC";
 }
 
 .header-nav-item a {
     margin-right: 20px;
-    font-size: 18px;
+    font-size: 20px;
+    font-weight: 400;
+    text-decoration: none;
     color: black;
-	opacity: 1;
-	font-family: Poppins;
-	text-decoration: none;
 }
 
 .no-underline {
   text-decoration: none;
-   text-transform: none;
-   
+   text-transform: none; 
 }
 
 
@@ -58,7 +61,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
+    font-family: "Mate SC";
 }
 
 body{
@@ -83,19 +86,19 @@ body{
 }
 
 .container p{
-    font-size: 14px;
+    font-size: 16px;
     line-height: 20px;
     letter-spacing: 0.3px;
     margin: 20px 0;
 }
 
 .container span{
-    font-size: 12px;
+    font-size: 16px;
 }
 
 .container a{
     color: #333;
-    font-size: 13px;
+    font-size: 14px;
     text-decoration: none;
     margin: 15px 0 10px;
 }
@@ -103,7 +106,7 @@ body{
 .container button{
     background-color: rgb(202, 152, 106);
     color: #fff;
-    font-size: 12px;
+    font-size: 14px;
     padding: 10px 45px;
     border: 1px solid transparent;
     border-radius: 8px;
@@ -134,7 +137,7 @@ body{
     border: none;
     margin: 8px 0;
     padding: 10px 15px;
-    font-size: 13px;
+    font-size: 14px;
     border-radius: 8px;
     width: 100%;
     outline: none;
@@ -200,9 +203,9 @@ body{
 }
 
 .toggle{
-    background-color: rgb(238, 222, 208);
+    background-color: rgb(228, 203, 180);
     height: 100%;
-    background: linear-gradient(to right, rgb(238, 222, 208), rgb(202, 152, 106));
+    background: linear-gradient(to right, rgb(228, 203, 180), rgb(201, 150, 103));
     color: #fff;
     position: relative;
     left: -100%;
