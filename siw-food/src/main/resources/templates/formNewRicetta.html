@@ -38,13 +38,12 @@
 			</div>
 		</header>
 		<div class="container" id="container">
-		        <div class="form-container inserisci-cuoco">
-		            <form th:action="@{/cuochi}" method="POST" th:object="${cuoco}">
-		                <h1>Inserisci Cuoco</h1>
+		        <div class="form-container inserisci">
+		            <form th:action="@{/ricette}" method="POST" th:object="${ricetta}">
+		                <h1>Inserisci Ricetta</h1>
 		                <span>Inserisci di seguito tutte le informazioni richieste</span>
-		                <input required type="text" placeholder="Nome" th:field="${cuoco.nome}">
-		                <input required type="text" placeholder="Cognome" th:field="${cuoco.cognome}">
-		                <input type="date" placeholder="Data Di Nascita (dd-MM-yyyy)" th:field="${cuoco.nascita}">
+		                <input required type="text" placeholder="Nome" th:field="${ricetta.nome}">
+		                <input required type="text" placeholder="Descrizione" th:field="${ricetta.descrizione}">
 		                <button>Inserisci</button>
 		            </form>
 		        </div>

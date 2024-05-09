@@ -25,9 +25,13 @@
     font-family: "Poppins";
 }
 
-.header-nav-item {
+.header-nav-item a {
     margin-right: 20px;
-    font-size: 18px; 
+    font-size: 18px;
+    color: black;
+	opacity: 1;
+	font-family: Poppins;
+	text-decoration: none;
 }
 
 .no-underline {
