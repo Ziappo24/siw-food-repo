@@ -55,7 +55,8 @@
 							<div data-fluid-engine="true">
 								<div class="image-block">
 									<div class="block-content">
-										<img th:src="@{/images/__${ricetta.urlImage}__}" style="width: 30%; height: auto;">
+										<img th:if="${ricetta.urlImage.startsWith('https')}" th:src="${ricetta.urlImage}" style="width: 30%; height: auto;">
+										<img th:unless="${ricetta.urlImage.startsWith('https')}" th:src="@{/images/__${ricetta.urlImage}__}" style="width: 30%; height: auto;">
 									</div>
 								</div>
 								<div class="html-block">

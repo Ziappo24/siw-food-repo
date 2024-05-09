@@ -55,7 +55,10 @@
 							<div data-fluid-engine="true">
 								<div class="image-block">
 									<div class="block-content">
-										<img th:src="@{/images/__${cuoco.urlImage}__}" style="width: 30%; height: auto;">
+										<div class="block-content">
+										    <img th:if="${cuoco.urlImage.startsWith('https')}" th:src="${cuoco.urlImage}" style="width: 30%; height: auto;">
+										    <img th:unless="${cuoco.urlImage.startsWith('https')}" th:src="@{/images/__${cuoco.urlImage}__}" style="width: 30%; height: auto;">
+										</div>
 									</div>
 								</div>
 								<div class="html-block">
