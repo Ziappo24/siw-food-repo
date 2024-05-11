@@ -3,10 +3,14 @@ package it.uniroma3.siw.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import it.uniroma3.siw.controller.validator.RicettaValidator;
 import it.uniroma3.siw.model.Ricetta;
 import it.uniroma3.siw.repository.RicettaRepository;
 import it.uniroma3.siw.service.RicettaService;
@@ -17,6 +21,7 @@ public class RicettaController {
 	@Autowired RicettaRepository ricettaRepository;
 	
 	@Autowired RicettaService ricettaService;
+	@Autowired RicettaValidator ricettaValidator;
 	
 	
 	@GetMapping("/ricetta/{id}")
@@ -38,13 +43,13 @@ public class RicettaController {
 	}
 	
 	@PostMapping("/ricette")
-	public String newRicetta(@ModelAttribute("ricetta") Ricetta ricetta, Model model) {
-		if (!ricettaRepository.existsByNomeAndCuoco(ricetta.getNome(), ricetta.getCuoco())) {
+	public String newRicetta(@Validated @ModelAttribute("ricetta") Ricetta ricetta, BindingResult bindingResult, Model model) {
+		this.ricettaValidator.validate(ricetta, bindingResult);
+		if (!bindingResult.hasErrors()) {
 			this.ricettaService.save(ricetta);
-			model.addAttribute("cuoco", ricetta);
+			model.addAttribute("ricetta", ricetta);
 			return "redirect:ricetta/"+ricetta.getId();
 		} else {
-			model.addAttribute("messaggioErrore", "Questa ricetta esiste già");
 			return "formNewRicetta.html";
 		}
 	}
