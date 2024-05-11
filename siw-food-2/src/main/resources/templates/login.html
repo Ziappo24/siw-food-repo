@@ -20,7 +20,11 @@
 				<div class="header-nav">
 					<div class="header-nav-wrapper">
 						<nav class="header-nav-list">
-							<div class="header-nav-item">
+							<div class="header-nav-item" th:if="${#request.userPrincipal}">
+								<span th:text="${#request.userPrincipal.principal.username}"></span>
+								<a class="no-underline" href="/logout">Logout</a>
+							</div>
+							<div class="header-nav-item" th:unless="${#request.userPrincipal}">
 								<a class="no-underline" href="/login">Login</a>
 							</div>
 							<div class="header-nav-item">							
@@ -39,23 +43,52 @@
 		</header>
 		<div class="container" id="container">
 		        <div class="form-container sign-up">
-		            <form>
-		                <h1>Create Account</h1>
-		                <span>Use your email for registeration</span>
-		                <input type="text" placeholder="Name">
-		                <input type="email" placeholder="Email">
-		                <input type="password" placeholder="Password">
-		                <button>Sign Up</button>
-		            </form>
+		            <form action="@{/register}" method="POST">
+						<h1>Registrazione nuovo utente</h1>
+						<div>	
+		                	<span>Usa la tua mail per registrati</span>
+		                	<input type="text" placeholder="Username" required th:field="${credentials.username}" />
+							<span th:if="${#fields.hasErrors('credentials.username')}" th:errors="${credentials.username}"
+								th:style="'color:red'">
+							</span>	
+						</div>
+						<div>     
+		                	<input type="password" placeholder="Password" required th:field="${credentials.password}" />
+							<span th:if="${#fields.hasErrors('credentials.password')}" th:errors="${credentials.password}"
+								th:style="'color:red'">
+							</span>
+						</div>
+						<div>     
+            				<input type="text" placeholder="Nome" required th:field="${user.nome}" />
+							<span th:if="${#fields.hasErrors('user.nome')}" th:errors="${user.nome}"
+								th:style="'color:red'">
+							</span>
+						</div>
+						<div>     
+            				<input type="text" placeholder="Cognome" required th:field="${user.cognome}" />
+							<span th:if="${#fields.hasErrors('user.cognome')}" th:errors="${user.cognome}"
+								th:style="'color:red'">
+							</span>
+						</div>
+						<div>     
+        					<input type="text" placeholder="Email" required th:field="${user.email}" />
+							<span th:if="${#fields.hasErrors('user.email')}" th:errors="${user.email}"
+								th:style="'color:red'">
+							</span>
+						</div>
+						<button>Sign Up</button>
+					</form>
 		        </div>
 		        <div class="form-container sign-in">
-		            <form>
+		            <form th:action="@{/login}" method="POST">
 		                <h1>Sign In</h1>
 		                <span>Use your email password</span>
-		                <input type="email" placeholder="Email">
-		                <input type="password" placeholder="Password">
-		                <a href="#">Forget Your Password?</a>
-		                <button>Sign In</button>
+		                <input type="text" placeholder="Username" required>
+		                <input type="password" placeholder="Password" required>
+						<div>
+							<span th:if="${param.error != null}">Username o password errati</span>
+						</div>
+		                <button type="submit">Sign In</button>
 		            </form>
 		        </div>
 		        <div class="toggle-container">

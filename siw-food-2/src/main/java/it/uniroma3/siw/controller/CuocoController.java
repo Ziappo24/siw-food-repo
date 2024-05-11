@@ -31,15 +31,16 @@ public class CuocoController {
 		model.addAttribute("cuochi", this.cuocoService.findAll());
 		return "cuochi.html";
 	}
-	@GetMapping("/login")
-	public String getLogin() {
-		return "login.html";
+	
+	@GetMapping(value="/admin/formNewCuoco")
+	public String formNewCuoco(Model model) {
+		model.addAttribute("artist", new Cuoco());
+		return "admin/formNewCuoco.html";
 	}
 	
-	@GetMapping("/formNewCuoco")
-	public String formNewCuoco(Model model) {
-		model.addAttribute("cuoco", new Cuoco());
-		return "/admin/formNewCuoco.html";
+	@GetMapping(value="/admin/indexArtist")
+	public String indexArtist() {
+		return "admin/indexArtist.html";
 	}
 	
 	@PostMapping("/cuochi")

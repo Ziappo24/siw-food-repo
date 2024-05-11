@@ -11,31 +11,35 @@
 	<body>
 		<header>
 			<!-- Title and Nav wrapper-->
-			<div class="header-title-nav-wrapper">
-				<div class="header-title">
-					<div class="header-title-text">
-						<a id="site-title" href="/">Siw-Food</a>
-					</div>
-				</div>
-				<div class="header-nav">
-					<div class="header-nav-wrapper">
-						<nav class="header-nav-list">
-							<div class="header-nav-item">
-								<a class="no-underline" href="/login">Login</a>
+						<div class="header-title-nav-wrapper">
+							<div class="header-title">
+								<div class="header-title-text">
+									<a id="site-title" href="/">Siw-Food</a>
+								</div>
 							</div>
-							<div class="header-nav-item">							
-								<a class="no-underline" href="/ricette">Ricette</a>
+							<div class="header-nav">
+								<div class="header-nav-wrapper">
+									<nav class="header-nav-list">
+										<div class="header-nav-item" th:if="${#request.userPrincipal}">
+											<span th:text="${#request.userPrincipal.principal.username}"></span>
+											<a class="no-underline" href="/logout">Logout</a>
+										</div>
+										<div class="header-nav-item" th:unless="${#request.userPrincipal}">
+											<a class="no-underline" href="/login">Login</a>
+										</div>
+										<div class="header-nav-item">							
+											<a class="no-underline" href="/ricette">Ricette</a>
+										</div>
+										<div class="header-nav-item">
+											<a class="no-underline" href="/cuochi">Cuochi</a>
+										</div>
+										<div class="header-nav-item">
+											<a class="no-underline" href="/ingredienti">Ingredienti</a>
+										</div>
+									</nav>
+								</div>
 							</div>
-							<div class="header-nav-item">
-								<a class="no-underline" href="/cuochi">Cuochi</a>
-							</div>
-							<div class="header-nav-item">
-								<a class="no-underline" href="/ingredienti">Ingredienti</a>
-							</div>
-						</nav>
-					</div>
-				</div>
-			</div>
+						</div>
 		</header>
 		<div class="container" id="container">
 		        <div class="form-container inserisci-cuoco">

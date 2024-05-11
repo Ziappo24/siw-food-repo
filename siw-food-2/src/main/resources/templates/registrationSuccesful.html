@@ -43,14 +43,16 @@
 		</header>
 		<div class="container" id="container">
 		        <div class="form-container inserisci">
-		            <form th:action="@{/ricette}" method="POST" th:object="${ricetta}">
-		                <h1>Inserisci Ricetta</h1>
-		                <span>Inserisci di seguito tutte le informazioni richieste</span>
-		                <input required type="text" placeholder="Nome" th:field="${ricetta.nome}">
-		                <input required type="text" placeholder="Descrizione" th:field="${ricetta.descrizione}">
-						<input required type="text" placeholder="URL Immagine" th:field="${ricetta.urlImage}">
-		                <button>Inserisci</button>
-		            </form>
+	                <h1>Congratulazioni ti sei registrato!</h1>
+					<div>
+						<span th:text="${user.name}">Nome: </span>
+					</div>
+					<div>
+						<span th:text="${user.surname}">Cognome: </span>
+					</div>
+					<div>
+						<span th:text="${user.email}">Email: </span>
+					</div>
 		        </div>
 		    </div>
 		<footer id="footer-sections" class="footer">

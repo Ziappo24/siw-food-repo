@@ -25,15 +25,15 @@ public class AuthenticationController {
 	private CredentialsService credentialsService;
 	
 	@GetMapping(value = "/register") 
-	public String showRegisterForm (Model model) {
+	public String showLoginForRegistration (Model model) {
 		model.addAttribute("user", new User());
 		model.addAttribute("credentials", new Credentials());
-		return "formRegisterUser";
+		return "login";
 	}
 	
 	@GetMapping(value = "/login") 
-	public String showLoginForm (Model model) {
-		return "formLogin";
+	public String showLoginForLogin(Model model) {
+		return "login";
 	}
 
 	@GetMapping(value = "/") 
@@ -77,6 +77,6 @@ public class AuthenticationController {
             model.addAttribute("user", user);
             return "registrationSuccessful";
         }
-        return "registerUser";
+        return "login";
     }
 }
