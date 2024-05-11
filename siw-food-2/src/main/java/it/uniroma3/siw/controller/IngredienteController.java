@@ -37,7 +37,7 @@ public class IngredienteController {
 	@GetMapping("/formNewIngrediente")
 	public String formNewIngrediente(Model model) {
 		model.addAttribute("ingrediente", new Ricetta());
-		return "/formNewIngrediente.html";
+		return "/admin/formNewIngrediente.html";
 	}
 	
 	@PostMapping("/ingredienti")
@@ -48,7 +48,7 @@ public class IngredienteController {
 			return "redirect:ingrediente/"+ingrediente.getId();
 		} else {
 			model.addAttribute("messaggioErrore", "Questo ingrediente esiste già");
-			return "formNewIngrediente.html";
+			return "/admin/formNewIngrediente.html";
 		}
 	}
 }

@@ -39,7 +39,7 @@ public class CuocoController {
 	@GetMapping("/formNewCuoco")
 	public String formNewCuoco(Model model) {
 		model.addAttribute("cuoco", new Cuoco());
-		return "/formNewCuoco.html";
+		return "/admin/formNewCuoco.html";
 	}
 	
 	@PostMapping("/cuochi")
@@ -50,7 +50,7 @@ public class CuocoController {
 			return "redirect:cuoco/"+cuoco.getId();
 		} else {
 			model.addAttribute("messaggioErrore", "Questo cuoco esiste già");
-			return "formNewCuoco.html";
+			return "/admin/formNewCuoco.html";
 		}
 	}
 }

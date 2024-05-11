@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +13,7 @@ import it.uniroma3.siw.controller.validator.RicettaValidator;
 import it.uniroma3.siw.model.Ricetta;
 import it.uniroma3.siw.repository.RicettaRepository;
 import it.uniroma3.siw.service.RicettaService;
+import jakarta.validation.Valid;
 
 @Controller
 public class RicettaController {
@@ -39,18 +39,18 @@ public class RicettaController {
 	@GetMapping("/formNewRicetta")
 	public String formNewRicetta(Model model) {
 		model.addAttribute("ricetta", new Ricetta());
-		return "/formNewRicetta.html";
+		return "/admin/formNewRicetta.html";
 	}
 	
 	@PostMapping("/ricette")
-	public String newRicetta(@Validated @ModelAttribute("ricetta") Ricetta ricetta, BindingResult bindingResult, Model model) {
+	public String newRicetta(@Valid @ModelAttribute("ricetta") Ricetta ricetta, BindingResult bindingResult, Model model) {
 		this.ricettaValidator.validate(ricetta, bindingResult);
 		if (!bindingResult.hasErrors()) {
 			this.ricettaService.save(ricetta);
 			model.addAttribute("ricetta", ricetta);
 			return "redirect:ricetta/"+ricetta.getId();
 		} else {
-			return "formNewRicetta.html";
+			return "/adminformNewRicetta.html";
 		}
 	}
 
