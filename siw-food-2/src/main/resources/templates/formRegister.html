@@ -1,0 +1,86 @@
+<html>
+	<head>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Mate+SC&display=swap" rel="stylesheet">
+    	<meta charset="UTF-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    	<title>Siw-Food - Login</title>
+    	<link rel="stylesheet" href="/css/login.css">
+	</head>
+	<body>
+		<header>
+			<!-- Title and Nav wrapper-->
+			<div class="header-title-nav-wrapper">
+				<div class="header-title">
+					<div class="header-title-text">
+						<a id="site-title" href="/">Siw-Food</a>
+					</div>
+				</div>
+				<div class="header-nav">
+					<div class="header-nav-wrapper">
+					</div>
+				</div>
+			</div>
+		</header>
+		<div class="container" id="container">
+		        <div class="form-container sign-up">
+		            <form action="@{/register}" method="POST">
+						<h1>Registrazione nuovo utente</h1>
+						<div>	
+		                	<span>Usa la tua mail per registrati</span>
+		                	<input type="text" placeholder="Username" required th:field="${credentials.username}" />
+							<span th:if="${#fields.hasErrors('credentials.username')}" th:errors="${credentials.username}"
+								th:style="'color:red'">
+							</span>	
+						</div>
+						<div>     
+		                	<input type="password" placeholder="Password" required th:field="${credentials.password}" />
+							<span th:if="${#fields.hasErrors('credentials.password')}" th:errors="${credentials.password}"
+								th:style="'color:red'">
+							</span>
+						</div>
+						<div>     
+            				<input type="text" placeholder="Nome" required th:field="${user.nome}" />
+							<span th:if="${#fields.hasErrors('user.nome')}" th:errors="${user.nome}"
+								th:style="'color:red'">
+							</span>
+						</div>
+						<div>     
+            				<input type="text" placeholder="Cognome" required th:field="${user.cognome}" />
+							<span th:if="${#fields.hasErrors('user.cognome')}" th:errors="${user.cognome}"
+								th:style="'color:red'">
+							</span>
+						</div>
+						<div>     
+        					<input type="text" placeholder="Email" required th:field="${user.email}" />
+							<span th:if="${#fields.hasErrors('user.email')}" th:errors="${user.email}"
+								th:style="'color:red'">
+							</span>
+						</div>
+						<button>Sign Up</button>
+					</form>
+		        </div>
+		    </div>
+		<footer id="footer-sections" class="footer">
+			<div class="section-border">
+				<div class="section-background"> </div>
+			</div>
+			<div class="content-wrapper">
+				<div class="content">
+					<div class="socials">
+						<nav class="footer-nav-list">
+							<a href="https://www.instagram.com/edoardopiazzolla/">
+								<img src="/images/Instagram.png"/>
+							</a>
+							<a href="https://www.youtube.com/channel/UC5LdtlfzoK9pftejCPvzWrg">
+								<img src="/images/youtube.png"/>
+							</a>
+						</nav>
+					</div>
+				</div>
+			</div>
+		</footer>
+		<script src="/js/script.js"></script>
+	</body>
+</html>

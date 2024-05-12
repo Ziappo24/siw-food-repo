@@ -38,9 +38,9 @@ public class CuocoController {
 		return "admin/formNewCuoco.html";
 	}
 	
-	@GetMapping(value="/admin/indexArtist")
-	public String indexArtist() {
-		return "admin/indexArtist.html";
+	@GetMapping(value="/admin/indexCuco")
+	public String indexCuoco() {
+		return "admin/indexCuoco.html";
 	}
 	
 	@PostMapping("/cuochi")

@@ -20,22 +20,22 @@
 							<div class="header-nav">
 								<div class="header-nav-wrapper">
 									<nav class="header-nav-list">
-										<div class="header-nav-item" th:if="${#request.userPrincipal}">
-											<span th:text="${#request.userPrincipal.principal.username}"></span>
-											<a class="no-underline" href="/logout">Logout</a>
-										</div>
-										<div class="header-nav-item" th:unless="${#request.userPrincipal}">
-											<a class="no-underline" href="/login">Login</a>
-										</div>
-										<div class="header-nav-item">							
-											<a class="no-underline" href="/ricette">Ricette</a>
-										</div>
-										<div class="header-nav-item">
-											<a class="no-underline" href="/cuochi">Cuochi</a>
-										</div>
-										<div class="header-nav-item">
-											<a class="no-underline" href="/ingredienti">Ingredienti</a>
-										</div>
+										<div th:if="${userDetails}">
+																		<div class="header-nav-item" th:text="${userDetails.username}"></div>
+																		<a class="no-underline"href="/logout">Logout</a>
+																	</div>
+																	<div class="header-nav-item" th:unless="${userDetail}">
+																	    <a href="/mainFormUser">Login</a>
+																	</div>
+																	<div class="header-nav-item">					
+																        <a class="no-underline" href="/ricette">Ricette</a>
+																    </div>
+																    <div class="header-nav-item">
+																        <a class="no-underline" href="/cuochi">Cuochi</a>
+																    </div>
+																    <div class="header-nav-item">
+																        <a class="no-underline" href="/ingredienti">Ingredienti</a>
+																    </div>
 									</nav>
 								</div>
 							</div>

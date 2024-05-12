@@ -10,7 +10,7 @@ import jakarta.persistence.OneToOne;
 @Entity
 public class Credentials {
 	
-	public static final String DEFAULT_ROLE = "DEFAULT";
+	public static final String CUOCO_ROLE = "CUOCO";
 	public static final String ADMIN_ROLE = "ADMIN";
 	
 	@Id

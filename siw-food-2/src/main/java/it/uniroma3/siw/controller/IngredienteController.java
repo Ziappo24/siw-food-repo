@@ -34,7 +34,7 @@ public class IngredienteController {
 		return "ingredienti.html";
 	}
 	
-	@GetMapping("/formNewIngrediente")
+	@GetMapping(value = "/admin/formNewIngrediente")
 	public String formNewIngrediente(Model model) {
 		model.addAttribute("ingrediente", new Ricetta());
 		return "/admin/formNewIngrediente.html";
