@@ -6,39 +6,41 @@
     	<meta charset="UTF-8">
     	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     	<title>Siw-Food - Inserisci Cuoco</title>
-    	<link rel="stylesheet" href="/css/formAdd.css">
+    	<link rel="stylesheet" href="/css/login.css">
 	</head>
 	<body>
 		<header>
 			<!-- Title and Nav wrapper-->
-						<div class="header-title-nav-wrapper">
-							<div class="header-title">
-								<div class="header-title-text">
-									<a id="site-title" href="/">Siw-Food</a>
-								</div>
-							</div>
-							<div class="header-nav">
-								<div class="header-nav-wrapper">
+			<div class="header-title-nav-wrapper">
+				<div class="header-title">
+					<div class="header-title-text">
+						<a id="site-title" href="/">Siw-Food</a>
+					</div>
+				</div>
+				<div class="header-nav">
+							<div class="header-nav-wrapper">
+								<nav class="header-nav-list">
 									<div th:if="${userDetails}">
-																	<div class="header-nav-item" th:text="${userDetails.username}"></div>
-																	<a class="no-underline"href="/logout">Logout</a>
-																</div>
-																<div class="header-nav-item" th:unless="${userDetail}">
-																    <a href="/formLogin">Login</a>
-																</div>
-																<div class="header-nav-item">					
-															        <a class="no-underline" href="/ricette">Ricette</a>
-															    </div>
-															    <div class="header-nav-item">
-															        <a class="no-underline" href="/cuochi">Cuochi</a>
-															    </div>
-															    <div class="header-nav-item">
-															        <a class="no-underline" href="/ingredienti">Ingredienti</a>
-															    </div>
-									</nav>
+										<div class="header-nav-item" th:text="${userDetails.username}"></div>
+											<a class="no-underline"href="/logout">Logout</a>
+											</div>
+											<div class="header-nav-item" th:unless="${userDetail}">
+											    <a href="/formLogin">Login</a>
+											</div>
+											<div class="header-nav-item">					
+										        <a class="no-underline" href="/ricette">Ricette</a>
+										    </div>
+										    <div class="header-nav-item">
+										        <a class="no-underline" href="/cuochi">Cuochi</a>
+										    </div>
+										    <div class="header-nav-item">
+										        <a class="no-underline" href="/ingredienti">Ingredienti</a>
+										    </div>
+										</nav>
+									</div>
 								</div>
 							</div>
-						</div>
+			</div>
 		</header>
 		<div class="container" id="container">
 		        <div class="form-container inserisci">

@@ -31,7 +31,7 @@
 		                <input type="text" placeholder="Username" required>
 		                <input type="password" placeholder="Password" required>
 						<div>
-							<span th:if="${param.error != null}">Username o password errati</span>
+							<span th:if="${messaggioErrore != null}">Username o password errati</span>
 						</div>
 		                <button type="submit">Sign In</button>
 		            </form>
