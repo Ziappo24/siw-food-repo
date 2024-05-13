@@ -27,7 +27,7 @@ public class AuthenticationController {
 	@Autowired
 	private UserService userService;
 
-	@GetMapping(value = "/register") 
+	@GetMapping("/register") 
 	public String showRegisterForm (Model model) {
 		model.addAttribute("user", new User());
 		model.addAttribute("credentials", new Credentials());
@@ -36,7 +36,7 @@ public class AuthenticationController {
 
 	@GetMapping(value = "/login") 
 	public String showLoginForm (Model model) {
-		return "mainFormUser";
+		return "formLogin";
 	}
 
 
@@ -44,7 +44,7 @@ public class AuthenticationController {
 	public String showLoginErrorForm(Model model) {
 		String messaggioErrore = new String("Username o password incorretti");
 		model.addAttribute("messaggioErrore", messaggioErrore);
-		return "mainFormUser";
+		return "formLogin";
 	}
 
 	@GetMapping("/") 
@@ -82,19 +82,20 @@ public class AuthenticationController {
 
 	@PostMapping(value = { "/register" })
 	public String registerUser(@Valid @ModelAttribute("user") User user,
-			BindingResult userBindingResult, @Valid
-			@ModelAttribute("credentials") Credentials credentials,
-			BindingResult credentialsBindingResult,
-			Model model) {
+	        BindingResult userBindingResult, @Valid
+	        @ModelAttribute("credentials") Credentials credentials,
+	        BindingResult credentialsBindingResult,
+	        Model model) {
 
-		// se user e credential hanno entrambi contenuti validi, memorizza User e the Credentials nel DB
-		if(!userBindingResult.hasErrors() && !credentialsBindingResult.hasErrors()) {
-			userService.saveUser(user);
-			credentials.setUser(user);
-			credentialsService.saveCredentials(credentials);
-			model.addAttribute("user", user);
-			return "registrationSuccessful";
-		}
-		return "formRegister";
+	    // se user e credential hanno entrambi contenuti validi, memorizza User e the Credentials nel DB
+	    if (!userBindingResult.hasErrors() && !credentialsBindingResult.hasErrors()) {
+	        userService.saveUser(user);
+	        credentials.setUser(user);
+	        credentialsService.saveCredentials(credentials);
+	        model.addAttribute("user", user);
+	        return "registrationSuccesful";
+	    }
+	    return "registerUser";
 	}
+
 }

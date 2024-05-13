@@ -24,7 +24,7 @@
 																	<a class="no-underline"href="/logout">Logout</a>
 																</div>
 																<div class="header-nav-item" th:unless="${userDetail}">
-																    <a href="/mainFormUser">Login</a>
+																    <a href="/formLogin">Login</a>
 																</div>
 																<div class="header-nav-item">					
 															        <a class="no-underline" href="/ricette">Ricette</a>
@@ -44,10 +44,10 @@
 		        <div class="form-container inserisci">
 	                <h1>Congratulazioni ti sei registrato!</h1>
 					<div>
-						<span th:text="${user.name}">Nome: </span>
+						<span th:text="${user.nome}">Nome: </span>
 					</div>
 					<div>
-						<span th:text="${user.surname}">Cognome: </span>
+						<span th:text="${user.cognome}">Cognome: </span>
 					</div>
 					<div>
 						<span th:text="${user.email}">Email: </span>

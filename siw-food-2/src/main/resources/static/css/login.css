@@ -117,10 +117,13 @@ body{
     cursor: pointer;
 }
 
-.container button.hidden{
+.container button.register-button{
     background-color: transparent;
     border-color: #fff;
     color: white;
+}
+.toggle-panel .register-button a {
+    color: white; /* Cambia il colore del testo del link del bottone a bianco */
 }
 
 .container form{
@@ -148,7 +151,6 @@ body{
     position: absolute;
     top: 0;
     height: 100%;
-    transition: all 0.6s ease-in-out;
 }
 
 .sign-in{
@@ -157,34 +159,33 @@ body{
     z-index: 2;
 }
 
-.container.active .sign-in{
-    transform: translateX(100%);
-}
 
 .sign-up{
     left: 0;
-    width: 50%;
-    opacity: 0;
+    width: 100%;
     z-index: 1;
 }
 
-.container.active .sign-up{
-    transform: translateX(100%);
-    opacity: 1;
-    z-index: 5;
-    animation: move 0.6s;
+.register-button {
+    display: inline-block;
+    color: white;
+    font-size: 14px;
+    padding: 10px 45px;
+    border: 1px solid white;
+    border-radius: 8px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    background-color: transparent;
+    transition: background-color 0.3s ease;
 }
 
-@keyframes move{
-    0%, 49.99%{
-        opacity: 0;
-        z-index: 1;
-    }
-    50%, 100%{
-        opacity: 1;
-        z-index: 5;
-    }
+.register-button a {
+    color: white; /* Imposta il colore del testo del link all'interno del bottone */
 }
+
 
 .toggle-container{
     position: absolute;
@@ -193,36 +194,28 @@ body{
     width: 50%;
     height: 100%;
     overflow: hidden;
-    transition: all 0.6s ease-in-out;
     border-radius: 150px 0 0 100px;
     z-index: 1000;
-}
-
-.container.active .toggle-container{
-    transform: translateX(-100%);
-    border-radius: 0 150px 100px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .toggle{
     background-color: rgb(228, 203, 180);
-    height: 100%;
     background: linear-gradient(to right, rgb(228, 203, 180), rgb(201, 150, 103));
     color: #fff;
     position: relative;
-    left: -100%;
+    width: 100%;
     height: 100%;
-    width: 200%;
-    transform: translateX(0);
-    transition: all 0.6s ease-in-out;
+    justify-content: center;
 }
 
-.container.active .toggle{
-    transform: translateX(50%);
-}
 
-.toggle-panel{
+
+.toggle-panel {
     position: absolute;
-    width: 50%;
+    width: 100%;
     height: 100%;
     display: flex;
     align-items: center;
@@ -231,27 +224,11 @@ body{
     padding: 0 30px;
     text-align: center;
     top: 0;
-    transform: translateX(0);
-    transition: all 0.6s ease-in-out;
 }
 
-.toggle-left{
-    transform: translateX(-200%);
+.toggle-panel h1 {
+    white-space: nowrap; /* Imposta il testo dell'h1 su una sola riga */
 }
-
-.container.active .toggle-left{
-    transform: translateX(0);
-}
-
-.toggle-right{
-    right: 0;
-    transform: translateX(0);
-}
-
-.container.active .toggle-right{
-    transform: translateX(200%);
-}
-
 
 footer {
 	margin-top: 30px; /* Aggiunge spazio sopra il footer */

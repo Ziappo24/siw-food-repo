@@ -1,0 +1,112 @@
+<html>
+  <head>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Mate+SC&display=swap" rel="stylesheet">
+	<meta charset="UTF-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Siw-Food - Cuochi</title>
+	<link rel="stylesheet" href="/css/style-v4.css">
+  </head>
+  <body>
+	<div id="site-wrapper" class="site-wrapper">
+		<header>
+			<!-- Background -->
+			<div class="header-background"></div>
+			<div class="header-display-desktop">
+				<style> .top-bun, .patty, .bottom-bun { height: 1px; } </style>
+			</div>
+			<!-- Title and Nav wrapper-->
+						<div class="header-title-nav-wrapper">
+							<div class="header-title">
+								<div class="header-title-text">
+									<a id="site-title" href="/">Siw-Food</a>
+								</div>
+							</div>
+							<div class="header-nav">
+								<div class="header-nav-wrapper">
+									<nav class="header-nav-list">
+										<div th:if="${userDetails}">
+																		<div class="header-nav-item" th:text="${userDetails.username}"></div>
+																		<a class="no-underline"href="/logout">Logout</a>
+																	</div>
+																	<div class="header-nav-item" th:unless="${userDetail}">
+																	    <a href="/mainFormUser">Login</a>
+																	</div>
+																	<div class="header-nav-item">					
+																        <a class="no-underline" href="/ricette">Ricette</a>
+																    </div>
+																    <div class="header-nav-item">
+																        <a class="no-underline" href="/cuochi">Cuochi</a>
+																    </div>
+																    <div class="header-nav-item">
+																        <a class="no-underline" href="/ingredienti">Ingredienti</a>
+																    </div>
+									</nav>
+								</div>
+							</div>
+						</div>
+		</header>
+		<main>
+			<article class="sections" id="sections">
+				<!-- inserire sezioni per alcuni articoli presi da database -->
+				<section class="section-cuoco">
+					<div class="section-border">
+						<div class="section-background"> </div>
+					</div>
+					<div class="content-wrapper">
+						<div class="content">
+							<div data-fluid-engine="true">
+								<div class="image-block">
+									<div class="block-content">
+										<div class="block-content">
+										    <img th:if="${cuoco.urlImage.startsWith('https')}" th:src="${cuoco.urlImage}" style="width: 30%; height: auto;">
+										    <img th:unless="${cuoco.urlImage.startsWith('https')}" th:src="@{/images/__${cuoco.urlImage}__}" style="width: 30%; height: auto;">
+										</div>
+									</div>
+								</div>
+								<div class="html-block">
+									<div class="block-content-main">
+										<div th:text="${cuoco.nome} + ' ' + ${cuoco.cognome}"></div>
+									</div>
+								</div>
+								<div class="html-block">
+									<div class="block-content">
+										<div class="year-text">Anno di nascita:
+											<span th:if="${cuoco.nascita != null}">
+												<span th:text="${#temporals.format(cuoco.nascita, 'dd-MM-yyyy')}"></span>
+											</span>
+										</div>
+											<span th:if="${cuoco.nascita == null}">
+												Non disponibile
+											</span>
+									</div>
+								</div>								
+							</div>
+						</div>
+					</div>
+				</section>
+			</article>
+		</main>
+		<footer id="footer-sections" class="footer">
+			<div class="section-border">
+				<div class="section-background"> </div>
+			</div>
+			<div class="content-wrapper">
+				<div class="content">
+					<div class="socials">
+						<nav class="footer-nav-list">
+							<a href="https://www.instagram.com/edoardopiazzolla/">
+								<img src="/images/Instagram.png"/>
+							</a>
+							<a href="https://www.youtube.com/channel/UC5LdtlfzoK9pftejCPvzWrg">
+								<img src="/images/youtube.png"/>
+							</a>
+						</nav>
+					</div>
+				</div>
+			</div>
+		</footer>
+	</div>
+  </body>
+</html>
