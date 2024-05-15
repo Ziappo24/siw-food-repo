@@ -26,22 +26,28 @@
 		<div class="container" id="container">
 		        <div class="form-container sign-in">
 		            <form th:action="@{/login}" method="POST">
-		                <h1>Sign In</h1>
-		                <span>Use your email password</span>
-		                <input type="text" placeholder="Username" required>
-		                <input type="password" placeholder="Password" required>
-						<div>
-							<span th:if="${messaggioErrore != null}">Username o password errati</span>
+		                <h1>Login</h1>
+		                <span>Usa la tua email e password</span>
+						<div class="input">
+							<label for="username"><strong>Username:</strong></label>
+							<input name="username" type="text" required />
 						</div>
-		                <button type="submit">Sign In</button>
+						<div class="input">
+							<label for="password"><strong>Password:</strong></label>
+							<input name="password" type="password" required />
+						</div>
+						<div th:if="${messaggioErrore != null}">
+							<span th:text="${messaggioErrore}"> Messaggio Errore </span>
+						</div>
+		                <button type="submit">Login</button>
 		            </form>
 		        </div>
 		        <div class="toggle-container">
 		            <div class="toggle">		                
 						<div class="toggle-panel toggle-right">
-						    <h1>Hello, Friend!</h1>
-						    <p>Register with your personal details to use all of site features</p>
-						    <a class="register-button" th:href="@{/register}">Sign Up</a>
+						    <h1>Benvenuto!</h1>
+						    <p>Registrati con i tuoi dati personali per utilizzare tutte le funzionalità del sito</p>
+						    <a class="register-button" th:href="@{/register}">Registrati</a>
 						</div>
 		            </div>
 		        </div>
@@ -65,6 +71,5 @@
 				</div>
 			</div>
 		</footer>
-		<script src="/js/script.js"></script>
 	</body>
 </html>

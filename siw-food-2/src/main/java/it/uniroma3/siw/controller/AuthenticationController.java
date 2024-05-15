@@ -31,7 +31,7 @@ public class AuthenticationController {
 	public String showRegisterForm (Model model) {
 		model.addAttribute("user", new User());
 		model.addAttribute("credentials", new Credentials());
-		return "formRegister";
+		return "formRegisterUSer";
 	}
 	
 	@GetMapping(value = "/login") 
@@ -92,8 +92,8 @@ public class AuthenticationController {
             credentials.setUser(user);
             credentialsService.saveCredentials(credentials);
             model.addAttribute("user", user);
-            return "registrationSuccesful";
+            return "registrationSuccessful";
         }
-        return "register";
+        return "registerUser";
     }
 }

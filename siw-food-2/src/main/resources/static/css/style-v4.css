@@ -49,6 +49,12 @@ a {
     font-weight: 400;
 }
 
+.inline-flex-container {
+    display: inline-flex;
+    align-items: center; /* Per allineare gli elementi verticalmente al centro */
+    gap: 20px; /* Spazio tra i figli */
+}
+
 /* Opzionale: Cambia il colore del testo del titolo */
 #site-title {
     color: black;
