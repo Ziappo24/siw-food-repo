@@ -22,6 +22,7 @@ public class RicettaController {
 	
 	@Autowired RicettaService ricettaService;
 	@Autowired RicettaValidator ricettaValidator;
+
 	
 	
 	@GetMapping("/ricetta/{id}")
@@ -42,7 +43,7 @@ public class RicettaController {
 		return "/admin/formNewRicetta.html";
 	}
 	
-	@PostMapping("/ricette")
+	@PostMapping("/admin/ricetta")
 	public String newRicetta(@Valid @ModelAttribute("ricetta") Ricetta ricetta, BindingResult bindingResult, Model model) {
 		this.ricettaValidator.validate(ricetta, bindingResult);
 		if (!bindingResult.hasErrors()) {
@@ -50,7 +51,26 @@ public class RicettaController {
 			model.addAttribute("ricetta", ricetta);
 			return "redirect:ricetta/"+ricetta.getId();
 		} else {
-			return "/adminformNewRicetta.html";
+			return "/admin/formNewRicetta.html";
+		}
+	}
+	
+	@GetMapping(value="/cuoco/formNewRicetta")
+	public String formNewRicettaCuoco(Model model) {
+		Ricetta ricetta = new Ricetta();
+	    model.addAttribute("ricetta", ricetta);
+		return "cuoco/formNewRicetta.html";
+	}
+	
+	@PostMapping("/cuoco/ricetta")
+	public String newRicettaCuoco(@Valid @ModelAttribute("ricetta") Ricetta ricetta, BindingResult bindingResult, Model model) {
+		this.ricettaValidator.validate(ricetta, bindingResult);
+		if (!bindingResult.hasErrors()) {
+			this.ricettaRepository.save(ricetta); 
+			model.addAttribute("ricetta", ricetta);
+			return "redirect:ricetta/"+ricetta.getId();
+		} else {
+			return "cuoco/formNewRicetta.html"; 
 		}
 	}
 

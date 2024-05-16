@@ -36,12 +36,12 @@ public class IngredienteController {
 	
 	@GetMapping(value = "/admin/formNewIngrediente")
 	public String formNewIngrediente(Model model) {
-		model.addAttribute("ingrediente", new Ricetta());
+		model.addAttribute("ingrediente", new Ingrediente());
 		return "/admin/formNewIngrediente.html";
 	}
 	
-	@PostMapping("/ingredienti")
-	public String newRicetta(@ModelAttribute("ingrediente") Ingrediente ingrediente, Model model) {
+	@PostMapping("/admin/ingrediente")
+	public String newIngrediente(@ModelAttribute("ingrediente") Ingrediente ingrediente, Model model) {
 		if (!ingredienteRepository.existsByNome(ingrediente.getNome())) {
 			this.ingredienteService.save(ingrediente);
 			model.addAttribute("ingrediente", ingrediente);
@@ -49,6 +49,24 @@ public class IngredienteController {
 		} else {
 			model.addAttribute("messaggioErrore", "Questo ingrediente esiste già");
 			return "/admin/formNewIngrediente.html";
+		}
+	}
+	
+	@GetMapping(value="/cuoco/formNewIngrediente")
+	public String formNewIngredienteCuoco(Model model) {
+	    model.addAttribute("ingrediente", new Ingrediente());
+		return "cuoco/formNewIngrediente.html";
+	}
+	
+	@PostMapping("/cuoco/ingrediente")
+	public String newIngredienteCuoco(@ModelAttribute("ingrediente") Ingrediente ingrediente, Model model) {
+		if (!ingredienteRepository.existsByNome(ingrediente.getNome())) {
+			this.ingredienteService.save(ingrediente);
+			model.addAttribute("ingrediente", ingrediente);
+			return "redirect:ingrediente/"+ingrediente.getId();
+		} else {
+			model.addAttribute("messaggioErrore", "Questo ingrediente esiste già");
+			return "/cuoco/formNewIngrediente.html";
 		}
 	}
 }

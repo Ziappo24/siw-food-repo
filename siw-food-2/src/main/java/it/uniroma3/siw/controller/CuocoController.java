@@ -43,7 +43,7 @@ public class CuocoController {
 		return "admin/indexCuoco.html";
 	}
 	
-	@PostMapping("/cuochi")
+	@PostMapping("/admin/cuochi")
 	public String newCuoco(@ModelAttribute("cuoco") Cuoco cuoco, Model model) {
 		if (!cuocoRepository.existsByNomeAndCognome(cuoco.getNome(), cuoco.getCognome())) {
 			this.cuocoService.save(cuoco);

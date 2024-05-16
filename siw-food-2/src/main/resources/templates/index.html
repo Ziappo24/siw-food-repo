@@ -27,22 +27,15 @@
 				<div class="header-nav">
 					<div class="header-nav-wrapper">
 						<nav class="header-nav-list">
-							<div th:if="${userDetails}">
-								<div class="header-nav-item" th:text="${userDetails.username}"></div>
-								<a class="no-underline"href="/logout">Logout</a>
+							<div class="header-nav-item" th:if="${userDetails}">
+						   		<div class="inline-flex-container">
+				        			<div class="username" th:text="${userDetails.username}"></div>
+					        		<a class="no-underline" href="/logout">Logout</a>
+						    	</div>
 							</div>
-							<div class="header-nav-item" th:unless="${userDetail}">
-							    <a href="/formLogin">Login</a>
-							</div>
-							<div class="header-nav-item">					
-						        <a class="no-underline" href="/ricette">Ricette</a>
-						    </div>
-						    <div class="header-nav-item">
-						        <a class="no-underline" href="/cuochi">Cuochi</a>
-						    </div>
-						    <div class="header-nav-item">
-						        <a class="no-underline" href="/ingredienti">Ingredienti</a>
-						    </div>
+	                        <div class="header-nav-item" th:unless="${userDetail}">
+	                            <a href="/formLogin">Login</a>
+	                        </div>
 						</nav>
 					</div>
 				</div>

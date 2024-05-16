@@ -59,7 +59,7 @@ public class AuthenticationController {
 				return "admin/indexAdmin.html";
 			}
 			if (credentials.getRole().equals(Credentials.CUOCO_ROLE)) {
-				return "admin/indexCuoco.html";
+				return "cuoco/indexCuoco.html";
 			}
 		}
         return "index.html";
@@ -74,7 +74,7 @@ public class AuthenticationController {
             return "admin/indexAdmin.html";
         }
     	if (credentials.getRole().equals(Credentials.CUOCO_ROLE)) {
-            return "admin/indexCuoco.html";
+            return "cuoco/indexCuoco.html";
         }
         return "index.html";
     }

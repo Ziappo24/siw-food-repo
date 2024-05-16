@@ -26,15 +26,17 @@
             </div>
             <div class="header-nav">
                 <div class="header-nav-wrapper">
-                    <nav class="header-nav-list">
-                        <div th:if="${userDetails}">
-                            <div class="header-nav-item" th:text="${userDetails.username}"></div>
-                            <a class="no-underline" href="/logout">Logout</a>
-                        </div>
-                        <div class="header-nav-item" th:unless="${userDetail}">
-                            <a href="/formLogin">Login</a>
-                        </div>
-                    </nav>
+					<nav class="header-nav-list">
+						<div class="header-nav-item" th:if="${userDetails}">
+							<div class="inline-flex-container">
+								<div class="username" th:text="${userDetails.username}"></div>
+								<a class="no-underline" href="/logout">Logout</a>
+							</div>
+						</div>
+						<div class="header-nav-item" th:unless="${userDetail}">
+							<a href="/formLogin">Login</a>
+						</div>
+					</nav>
                 </div>
             </div>
         </div>
@@ -78,7 +80,6 @@
                                 <img src="/images/cuoco.jpg" id="img1">
                                 <!-- Link "Aggiungi" e "Gestisci" per l'immagine 1 -->
                                 <div class="links">
-                                    <a href="/admin/formNewCuoco" class="add-link">Aggiungi Cuoco</a>
                                     <a href="/cuochi" class="add-link">Elenco Cuochi</a>
                                 </div>
                             </div>
@@ -89,6 +90,7 @@
                                 <img src="/images/ricetta.jpg" id="img2">
                                 <!-- Link "Aggiungi" e "Gestisci" per l'immagine 2 -->
                                 <div class="links">
+									<a href="/cuoco/formNewRicetta" class="add-link">Aggiungi Ricetta</a>
                                     <a href="/ricette" class="add-link">Elenco Ricette</a>
                                 </div>
                             </div>
@@ -99,6 +101,7 @@
                                 <img src="/images/ingredienti.jpg" id="img3">
                                 <!-- Link "Aggiungi" e "Gestisci" per l'immagine 3 -->
                                 <div class="links">
+									<a href="/cuoco/formNewIngrediente" class="add-link">Aggiungi Igrediente</a>
                                     <a href="/ingredienti" class="add-link">Elenco Ingredienti</a>
                                 </div>
                             </div>
