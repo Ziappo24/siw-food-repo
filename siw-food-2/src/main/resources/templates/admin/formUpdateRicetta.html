@@ -61,9 +61,12 @@
 							<div data-fluid-engine="true">
 								<div class="image-block">
 									<div class="block-content">
-	                                    <img th:if="${ricetta.urlImage.startsWith('https')}" th:src="${ricetta.urlImage}" style="width: 30%; height: auto;">
-	                                    <img th:unless="${ricetta.urlImage.startsWith('https')}" th:src="@{/images/__${ricetta.urlImage}__}" style="width: 30%; height: auto;">
-                                	</div>
+										<img th:if="${ricetta.urlImage.startsWith('https')}"
+											th:src="${ricetta.urlImage}" style="width: 30%; height: auto;">
+										<img th:unless="${ricetta.urlImage.startsWith('https')}"
+											th:src="@{/images/__${ricetta.urlImage}__}"
+											style="width: 30%; height: auto;">
+									</div>
 								</div>
 								<div class="html-block">
 									<div class="block-content-main">
@@ -83,6 +86,22 @@
 										</div>
 										<div th:unless="${ricetta.cuoco}">
 											<a th:href="@{'/admin/addCuoco' + '/' + ${ricetta.id}}">Aggiungi cuoco</a>
+										</div>
+									</div>
+								</div>
+								<div class="html-block">
+									<div class="block-content">
+										<div th:each="ingrediente: ${ricetta.ingredientiUtilizzati}">
+											<p>Ingredienti: <span
+													th:text="${ingrediente.nome}"></span>
+											</p>
+										</div>
+										<div th:unless="${ricetta.cuoco}">
+											<p>Non c'è nessun ingrediente per questa ricetta.</p>
+										</div>
+										<div>
+											<a th:href="@{'/admin/addIngrediente' + '/' + ${ricetta.id}}">Modifica la
+												lista degli ingredienti</a>
 										</div>
 									</div>
 								</div>

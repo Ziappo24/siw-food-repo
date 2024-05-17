@@ -29,7 +29,7 @@ public class Ingrediente {
 	
 	
 
-	@ManyToMany
+	@ManyToMany(mappedBy = "ingredientiUtilizzati")
 	private List<Ricetta> ricette;
 	
 

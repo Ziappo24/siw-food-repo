@@ -1,5 +1,9 @@
 package it.uniroma3.siw.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +15,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import it.uniroma3.siw.controller.validator.RicettaValidator;
 import it.uniroma3.siw.model.Cuoco;
+import it.uniroma3.siw.model.Ingrediente;
 import it.uniroma3.siw.model.Ricetta;
+import it.uniroma3.siw.repository.IngredienteRepository;
 import it.uniroma3.siw.repository.RicettaRepository;
 import it.uniroma3.siw.service.CuocoService;
 import it.uniroma3.siw.service.RicettaService;
@@ -27,6 +33,8 @@ public class RicettaController {
 	@Autowired RicettaValidator ricettaValidator;
 	
 	@Autowired CuocoService cuocoService;
+	
+	@Autowired IngredienteRepository ingredienteRepository;
 
 	
 	
@@ -35,9 +43,15 @@ public class RicettaController {
 		model.addAttribute("ricetta", this.ricettaRepository.findById(id).get());
 		return "ricetta.html";
 	}
+	
+	@GetMapping("/ricette")
+	public String ShowRicettaIndex(Model model) {
+		model.addAttribute("ricette", this.ricettaService.findAll());
+		return "ricette.html";
+	}
 
 	@GetMapping("/admin/manageRicette")
-	public String ShowRicetta(Model model) {
+	public String ShowRicettaAdmin(Model model) {
 		model.addAttribute("ricette", this.ricettaService.findAll());
 		return "/admin/manageRicette.html";
 	}
@@ -58,7 +72,7 @@ public class RicettaController {
 	public String newRicetta(@Valid @ModelAttribute("ricetta") Ricetta ricetta, BindingResult bindingResult, Model model) {
 		this.ricettaValidator.validate(ricetta, bindingResult);
 		if (!bindingResult.hasErrors()) {
-			this.ricettaService.save(ricetta);
+			this.ricettaRepository.save(ricetta);
 			model.addAttribute("ricetta", ricetta);
 			return "ricetta.html";
 		} else {
@@ -88,14 +102,14 @@ public class RicettaController {
 	@GetMapping(value = "/admin/addCuoco/{idRicetta}")
 	public String addArtist(@PathVariable("idRicetta") Long ricettaId, Model model) {
 		model.addAttribute("cuochi", cuocoService.findAll());
-		model.addAttribute("ricetta", ricettaService.findById(ricettaId));
+		model.addAttribute("ricetta", ricettaRepository.findById(ricettaId).get());
 		// Ritorna il nome della pagina HTML da visualizzare
-		return "/admin/cuocoToAdd.html";
+		return "/admin/addCuoco.html";
 	}
 
 	@GetMapping(value = "/admin/formUpdateRicetta/{id}")
 	public String formUpdateRicetta(@PathVariable("id") Long id, Model model) {
-		model.addAttribute("ricetta", ricettaService.findById(id));
+		model.addAttribute("ricetta", ricettaRepository.findById(id).get());
 		return "admin/formUpdateRicetta.html";
 	}
 	
@@ -103,15 +117,65 @@ public class RicettaController {
 	public String setDirectorToMovie(@PathVariable("cuocoId") Long cuocoId, @PathVariable("ricettaId") Long ricettaId, Model model) {
 
 		Cuoco cuoco = this.cuocoService.findById(cuocoId);
-		Ricetta ricetta = this.ricettaService.findById(ricettaId);
+		Ricetta ricetta = this.ricettaRepository.findById(ricettaId).get();
 		ricetta.setCuoco(cuoco);
-		this.ricettaService.save(ricetta);
+		this.ricettaRepository.save(ricetta);
 
 		model.addAttribute("ricetta", ricetta);
 		return "admin/formUpdateRicetta.html";
 	}
 	
 	
+	/* per aggiungere o togliere ingredienti a mo di lista*/
+	@GetMapping("/admin/updateIngredienti/{id}")
+	public String updateIngredienti(@PathVariable("id") Long id, Model model) {
+
+		List<Ingrediente> ingredientiToAdd = this.ingredientiToAdd(id);
+		model.addAttribute("ingredientiToAdd", ingredientiToAdd);
+		model.addAttribute("ricetta", this.ricettaRepository.findById(id).get());
+
+		return "admin/actorsToAdd.html";
+	}
+
+	@GetMapping(value="/admin/addActorToMovie/{actorId}/{movieId}")
+	public String addActorToMovie(@PathVariable("actorId") Long actorId, @PathVariable("movieId") Long movieId, Model model) {
+		Ricetta ricetta = this.ricettaRepository.findById(movieId).get();
+		Ingrediente ingrediente = this.ingredienteRepository.findById(actorId).get();
+		Set<Ingrediente> ingredienti = ricetta.getIngredientiUtilizzati();
+		ingredienti.add(ingrediente);
+		this.ricettaRepository.save(ricetta);
+		
+		List<Ingrediente> ingredientiToAdd = ingredientiToAdd(movieId);
+		
+		model.addAttribute("ricetta", ricetta);
+		model.addAttribute("ingredientiToAdd", ingredientiToAdd);
+
+		return "admin/ingredientiToAdd.html";
+	}
 	
+	@GetMapping(value="/admin/removeIngredienteFromRicetta/{ingredienteId}/{ricettaId}")
+	public String removeIngredienteFromRicetta(@PathVariable("ingredienteId") Long ingredienteId, @PathVariable("ricettaId") Long ricettaId, Model model) {
+		Ricetta ricetta= this.ricettaRepository.findById(ricettaId).get();
+		Ingrediente ingrediente = this.ingredienteRepository.findById(ingredienteId).get();
+		Set<Ingrediente> ingredientiUtilizzati = ricetta.getIngredientiUtilizzati();
+		ingredientiUtilizzati.remove(ingrediente);
+		this.ricettaRepository.save(ricetta);
+
+		List<Ingrediente> ingredientiToAdd = ingredientiToAdd(ricettaId);
+		
+		model.addAttribute("ricetta", ricetta);
+		model.addAttribute("ingredientiToAdd", ingredientiToAdd);
+
+		return "admin/ingredientiToAdd.html";
+	}
+
+	private List<Ingrediente> ingredientiToAdd(Long movieId) {
+		List<Ingrediente> ingredientiToAdd = new ArrayList<>();
+
+		for (Ingrediente i : ingredienteRepository.findIngredientiNotInRicetta(movieId)) {
+			ingredientiToAdd.add(i);
+		}
+		return ingredientiToAdd;
+	}
 
 }

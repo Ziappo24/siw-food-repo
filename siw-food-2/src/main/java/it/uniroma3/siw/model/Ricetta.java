@@ -1,7 +1,8 @@
 package it.uniroma3.siw.model;
 
-import java.util.List;
+
 import java.util.Objects;
+import java.util.Set;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -30,8 +31,16 @@ public class Ricetta {
 	@ManyToOne
 	private Cuoco cuoco;
 	
-	@ManyToMany(mappedBy = "ricette")
-	private List<Ingrediente> ingredientiUtilizzati;
+	@ManyToMany
+	private Set<Ingrediente> ingredientiUtilizzati;
+
+	public Set<Ingrediente> getIngredientiUtilizzati() {
+		return ingredientiUtilizzati;
+	}
+
+	public void setIngredientiUtilizzati(Set<Ingrediente> ingredientiUtilizzati) {
+		this.ingredientiUtilizzati = ingredientiUtilizzati;
+	}
 
 	public String getNome() {
 		return nome;

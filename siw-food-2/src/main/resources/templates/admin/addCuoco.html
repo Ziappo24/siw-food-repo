@@ -68,8 +68,8 @@
 									<div class="list-content">
 										<ul class="cuochi-list">
 											<li class="cuochi-list-item" th:each="cuoco : ${cuochi}">
-												<span th:text="${cuoco.nome} + ' (' + ${cuoco.cognome} + ')'"></span>
-												<a class="cuochi-list-link" th:href="@{'/setCuocoToRicetta/' + ${cuoco.id} + '/' + ${ricetta.id}}">(Aggiungi)</a>
+												<span th:text="${cuoco.nome} + ${cuoco.cognome}"></span>
+												<a class="cuochi-list-link" th:href="@{'/admin/setCuocoToRicetta/' + ${cuoco.id} + '/' + ${ricetta.id}}">(Aggiungi)</a>
 											</li>
 										</ul>
 									</div>
