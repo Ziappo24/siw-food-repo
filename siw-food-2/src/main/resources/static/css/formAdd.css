@@ -87,7 +87,7 @@ body{
     min-height: 480px;
 }
 .container span{
-    font-size: 12px;
+    font-size: 1.1em;
 }
 
 .container button{
@@ -125,13 +125,14 @@ body{
     outline: none;
 }
 
-.form-container inserisci{
+.form-container inserisci {
 	justify-content: center;
     position: absolute;
     top: 0;
     height: 100%;
     transition: all 0.6s ease-in-out;
 }
+
 
 .aggiungi-cuoco{
     left: 0;

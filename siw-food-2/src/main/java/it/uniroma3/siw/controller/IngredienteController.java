@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import it.uniroma3.siw.model.Ingrediente;
-import it.uniroma3.siw.model.Ricetta;
 import it.uniroma3.siw.repository.IngredienteRepository;
 import it.uniroma3.siw.service.IngredienteService;
 
@@ -45,7 +44,7 @@ public class IngredienteController {
 		if (!ingredienteRepository.existsByNome(ingrediente.getNome())) {
 			this.ingredienteService.save(ingrediente);
 			model.addAttribute("ingrediente", ingrediente);
-			return "redirect:ingrediente/"+ingrediente.getId();
+			return "ingrediente.html";
 		} else {
 			model.addAttribute("messaggioErrore", "Questo ingrediente esiste già");
 			return "/admin/formNewIngrediente.html";
@@ -63,7 +62,7 @@ public class IngredienteController {
 		if (!ingredienteRepository.existsByNome(ingrediente.getNome())) {
 			this.ingredienteService.save(ingrediente);
 			model.addAttribute("ingrediente", ingrediente);
-			return "redirect:ingrediente/"+ingrediente.getId();
+			return "ingrediente.html";
 		} else {
 			model.addAttribute("messaggioErrore", "Questo ingrediente esiste già");
 			return "/cuoco/formNewIngrediente.html";
