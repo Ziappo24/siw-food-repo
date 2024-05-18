@@ -2,12 +2,14 @@ package it.uniroma3.siw.model;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 
 @Entity
@@ -29,9 +31,17 @@ public class Ingrediente {
 	
 	
 
-	@ManyToMany(mappedBy = "ingredientiUtilizzati")
-	private List<Ricetta> ricette;
+	@ManyToMany
+    private Set<Ingrediente> ingredientiUtilizzati;
 	
+
+	public Set<Ingrediente> getIngredientiUtilizzati() {
+		return ingredientiUtilizzati;
+	}
+
+	public void setIngredientiUtilizzati(Set<Ingrediente> ingredientiUtilizzati) {
+		this.ingredientiUtilizzati = ingredientiUtilizzati;
+	}
 
 	public String getNome() {
 		return nome;

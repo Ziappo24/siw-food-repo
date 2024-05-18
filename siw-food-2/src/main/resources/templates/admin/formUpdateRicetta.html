@@ -76,33 +76,34 @@
 								<div class="html-block">
 									<div class="block-content">
 										<div th:if="${ricetta.cuoco}">
-											<a th:href="@{'/admin/addCuoco' + '/' + ${ricetta.id}}">Modifica cuoco</a>
-											<p>Cuoco: <span
-													th:text="${ricetta.cuoco.nome}	+ ' ' + ${ricetta.cuoco.cognome}"></span>
-											</p>
+											<strong>Cuoco:</strong>
+											<span
+												th:text="${ricetta.cuoco.nome} + ' ' + ${ricetta.cuoco.cognome}"></span>
+											<br>
+											<a th:href="@{'/admin/addCuoco' + '/' + ${ricetta.id}}" class="button-link">
+												<button type="button">Modifica cuoco</button>
+											</a>
 										</div>
 										<div th:unless="${ricetta.cuoco}">
 											<p>Non c'è nessun cuoco per questa ricetta.</p>
-										</div>
-										<div th:unless="${ricetta.cuoco}">
-											<a th:href="@{'/admin/addCuoco' + '/' + ${ricetta.id}}">Aggiungi cuoco</a>
+											<a th:href="@{'/admin/addCuoco' + '/' + ${ricetta.id}}" class="button-link">
+												<button type="button">Aggiungi cuoco</button>
+											</a>
 										</div>
 									</div>
 								</div>
+
 								<div class="html-block">
 									<div class="block-content">
-										<div th:each="ingrediente: ${ricetta.ingredientiUtilizzati}">
-											<p>Ingredienti: <span
-													th:text="${ingrediente.nome}"></span>
-											</p>
-										</div>
-										<div th:unless="${ricetta.cuoco}">
-											<p>Non c'è nessun ingrediente per questa ricetta.</p>
-										</div>
-										<div>
-											<a th:href="@{'/admin/addIngrediente' + '/' + ${ricetta.id}}">Modifica la
-												lista degli ingredienti</a>
-										</div>
+										<strong>Lista degli ingredienti:</strong>
+										<ul>
+											<div th:each="ingrediente: ${ricetta.ingredientiUtilizzati}">
+												<li th:text="${ingrediente.nome}"></li>
+											</div>
+										</ul>
+										<a th:href="@{'/admin/updateIngredienti/' + ${ricetta.id}}">
+											<button type="button">Modifica</button>
+										</a>
 									</div>
 								</div>
 								<div class="html-block">

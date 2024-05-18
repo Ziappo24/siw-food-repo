@@ -134,23 +134,23 @@ public class RicettaController {
 		model.addAttribute("ingredientiToAdd", ingredientiToAdd);
 		model.addAttribute("ricetta", this.ricettaRepository.findById(id).get());
 
-		return "admin/actorsToAdd.html";
+		return "admin/addIngrediente.html";
 	}
 
-	@GetMapping(value="/admin/addActorToMovie/{actorId}/{movieId}")
-	public String addActorToMovie(@PathVariable("actorId") Long actorId, @PathVariable("movieId") Long movieId, Model model) {
-		Ricetta ricetta = this.ricettaRepository.findById(movieId).get();
-		Ingrediente ingrediente = this.ingredienteRepository.findById(actorId).get();
+	@GetMapping(value="/admin/addIngredienteToRicetta/{ingredienteId}/{ricettaId}")
+	public String addActorToMovie(@PathVariable("ingredienteId") Long ingredienteId, @PathVariable("ricettaId") Long ricettaId, Model model) {
+		Ricetta ricetta = this.ricettaRepository.findById(ricettaId).get();
+		Ingrediente ingrediente = this.ingredienteRepository.findById(ingredienteId).get();
 		Set<Ingrediente> ingredienti = ricetta.getIngredientiUtilizzati();
 		ingredienti.add(ingrediente);
 		this.ricettaRepository.save(ricetta);
 		
-		List<Ingrediente> ingredientiToAdd = ingredientiToAdd(movieId);
+		List<Ingrediente> ingredientiToAdd = ingredientiToAdd(ricettaId);
 		
 		model.addAttribute("ricetta", ricetta);
 		model.addAttribute("ingredientiToAdd", ingredientiToAdd);
 
-		return "admin/ingredientiToAdd.html";
+		return "admin/addIngrediente.html";
 	}
 	
 	@GetMapping(value="/admin/removeIngredienteFromRicetta/{ingredienteId}/{ricettaId}")
@@ -166,13 +166,13 @@ public class RicettaController {
 		model.addAttribute("ricetta", ricetta);
 		model.addAttribute("ingredientiToAdd", ingredientiToAdd);
 
-		return "admin/ingredientiToAdd.html";
+		return "admin/addIngrediente.html";
 	}
 
-	private List<Ingrediente> ingredientiToAdd(Long movieId) {
+	private List<Ingrediente> ingredientiToAdd(Long ricettaId) {
 		List<Ingrediente> ingredientiToAdd = new ArrayList<>();
 
-		for (Ingrediente i : ingredienteRepository.findIngredientiNotInRicetta(movieId)) {
+		for (Ingrediente i : ingredienteRepository.findIngredientiNotInRicetta(ricettaId)) {
 			ingredientiToAdd.add(i);
 		}
 		return ingredientiToAdd;

@@ -34,8 +34,14 @@ public class CuocoController {
 	
 	@GetMapping(value="/admin/formNewCuoco")
 	public String formNewCuoco(Model model) {
-		model.addAttribute("artist", new Cuoco());
+		model.addAttribute("cuoco", new Cuoco());
 		return "admin/formNewCuoco.html";
+	}
+	
+	@GetMapping("/admin/manageCuochi")
+	public String ShowCuocoAdmin(Model model) {
+		model.addAttribute("cuochi", this.cuocoService.findAll());
+		return "/admin/manageCuochi.html";
 	}
 	
 	@GetMapping(value="/admin/indexCuco")
@@ -48,7 +54,7 @@ public class CuocoController {
 		if (!cuocoRepository.existsByNomeAndCognome(cuoco.getNome(), cuoco.getCognome())) {
 			this.cuocoService.save(cuoco);
 			model.addAttribute("cuoco", cuoco);
-			return "redirect:cuoco/"+cuoco.getId();
+			return "cuoco.html";
 		} else {
 			model.addAttribute("messaggioErrore", "Questo cuoco esiste già");
 			return "/admin/formNewCuoco.html";

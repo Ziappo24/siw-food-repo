@@ -33,6 +33,12 @@ public class IngredienteController {
 		return "ingredienti.html";
 	}
 	
+	@GetMapping("/admin/manageIngredienti")
+	public String ShowIngredientiAdmin(Model model) {
+		model.addAttribute("ingredienti", this.ingredienteService.findAll());
+		return "/admin/manageIngredienti.html";
+	}
+	
 	@GetMapping(value = "/admin/formNewIngrediente")
 	public String formNewIngrediente(Model model) {
 		model.addAttribute("ingrediente", new Ingrediente());

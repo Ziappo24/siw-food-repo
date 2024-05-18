@@ -17,6 +17,7 @@ a {
 	
 }
 
+
 .header-title-nav-wrapper {
     display: flex;
     justify-content: space-between; /* Allinea gli elementi ai lati opposti */
@@ -136,7 +137,7 @@ footer {
 }
 
 .block-content {
-	font-size: 1em;
+	font-size: 20px;
     margin-right: 20px;
     margin-bottom: 20px;
 }
@@ -229,6 +230,15 @@ footer {
     letter-spacing: 0em;
     line-height: 1.4em;
 }
+.list-title {
+	font-size: 22px;
+	font-weight: 600;
+   	font-family: "Mate SC";
+   	font-style: normal;
+    text-transform: none;
+    letter-spacing: 0em;
+    line-height: 1.4em;
+}
 
 .ingredienti-list-item {
     font-size: 20px;
@@ -245,6 +255,12 @@ footer {
 	color: rgb(0, 0, 0);
 	font-weight: normal;
 }
+
+.button-link button {
+    margin-top: 10px; /* Aggiunge margine in alto */
+    margin-bottom: 10px; /* Aggiunge margine in basso */
+}
+
 
 .year-text {
 	font-size: 18px;
