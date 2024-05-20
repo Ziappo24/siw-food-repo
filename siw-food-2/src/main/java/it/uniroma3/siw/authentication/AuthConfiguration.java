@@ -52,7 +52,7 @@ public class AuthConfiguration {
 		.requestMatchers(HttpMethod.GET,"/","/index","/register","/css/**", "/images/**", "favicon.ico",
 				"/cuochi", "ricette", "ingredienti", "/cuoco/**", "/ricetta/**", "/ingrediente/**").permitAll()
 		// chiunque (autenticato o no) può mandare richieste POST al punto di accesso per login e register
-		.requestMatchers(HttpMethod.POST,"/register", "/login").permitAll()
+		.requestMatchers(HttpMethod.POST,"/register", "/login", "/searchRicette", "/searchCuochi", "/searchIngredienti").permitAll()
 		.requestMatchers(HttpMethod.GET,"/admin/**").hasAnyAuthority(ADMIN_ROLE)
 		.requestMatchers(HttpMethod.POST,"/admin/**").hasAnyAuthority(ADMIN_ROLE)
 		.requestMatchers(HttpMethod.GET,"/cuoco/**").hasAnyAuthority(CUOCO_ROLE)

@@ -1,12 +1,9 @@
-<!DOCTYPE html>
 <html>
 
 <head>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Mate+SC&display=swap" rel="stylesheet">
-	<link rel="stylesheet"
-		href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Siw-Food - Lista Cuochi</title>
@@ -19,6 +16,13 @@
 			<!-- Background -->
 			<div class="header-background"></div>
 			<div class="header-display-desktop">
+				<style>
+					.top-bun,
+					.patty,
+					.bottom-bun {
+						height: 1px;
+					}
+				</style>
 			</div>
 			<!-- Title and Nav wrapper-->
 			<div class="header-title-nav-wrapper">
@@ -47,7 +51,7 @@
 		<main>
 			<article class="sections" id="sections">
 				<!-- inserire sezioni per alcuni articoli presi da database -->
-				<section class="section-ricetta"
+				<section class="section-ingrediente"
 					style="background-color: rgb(255, 255, 255); box-shadow: rgba(0, 0, 0, 0.09) 1px 1px 10px 4px;">
 					<div class="section-border">
 						<div class="section-background"> </div>
@@ -56,27 +60,38 @@
 						<div class="content">
 							<div data-fluid-engine="true">
 								<div class="list-title">
-									<h3 class>Lista dei cuochi</h3>
+									<h3 th:text="'Ingredienti della ricetta' +' ' + ${ricetta.nome}"></h3>
 								</div>
-								<form th:action="@{/admin/searchCuochi}" method="post">
-									<div class="search">
-										<span class=" search-icon material-symbols-outlined">search</span>
-										<input class="search-input" type="text" name="nome" th:value="${nome}"
-											placeholder="Ricerca">
-									</div>
-								</form>
-								<div class="list-checker" th:if="${cuochi.isEmpty()}">Non ci sono cuochi nel sistema
-								</div>
+								<div class="list-checker" th:if="${ricetta.ingredientiUtilizzati.isEmpty()}">Non ci sono
+									ingredienti per questa ricetta</div>
 								<div class="list-block">
 									<div class="list-content">
-										<ul class="ricette-list" th:if="${!cuochi.isEmpty()}">
-											<li class="ricette-list-item" th:each="cuoco : ${cuochi}">
-												<a class="ricette-list-link" th:href="@{'/cuoco' + '/' + ${cuoco.id}}"
-													th:text="${cuoco.nome} + ' ' + ${cuoco.cognome}"></a>
-												<a class="ricette-list-link"
-													th:href="@{'/admin/formUpdateCuoco' + '/' + ${cuoco.id}}">(Elimina)</a>
+										<ul class="ingredienti-list">
+											<li class="ingredienti-list-item"
+												th:each="ingrediente : ${ricetta.ingredientiUtilizzati}">
+												<span class="ingredienti-list-link"
+													th:text="${ingrediente.nome}"></span>
+												<a
+													th:href="@{'/cuoco/removeIngredienteFromRicetta/'+ ${ingrediente.id}+'/'+${ricetta.id}}">-
+													(rimuovi)</a>
 											</li>
 										</ul>
+										<div class="list-content">
+											<div class="list-title">Ingredienti che si possono aggiungere:</div>
+											<ul class="ricette-list">
+												<li class="ricette-list-item"
+													th:each="ingrediente : ${ingredientiToAdd}">
+													<span th:text="${ingrediente.nome}"></span>
+													<a
+														th:href="@{'/cuoco/addIngredienteToRicetta/'+ ${ingrediente.id}+'/'+${ricetta.id}}">-
+														(aggiungi)</a>
+												</li>
+											</ul>
+										</div>
+										<div>
+											<a th:href="@{'/cuoco/formUpdateRicetta/'+ ${ricetta.id}}">
+												<button type="button">Fine</button></a>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -94,11 +109,10 @@
 					<div class="socials">
 						<nav class="footer-nav-list">
 							<a href="https://www.instagram.com/edoardopiazzolla/">
-								<img
-									src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Instagram_logo_2016.svg/2048px-Instagram_logo_2016.svg.png" />
+								<img src="/images/Instagram.png" />
 							</a>
 							<a href="https://www.youtube.com/channel/UC5LdtlfzoK9pftejCPvzWrg">
-								<img src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Youtube_logo.png" />
+								<img src="/images/youtube.png" />
 							</a>
 						</nav>
 					</div>

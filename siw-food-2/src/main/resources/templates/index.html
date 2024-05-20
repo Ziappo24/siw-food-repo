@@ -1,21 +1,25 @@
 <html>
-  <head>
+
+<head>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Mate+SC&display=swap" rel="stylesheet">
+	<link rel="stylesheet"
+		href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 	<meta charset="UTF-8">
-	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Siw-Food - Homepage</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Siw-Food - Homepage</title>
 	<link rel="stylesheet" href="/css/style-v4.css">
-	
-  </head>
-  <body>
+
+</head>
+
+<body>
 	<div id="site-wrapper" class="site-wrapper">
 		<header>
 			<!-- Background -->
 			<div class="header-background"></div>
 			<div class="header-display-desktop">
-				<style> .top-bun, .patty, .bottom-bun { height: 1px; } </style>
+
 			</div>
 			<!-- Title and Nav wrapper-->
 			<div class="header-title-nav-wrapper">
@@ -28,14 +32,14 @@
 					<div class="header-nav-wrapper">
 						<nav class="header-nav-list">
 							<div class="header-nav-item" th:if="${userDetails}">
-						   		<div class="inline-flex-container">
-				        			<div class="username" th:text="${userDetails.username}"></div>
-					        		<a class="no-underline" href="/logout">Logout</a>
-						    	</div>
+								<div class="inline-flex-container">
+									<div class="username" th:text="${userDetails.username}"></div>
+									<a class="no-underline" href="/logout">Logout</a>
+								</div>
 							</div>
-	                        <div class="header-nav-item" th:unless="${userDetail}">
-	                            <a href="/formLogin">Login</a>
-	                        </div>
+							<div class="header-nav-item" th:unless="${userDetail}">
+								<a href="/formLogin">Login</a>
+							</div>
 						</nav>
 					</div>
 				</div>
@@ -45,67 +49,71 @@
 			<article class="article">
 				<!-- inserire sezioni per alcuni articoli presi da database -->
 				<section class="first-section">
-				    <div class="first-section-border">
-				        <div class="first-section-background"></div>
-				    </div>
-				    <div class="first-section-content-wrapper">
-				        <div class="first-section-content">
-				            <div class="fs-image-block">
-				                <div class="fs-block-content">
-				                    <img src="/images/gourmet-dishes.png">
-				                </div>
-				            </div>
-				            <div class="fs-text-block">
-				                <h2>L'essenza di questo sito</h2>
-				                <p>Questo sito dedicato alla cucina è un portale progettato per offrire 
-								   agli utenti un'ampia varietà di informazioni culinarie, inclusi chef rinomati, 
-								   ricette deliziose e descrizioni dettagliate dei piatti. Con una vasta gamma di contenuti, 
-								   il sito mira a ispirare gli appassionati di cucina fornendo loro idee, istruzioni e suggerimenti 
-								   per preparare piatti eccezionali. Dal profilo dei cuochi famosi alle istruzioni passo dopo passo 
-								   per la preparazione delle ricette, il sito è pensato per soddisfare le esigenze e i desideri di 
-								   chiunque sia interessato all'arte della cucina.</p>
-				            </div>
-				        </div>
-				    </div>
+					<div class="first-section-border">
+						<div class="first-section-background"></div>
+					</div>
+					<div class="first-section-content-wrapper">
+						<div class="first-section-content">
+							<div class="fs-image-block">
+								<div class="fs-block-content">
+									<img src="/images/gourmet-dishes.png">
+								</div>
+							</div>
+							<div class="fs-text-block">
+								<h2>L'essenza di questo sito</h2>
+								<p>Questo sito dedicato alla cucina è un portale progettato per offrire
+									agli utenti un'ampia varietà di informazioni culinarie, inclusi chef rinomati,
+									ricette deliziose e descrizioni dettagliate dei piatti. Con una vasta gamma di
+									contenuti,
+									il sito mira a ispirare gli appassionati di cucina fornendo loro idee, istruzioni e
+									suggerimenti
+									per preparare piatti eccezionali. Dal profilo dei cuochi famosi alle istruzioni
+									passo dopo passo
+									per la preparazione delle ricette, il sito è pensato per soddisfare le esigenze e i
+									desideri di
+									chiunque sia interessato all'arte della cucina.</p>
+							</div>
+						</div>
+					</div>
 				</section>
 				<section class="second-section">
-				    <div class="second-section-border">
-				        <div class="second-section-background"></div>
-				    </div>
-				    <div class="second-section-content-wrapper">
-				        <div class="second-section-content">
-				            <div class="ss-image-block">
-				                <div class="ss-block-content">
-				                    <!-- Immagine 1 -->
-				                    <img src="/images/cuoco.jpg" id="img1">
-				                    <!-- Link "Aggiungi" e "Gestisci" per l'immagine 1 -->
-				                    <div class="links">
-				                        <a href="/cuochi" class="add-link">Elenco Cuochi</a>
-				                    </div>
-				                </div>
-				            </div>
-				            <div class="ss-image-block">
-				                <div class="ss-block-content">
-				                    <!-- Immagine 2 -->
-				                    <img src="/images/ricetta.jpg" id="img2">
-				                    <!-- Link "Aggiungi" e "Gestisci" per l'immagine 2 -->
-				                    <div class="links">
-				                        <a href="/ricette" class="add-link">Elenco Ricette</a>
-				                    </div>
-				                </div>
-				            </div>
-				            <div class="ss-image-block">
-				                <div class="ss-block-content">
-				                    <!-- Immagine 3 -->
-				                    <img src="/images/ingredienti.jpg" id="img3">
-				                    <!-- Link "Aggiungi" e "Gestisci" per l'immagine 3 -->
-				                    <div class="links">
-				                        <a href="/ingredienti" class="add-link">Elenco Ingredienti</a>
-				                    </div>
-				                </div>
-				            </div>
-				        </div>
-				    </div>
+					<div class="second-section-border">
+						<div class="second-section-background"></div>
+					</div>
+					<div class="second-section-content-wrapper">
+						<div class="second-section-content">
+							<div class="ss-image-block">
+								<div class="ss-block-content">
+									<!-- Immagine 1 -->
+									<img src="/images/cuoco.jpg" id="img1">
+									<!-- Link "Aggiungi" e "Gestisci" per l'immagine 1 -->
+									<div class="links">
+										<a href="/cuochi" class="add-link">Elenco Cuochi</a>
+									</div>
+								</div>
+							</div>
+							<div class="ss-image-block">
+								<div class="ss-block-content">
+									<!-- Immagine 2 -->
+									<img src="/images/ricetta.jpg" id="img2">
+									<!-- Link "Aggiungi" e "Gestisci" per l'immagine 2 -->
+									<div class="links">
+										<a href="/ricette" class="add-link">Elenco Ricette</a>
+									</div>
+								</div>
+							</div>
+							<div class="ss-image-block">
+								<div class="ss-block-content">
+									<!-- Immagine 3 -->
+									<img src="/images/ingredienti.jpg" id="img3">
+									<!-- Link "Aggiungi" e "Gestisci" per l'immagine 3 -->
+									<div class="links">
+										<a href="/ingredienti" class="add-link">Elenco Ingredienti</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</section>
 			</article>
 		</main>
@@ -118,10 +126,10 @@
 					<div class="socials">
 						<nav class="footer-nav-list">
 							<a href="https://www.instagram.com/edoardopiazzolla/">
-								<img src="/images/Instagram.png"/>
+								<img src="/images/Instagram.png" />
 							</a>
 							<a href="https://www.youtube.com/channel/UC5LdtlfzoK9pftejCPvzWrg">
-								<img src="/images/youtube.png"/>
+								<img src="/images/youtube.png" />
 							</a>
 						</nav>
 					</div>
@@ -129,5 +137,6 @@
 			</div>
 		</footer>
 	</div>
-  </body>
+</body>
+
 </html>

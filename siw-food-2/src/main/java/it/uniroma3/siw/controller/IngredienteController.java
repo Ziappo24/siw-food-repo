@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import it.uniroma3.siw.model.Ingrediente;
 import it.uniroma3.siw.repository.IngredienteRepository;
@@ -32,6 +33,19 @@ public class IngredienteController {
 		model.addAttribute("ingredienti", this.ingredienteService.findAll());
 		return "ingredienti.html";
 	}
+	
+	@PostMapping("/searchIngredienti")
+	public String searchIngredienti(Model model, @RequestParam String nome) {
+		model.addAttribute("ingredienti", this.ingredienteRepository.findByNome(nome));
+		return "ingredienti.html";
+	}
+	
+	@PostMapping("admin/searchIngredienti")
+	public String searchIngredientiAdmin(Model model, @RequestParam String nome) {
+		model.addAttribute("ingredienti", this.ingredienteRepository.findByNome(nome));
+		return "/admin/manageIngredienti.html";
+	}
+
 	
 	@GetMapping("/admin/manageIngredienti")
 	public String ShowIngredientiAdmin(Model model) {

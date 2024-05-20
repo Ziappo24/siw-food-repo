@@ -50,6 +50,38 @@ a {
     font-weight: 400;
 }
 
+.search {
+	width: max-content;
+	display: flex;
+	align-items: center;
+	padding: 10px;
+	border-radius: 10px;
+	background-color: #f6f6f6;
+	
+	transition: box-shadow 0.25s;
+}
+
+.search:focus-within {
+	box-shadow: 0 0 4px rgba(0, 0, 0, 0.75);
+}
+
+.search-input {
+	font-size: 16px;
+	font-family: "Mate SC";
+	color: #333333;
+	margin-left: 14px;
+	border: 10px;
+	outline: none;
+	border: none;
+	background: transparent;
+	width: 150px;
+}
+
+.search-input::placeholder,
+.search-icon {
+	color: rgba(0, 0, 0, 0.5);
+}
+
 .inline-flex-container {
     display: inline-flex;
     align-items: center; /* Per allineare gli elementi verticalmente al centro */

@@ -33,6 +33,16 @@ public class UserService {
     }
 
     /**
+     * This method retrieves a User from the DB based on its name.
+     * @param nome the name of the User to retrieve from the DB
+     * @return the retrieved User, or null if no User with the passed name could be found in the DB
+     */
+    @Transactional
+    public User getUserByNome(String nome) {
+        return this.userRepository.findByNome(nome);
+    }
+
+    /**
      * This method saves a User in the DB.
      * @param user the User to save into the DB
      * @return the saved User
@@ -56,4 +66,5 @@ public class UserService {
             result.add(user);
         return result;
     }
+
 }

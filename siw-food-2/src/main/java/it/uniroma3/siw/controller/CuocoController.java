@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import it.uniroma3.siw.model.Cuoco;
 import it.uniroma3.siw.repository.CuocoRepository;
@@ -47,6 +48,18 @@ public class CuocoController {
 	@GetMapping(value="/admin/indexCuco")
 	public String indexCuoco() {
 		return "admin/indexCuoco.html";
+	}
+	
+	@PostMapping("/searchCuochi")
+	public String searchCuochi(Model model, @RequestParam String nome) {
+		model.addAttribute("cuochi", this.cuocoRepository.findByNome(nome));
+		return "cuochi.html";
+	}
+	
+	@PostMapping("admin/searchCuochi")
+	public String searchCuochiAdmin(Model model, @RequestParam String nome) {
+		model.addAttribute("cuochi", this.cuocoRepository.findByNome(nome));
+		return "/admin/manageCuochi.html";
 	}
 	
 	@PostMapping("/admin/cuochi")

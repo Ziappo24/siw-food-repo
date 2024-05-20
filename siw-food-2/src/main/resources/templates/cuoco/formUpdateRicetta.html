@@ -17,13 +17,6 @@
 			<!-- Background -->
 			<div class="header-background"></div>
 			<div class="header-display-desktop">
-				<style>
-					.top-bun,
-					.patty,
-					.bottom-bun {
-						height: 1px;
-					}
-				</style>
 			</div>
 			<!-- Title and Nav wrapper-->
 			<div class="header-title-nav-wrapper">
@@ -61,9 +54,12 @@
 							<div data-fluid-engine="true">
 								<div class="image-block">
 									<div class="block-content">
-	                                    <img th:if="${ricetta.urlImage.startsWith('https')}" th:src="${ricetta.urlImage}" style="width: 30%; height: auto;">
-	                                    <img th:unless="${ricetta.urlImage.startsWith('https')}" th:src="@{/images/__${ricetta.urlImage}__}" style="width: 30%; height: auto;">
-                                	</div>
+										<img th:if="${ricetta.urlImage.startsWith('https')}"
+											th:src="${ricetta.urlImage}" style="width: 30%; height: auto;">
+										<img th:unless="${ricetta.urlImage.startsWith('https')}"
+											th:src="@{/images/__${ricetta.urlImage}__}"
+											style="width: 30%; height: auto;">
+									</div>
 								</div>
 								<div class="html-block">
 									<div class="block-content-main">
@@ -72,7 +68,35 @@
 								</div>
 								<div class="html-block">
 									<div class="block-content">
-									<!--aggiungere logica aggiungi ingredienti-->
+										<div th:if="${ricetta.cuoco}">
+											<strong>Cuoco:</strong>
+											<span
+												th:text="${ricetta.cuoco.nome} + ' ' + ${ricetta.cuoco.cognome}"></span>
+											<br>
+<!--											<a th:href="@{'/admin/addCuoco' + '/' + ${ricetta.id}}" class="button-link">-->
+<!--												<button type="button">Modifica cuoco</button>-->
+<!--											</a>-->
+										</div>
+										<div th:unless="${ricetta.cuoco}">
+											<p>Non c'è nessun cuoco per questa ricetta.</p>
+<!--											<a th:href="@{'/admin/addCuoco' + '/' + ${ricetta.id}}" class="button-link">-->
+<!--												<button type="button">Aggiungi cuoco</button>-->
+<!--											</a>-->
+										</div>
+									</div>
+								</div>
+
+								<div class="html-block">
+									<div class="block-content">
+										<strong>Lista degli ingredienti:</strong>
+										<ul>
+											<div th:each="ingrediente: ${ricetta.ingredientiUtilizzati}">
+												<li th:text="${ingrediente.nome}"></li>
+											</div>
+										</ul>
+										<a th:href="@{'/cuoco/updateIngredienti/' + ${ricetta.id}}">
+											<button type="button">Modifica</button>
+										</a>
 									</div>
 								</div>
 								<div class="html-block">

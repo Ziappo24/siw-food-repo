@@ -4,6 +4,8 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Mate+SC&display=swap" rel="stylesheet">
+	<link rel="stylesheet"
+		href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Siw-Food - Lista Cuochi</title>
@@ -40,9 +42,9 @@
 									<a class="no-underline" href="/logout">Logout</a>
 								</div>
 							</div>
-<!--							<div class="header-nav-item" th:unless="${userDetail}">-->
-<!--								<a href="/formLogin">Login</a>-->
-<!--							</div>-->
+							<!--							<div class="header-nav-item" th:unless="${userDetail}">-->
+							<!--								<a href="/formLogin">Login</a>-->
+							<!--							</div>-->
 						</nav>
 					</div>
 				</div>
@@ -62,11 +64,18 @@
 								<div class="list-title">
 									<h3 class>Lista degli ingredienti</h3>
 								</div>
+								<form th:action="@{/searchIngredienti}" method="post">
+									<div class="search">
+										<span class=" search-icon material-symbols-outlined">search</span>
+										<input class="search-input" type="text" name="nome" th:value="${nome}"
+											placeholder="Ricerca">
+									</div>
+								</form>
 								<div class="list-checker" th:if="${ingredienti.isEmpty()}">Non ci sono ingredienti nel
 									sistema</div>
 								<div class="list-block">
 									<div class="list-content">
-										<ul class="ingredienti-list">
+										<ul class="ingredienti-list" th:if="${!ingredienti.isEmpty()}">
 											<li class="ingredienti-list-item" th:each="ingrediente : ${ingredienti}">
 												<a class="ingredienti-list-link"
 													th:href="@{'/ingrediente' + '/' + ${ingrediente.id}}"
