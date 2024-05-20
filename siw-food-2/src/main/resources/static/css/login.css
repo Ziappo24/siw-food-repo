@@ -82,7 +82,7 @@ body{
     overflow: hidden;
     width: 768px;
     max-width: 100%;
-    min-height: 480px;
+    min-height: 550px;
 }
 
 .container p{
@@ -166,6 +166,7 @@ input {
 .sign-up{
     left: 0;
     width: 100%;
+    max-height: 100%;
     z-index: 1;
 }
 
@@ -280,7 +281,7 @@ footer {
 /* Stile per il titolo di congratulazioni */
 .inserisci h1 {
     font-size: 24px; /* Dimensione del testo ridotta */
-    margin-top: 20px; /* Margine dall'alto per spostare il titolo leggermente in basso */
+    margin-top: 0px; /* Margine dall'alto per spostare il titolo leggermente in basso */
     text-align: center; /* Centro il testo */
 }
 

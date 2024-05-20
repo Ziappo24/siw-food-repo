@@ -20,7 +20,14 @@ public class User {
 	private String cognome;
 	private LocalDate nascita;
 	private String email;
+	public String urlImage;
 	
+	public String getUrlImage() {
+		return urlImage;
+	}
+	public void setUrlImage(String urlImage) {
+		this.urlImage = urlImage;
+	}
 	public LocalDate getNascita() {
 		return nascita;
 	}

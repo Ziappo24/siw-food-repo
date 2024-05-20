@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import it.uniroma3.siw.model.Credentials;
 import it.uniroma3.siw.model.Cuoco;
 import it.uniroma3.siw.model.User;
-import it.uniroma3.siw.repository.CuocoRepository;
 import it.uniroma3.siw.service.CredentialsService;
 import it.uniroma3.siw.service.CuocoService;
 import it.uniroma3.siw.service.UserService;
@@ -120,7 +119,8 @@ public class AuthenticationController {
             Cuoco nuovoCuoco = new Cuoco();
             nuovoCuoco.nome = user.getNome();
             nuovoCuoco.cognome = user.getCognome();
-            nuovoCuoco.nascita = user.getNascita();            
+            nuovoCuoco.nascita = user.getNascita();
+            nuovoCuoco.urlImage = user.getUrlImage();
             this.cuocoService.save(nuovoCuoco);
             return "registrationSuccessful";
         }
