@@ -18,13 +18,13 @@ public class Cuoco {
 		@GeneratedValue(strategy = GenerationType.AUTO)
 		private long id;
 		
-		private String nome;
+		public String nome;
 		
-		private String cognome;
+		public String cognome;
 		
-		private String urlImage;
+		public String urlImage;
 		
-		private LocalDate nascita;
+		public LocalDate nascita;
 		
 		@OneToMany(mappedBy = "cuoco")
 		private List<Ricetta> ricette;

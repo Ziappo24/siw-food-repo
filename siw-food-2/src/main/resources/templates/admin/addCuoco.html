@@ -40,9 +40,9 @@
 									<a class="no-underline" href="/logout">Logout</a>
 								</div>
 							</div>
-							<div class="header-nav-item" th:unless="${userDetail}">
-								<a href="/formLogin">Login</a>
-							</div>
+<!--							<div class="header-nav-item" th:unless="${userDetail}">-->
+<!--								<a href="/formLogin">Login</a>-->
+<!--							</div>-->
 						</nav>
 					</div>
 				</div>
@@ -68,7 +68,7 @@
 									<div class="list-content">
 										<ul class="cuochi-list">
 											<li class="cuochi-list-item" th:each="cuoco : ${cuochi}">
-												<span th:text="${cuoco.nome} + ${cuoco.cognome}"></span>
+												<span th:text="${cuoco.nome} + ' ' + ${cuoco.cognome}"></span>
 												<a class="cuochi-list-link" th:href="@{'/admin/setCuocoToRicetta/' + ${cuoco.id} + '/' + ${ricetta.id}}">(Aggiungi)</a>
 											</li>
 										</ul>

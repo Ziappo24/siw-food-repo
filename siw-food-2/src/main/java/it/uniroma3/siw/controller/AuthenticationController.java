@@ -13,8 +13,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import it.uniroma3.siw.model.Credentials;
+import it.uniroma3.siw.model.Cuoco;
 import it.uniroma3.siw.model.User;
+import it.uniroma3.siw.repository.CuocoRepository;
 import it.uniroma3.siw.service.CredentialsService;
+import it.uniroma3.siw.service.CuocoService;
 import it.uniroma3.siw.service.UserService;
 import jakarta.validation.Valid;
 
@@ -26,6 +29,10 @@ public class AuthenticationController {
 
     @Autowired
 	private UserService userService;
+    
+    
+    @Autowired
+    private CuocoService cuocoService;
 	
 	@GetMapping(value = "/register") 
 	public String showRegisterForm (Model model) {
@@ -79,6 +86,24 @@ public class AuthenticationController {
         return "index.html";
     }
 
+//	@PostMapping(value = { "/register" })
+//    public String registerUser(@Valid @ModelAttribute("user") User user,
+//                 BindingResult userBindingResult, @Valid
+//                 @ModelAttribute("credentials") Credentials credentials,
+//                 BindingResult credentialsBindingResult,
+//                 Model model) {
+//
+//		// se user e credential hanno entrambi contenuti validi, memorizza User e the Credentials nel DB
+//        if(!userBindingResult.hasErrors() && !credentialsBindingResult.hasErrors()) {
+//            userService.saveUser(user);
+//            credentials.setUser(user);
+//            credentialsService.saveCredentials(credentials);
+//            model.addAttribute("user", user);
+//            return "registrationSuccessful";
+//        }
+//        return "registerUser";
+//    }
+	
 	@PostMapping(value = { "/register" })
     public String registerUser(@Valid @ModelAttribute("user") User user,
                  BindingResult userBindingResult, @Valid
@@ -92,6 +117,11 @@ public class AuthenticationController {
             credentials.setUser(user);
             credentialsService.saveCredentials(credentials);
             model.addAttribute("user", user);
+            Cuoco nuovoCuoco = new Cuoco();
+            nuovoCuoco.nome = user.getNome();
+            nuovoCuoco.cognome = user.getCognome();
+            nuovoCuoco.nascita = user.getNascita();            
+            this.cuocoService.save(nuovoCuoco);
             return "registrationSuccessful";
         }
         return "registerUser";

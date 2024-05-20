@@ -1,5 +1,7 @@
 package it.uniroma3.siw.model;
 
+import java.time.LocalDate;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,8 +18,15 @@ public class User {
 
 	private String nome;
 	private String cognome;
+	private LocalDate nascita;
 	private String email;
 	
+	public LocalDate getNascita() {
+		return nascita;
+	}
+	public void setNascita(LocalDate nascita) {
+		this.nascita = nascita;
+	}
 	public Long getId() {
 		return id;
 	}
