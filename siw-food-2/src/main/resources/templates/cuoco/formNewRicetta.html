@@ -44,6 +44,7 @@
 				<input required type="text" placeholder="Nome" th:field="${ricetta.nome}">
 				<input required type="text" placeholder="Descrizione" th:field="${ricetta.descrizione}">
 				<input required type="text" placeholder="URL Immagine" th:field="${ricetta.urlImage}">
+				<input type="hidden" name="username" th:value="${userDetails.username}"/>
 				<button>Inserisci</button>
 			</form>
 		</div>
