@@ -89,7 +89,7 @@
 											</ul>
 										</div>
 										<div>
-											<a th:href="@{'/cuoco/formUpdateRicetta/'+ ${ricetta.id}}">
+											<a th:href="@{'/cuoco/formUpdateRicetta/'+ ${ricetta.id} + '/' + ${userDetails.username}}">
 												<button type="button">Fine</button></a>
 										</div>
 									</div>

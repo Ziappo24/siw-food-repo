@@ -69,6 +69,10 @@
 								</div>
 								<div class="list-block">
 									<div class="list-content">
+										<!-- Mostra il messaggio di errore se esiste -->
+										<div th:if="${messaggioErrore != null}" class="error-message">
+											<p th:text="${messaggioErrore}">Messaggio Errore</p>
+										</div>
 										<ul class="ricette-list" th:if="${!ricette.isEmpty()}">
 											<li class="ricette-list-item" th:each="ricetta : ${ricette}">
 												<a class="ricette-list-link"

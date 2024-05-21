@@ -14,15 +14,18 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import it.uniroma3.siw.controller.validator.RicettaValidator;
+import it.uniroma3.siw.model.Credentials;
 import it.uniroma3.siw.model.Cuoco;
 import it.uniroma3.siw.model.Ingrediente;
 import it.uniroma3.siw.model.Ricetta;
 import it.uniroma3.siw.model.User;
+import it.uniroma3.siw.repository.CredentialsRepository;
+import it.uniroma3.siw.repository.CuocoRepository;
 import it.uniroma3.siw.repository.IngredienteRepository;
 import it.uniroma3.siw.repository.RicettaRepository;
-import it.uniroma3.siw.repository.UserRepository;
 import it.uniroma3.siw.service.CuocoService;
 import it.uniroma3.siw.service.RicettaService;
 
@@ -39,9 +42,11 @@ public class RicettaController {
 	
 	@Autowired CuocoService cuocoService;
 	
+	@Autowired CuocoRepository cuocoRepository;
+	
 	@Autowired IngredienteRepository ingredienteRepository;
 	
-	@Autowired UserRepository userRepository;
+	@Autowired CredentialsRepository credentialsRepository;
 
 	
 	
@@ -105,10 +110,15 @@ public class RicettaController {
 		}
 	}
 	
-	@GetMapping(value="/cuoco/formNewRicetta")
-	public String formNewRicettaCuoco(Model model) {
+	@GetMapping(value="/cuoco/formNewRicetta/{username}")
+	public String formNewRicettaCuoco(@PathVariable("username") String username, Model model) {
+		Credentials tempUser = credentialsRepository.findByUsername(username);
+	    User currentUser = tempUser.getUser();
+	    Cuoco currentCuoco = this.cuocoRepository.findByNomeAndCognome(currentUser.getNome(), currentUser.getCognome());
 		Ricetta ricetta = new Ricetta();
+		ricetta.setCuoco(currentCuoco);
 	    model.addAttribute("ricetta", ricetta);
+	    model.addAttribute("cuoco", currentUser);
 		return "cuoco/formNewRicetta.html";
 	}
 	
@@ -139,22 +149,26 @@ public class RicettaController {
 	}
 	
 	@GetMapping(value = "/cuoco/formUpdateRicetta/{id}/{username}")
-	public String formUpdateRicettaCuoco(@PathVariable("id") Long id, @PathVariable("username") String username, Model model) {
+	public String formUpdateRicettaCuoco(@PathVariable("id") Long id, @PathVariable("username") String username, Model model, RedirectAttributes redirectAttributes) {
 	    // Recupera l'utente dal repository
-		User currentUser = userRepository.findByNome(username);
-	    // Verifica se l'utente è stato trovato
-	    // L'utente è stato trovato, procedi con la logica
+	    Credentials tempUser = credentialsRepository.findByUsername(username);
+	    User currentUser = tempUser.getUser();
+	    
+	    // Recupera la ricetta dal repository
 	    Ricetta ricetta = ricettaRepository.findById(id).orElse(null);
 	    
 	    // Verifica se il cuoco della ricetta è il cuoco corrente
-	    if (!ricetta.getCuoco().getNome().equals(currentUser.getNome()) && !ricetta.getCuoco().getCognome().equals(currentUser.getCognome())) {
+	    if (ricetta == null || !ricetta.getCuoco().getNome().equals(currentUser.getNome()) || !ricetta.getCuoco().getCognome().equals(currentUser.getCognome())) {
 	        // Gestisci il caso di accesso non autorizzato
-	        return "error/403.html"; // esempio di vista per errore 403
+	        redirectAttributes.addFlashAttribute("messaggioErrore", "Non puoi modificare questa ricetta perché non ti appartiene!");
+	        return "redirect:/cuoco/manageRicette";
 	    }
+	    
 	    // Aggiungi la ricetta al modello e restituisci la vista
 	    model.addAttribute("ricetta", ricetta);
 	    return "cuoco/formUpdateRicetta.html";
 	}
+
 
 	
 	@GetMapping(value = "/admin/setCuocoToRicetta/{cuocoId}/{ricettaId}")

@@ -27,4 +27,8 @@ public class CuocoService {
 		public Object findByName(String nome) {
 			return cuocoRepository.findByNome(nome);
 		}
+		
+		public Object findByNomeAndCognome(String nome, String cognome) {
+			return cuocoRepository.findByNomeAndCognome(nome, cognome);
+		}
 }
