@@ -2,7 +2,6 @@ package it.uniroma3.siw.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -172,7 +171,7 @@ public class RicettaController {
 		Ricetta ricetta = ricettaRepository.findById(id).orElse(null);
 
 		// Verifica se il cuoco della ricetta è il cuoco corrente
-		if (ricetta == null || !ricetta.getCuoco().getNome().equals(currentUser.getNome())
+		if (ricetta == null || ricetta.getCuoco() == null || !ricetta.getCuoco().getNome().equals(currentUser.getNome())
 				|| !ricetta.getCuoco().getCognome().equals(currentUser.getCognome())) {
 			// Gestisci il caso di accesso non autorizzato
 			redirectAttributes.addFlashAttribute("messaggioErrore",
@@ -295,5 +294,6 @@ public class RicettaController {
 		}
 		return ingredientiToAdd;
 	}
+
 
 }

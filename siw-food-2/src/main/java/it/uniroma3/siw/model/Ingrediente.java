@@ -21,11 +21,12 @@ public class Ingrediente {
 
 	private String nome;
 
-	private Float quantita;
+	private String quantita;
 
 	private String urlImage;
 	
-	// private String udm;
+
+
 	@Column(length = 2000)
 	private String descrizione;
 	
@@ -42,7 +43,7 @@ public class Ingrediente {
 	public void setIngredientiUtilizzati(Set<Ingrediente> ingredientiUtilizzati) {
 		this.ingredientiUtilizzati = ingredientiUtilizzati;
 	}
-
+	
 	public String getNome() {
 		return nome;
 	}
@@ -51,11 +52,11 @@ public class Ingrediente {
 		this.nome = nome;
 	}
 
-	public Float getQuantita() {
+	public String getQuantita() {
 		return quantita;
 	}
 
-	public void setQuantita(Float quantita) {
+	public void setQuantita(String quantita) {
 		this.quantita = quantita;
 	}
 

@@ -93,8 +93,12 @@
 										<ul>
 											<div th:each="ingrediente: ${ricetta.ingredientiUtilizzati}">
 												<li>
-													<span th:text="${ingrediente.nome}"></span>
-													<div class="quantita" th:text="${ingrediente.quantita}">Quantità</div>
+													<a class="ricette-list-link"
+														th:href="@{'/ingrediente' + '/' + ${ingrediente.id}}"
+														th:text="${ingrediente.nome} + ':' + ' '">
+													</a>
+													<div class="quantita" th:text="${ingrediente.quantita}">Quantità
+													</div>
 												</li>
 											</div>
 										</ul>

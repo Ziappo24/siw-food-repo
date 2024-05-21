@@ -5,6 +5,8 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Mate+SC&display=swap" rel="stylesheet">
+	<link rel="stylesheet"
+		href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Siw-Food - Cuochi</title>
@@ -34,9 +36,9 @@
 									<a class="no-underline" href="/logout">Logout</a>
 								</div>
 							</div>
-<!--							<div class="header-nav-item" th:unless="${userDetail}">-->
-<!--								<a href="/formLogin">Login</a>-->
-<!--							</div>-->
+							<!--							<div class="header-nav-item" th:unless="${userDetail}">-->
+							<!--								<a href="/formLogin">Login</a>-->
+							<!--							</div>-->
 						</nav>
 					</div>
 				</div>
@@ -73,15 +75,15 @@
 											<span
 												th:text="${ricetta.cuoco.nome} + ' ' + ${ricetta.cuoco.cognome}"></span>
 											<br>
-<!--											<a th:href="@{'/admin/addCuoco' + '/' + ${ricetta.id}}" class="button-link">-->
-<!--												<button type="button">Modifica cuoco</button>-->
-<!--											</a>-->
+											<!--											<a th:href="@{'/admin/addCuoco' + '/' + ${ricetta.id}}" class="button-link">-->
+											<!--												<button type="button">Modifica cuoco</button>-->
+											<!--											</a>-->
 										</div>
 										<div th:unless="${ricetta.cuoco}">
 											<p>Non c'è nessun cuoco per questa ricetta.</p>
-<!--											<a th:href="@{'/admin/addCuoco' + '/' + ${ricetta.id}}" class="button-link">-->
-<!--												<button type="button">Aggiungi cuoco</button>-->
-<!--											</a>-->
+											<!--											<a th:href="@{'/admin/addCuoco' + '/' + ${ricetta.id}}" class="button-link">-->
+											<!--												<button type="button">Aggiungi cuoco</button>-->
+											<!--											</a>-->
 										</div>
 									</div>
 								</div>
@@ -91,7 +93,15 @@
 										<strong>Lista degli ingredienti:</strong>
 										<ul>
 											<div th:each="ingrediente: ${ricetta.ingredientiUtilizzati}">
-												<li th:text="${ingrediente.nome}"></li>
+												<li>
+													<span
+														th:text="${ingrediente.nome} + ' ' + ${ingrediente.quantita}"></span>
+													<a th:href="@{'/cuoco/updateQuantita/' + ${ingrediente.id}}">
+														<span class="material-symbols-outlined edit-icon">
+															edit
+														</span>
+													</a>
+												</li>
 											</div>
 										</ul>
 										<a th:href="@{'/cuoco/updateIngredienti/' + ${ricetta.id}}">

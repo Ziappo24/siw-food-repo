@@ -1,10 +1,10 @@
 .mate-sc-regular {
-  font-family: "Mate SC", serif;
-  font-weight: 400;
-  font-style: normal;
+	font-family: "Mate SC", serif;
+	font-weight: 400;
+	font-style: normal;
 }
 
-body {	
+body {
 	background-color: rgb(238, 222, 208);
 	overflow-wrap: break-word;
 }
@@ -14,40 +14,47 @@ a {
 	opacity: 1;
 	font-family: "Mate SC";
 	text-decoration: none;
-	
+
 }
 
 
 .header-title-nav-wrapper {
-    display: flex;
-    justify-content: space-between; /* Allinea gli elementi ai lati opposti */
-    align-items: center;
-    margin-top: 20px;
+	display: flex;
+	justify-content: space-between;
+	/* Allinea gli elementi ai lati opposti */
+	align-items: center;
+	margin-top: 20px;
 }
 
 .header-title-text {
-    font-size: 40px;
-    font-weight: 550;
-    margin-right: 20px;
-    margin-left: 20px;
-   	font-family: "Mate SC";
-   	font-style: normal;
-    text-transform: none;
-    letter-spacing: 0em;
-    line-height: 1.4em;
+	font-size: 40px;
+	font-weight: 550;
+	margin-right: 20px;
+	margin-left: 20px;
+	font-family: "Mate SC";
+	font-style: normal;
+	text-transform: none;
+	letter-spacing: 0em;
+	line-height: 1.4em;
 }
 
 .header-nav-list {
-    display: inline-flex;
-    flex-wrap: wrap;
-    align-items: center;
-    font-family: "Mate SC";
+	display: inline-flex;
+	flex-wrap: wrap;
+	align-items: center;
+	font-family: "Mate SC";
 }
 
 .header-nav-item {
-    margin-right: 20px;
-    font-size: 22px;
-    font-weight: 400;
+	margin-right: 20px;
+	font-size: 22px;
+	font-weight: 400;
+}
+
+.edit-icon {
+	vertical-align: top;
+	cursor: pointer;
+	margin-left: 5px;
 }
 
 .search {
@@ -57,7 +64,7 @@ a {
 	padding: 10px;
 	border-radius: 10px;
 	background-color: #f6f6f6;
-	
+
 	transition: box-shadow 0.25s;
 }
 
@@ -83,104 +90,116 @@ a {
 }
 
 .inline-flex-container {
-    display: inline-flex;
-    align-items: center; /* Per allineare gli elementi verticalmente al centro */
-    gap: 20px; /* Spazio tra i figli */
+	display: inline-flex;
+	align-items: center;
+	/* Per allineare gli elementi verticalmente al centro */
+	gap: 20px;
+	/* Spazio tra i figli */
 }
 
 /* Opzionale: Cambia il colore del testo del titolo */
 #site-title {
-    color: black;
-    text-decoration: none;
+	color: black;
+	text-decoration: none;
 }
 
 /* Modifica in base alla larghezza dello schermo */
 @media screen and (max-width: 768px) {
-    .header-nav-item {
-        font-size: 16px; /* Riduci la dimensione del testo per schermi più piccoli */
-    }
+	.header-nav-item {
+		font-size: 16px;
+		/* Riduci la dimensione del testo per schermi più piccoli */
+	}
 }
 
 footer {
-	margin-top: 30px; /* Aggiunge spazio sopra il footer */
-    text-align: center; /* Centra il contenuto all'interno del footer */
+	margin-top: 30px;
+	/* Aggiunge spazio sopra il footer */
+	text-align: center;
+	/* Centra il contenuto all'interno del footer */
 }
 
 .socials {
-    display: inline-block; /* Imposta il display a inline-block per centrare l'icona */
+	display: inline-block;
+	/* Imposta il display a inline-block per centrare l'icona */
 }
 
 .socials img {
-    display: block; /* Imposta il display a block per centrare l'immagine */
-    margin: 0 auto; /* Centra l'immagine orizzontalmente */
+	display: block;
+	/* Imposta il display a block per centrare l'immagine */
+	margin: 0 auto;
+	/* Centra l'immagine orizzontalmente */
 }
 
 .footer-nav-list {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px; /* Riduci la distanza tra le immagini */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+	/* Riduci la distanza tra le immagini */
 }
 
 .footer-nav-list a {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    margin-right: auto; /* Imposta un margine a destra per spingere il secondo link più a sinistra */
+	display: flex;
+	align-items: center;
+	text-decoration: none;
+	margin-right: auto;
+	/* Imposta un margine a destra per spingere il secondo link più a sinistra */
 }
 
 .footer-nav-list img {
-    max-width: 100%;
-    height: 30px
+	max-width: 100%;
+	height: 30px
 }
 
 .content-wrapper {
-    padding: 1.5em;
+	padding: 1.5em;
 }
 
 .section-cuoco {
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Aggiunge un'ombra */
+	background-color: white;
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	/* Aggiunge un'ombra */
 }
 
-.image-block img{
-    margin-bottom: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); /* Aggiunge un'ombra */
+.image-block img {
+	margin-bottom: 20px;
+	border-radius: 5px;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+	/* Aggiunge un'ombra */
 }
 
 .html-block {
-    font-weight: 500;
-    font-family: "Mate SC";
-    font-style: normal;
-    text-transform: none;
-    letter-spacing: 0em;
-    line-height: 1.4em;
-    margin-bottom: 20px;
+	font-weight: 500;
+	font-family: "Mate SC";
+	font-style: normal;
+	text-transform: none;
+	letter-spacing: 0em;
+	line-height: 1.4em;
+	margin-bottom: 20px;
 }
 
 .block-content-main {
 	font-size: 30px;
 	font-weight: 600;
-    margin-right: 20px;
-    margin-bottom: 20px;
+	margin-right: 20px;
+	margin-bottom: 20px;
 }
 
 .block-content {
 	font-size: 20px;
-    margin-right: 20px;
-    margin-bottom: 20px;
+	margin-right: 20px;
+	margin-bottom: 20px;
 }
 
 .list-title {
-    font-size: 1.2em;
-   	font-family: "Mate SC";
-   	font-style: normal;
-    text-transform: none;
-    letter-spacing: 0em;
-    line-height: 1.4em;
+	font-size: 1.2em;
+	font-family: "Mate SC";
+	font-style: normal;
+	text-transform: none;
+	letter-spacing: 0em;
+	line-height: 1.4em;
 }
 
 .cuochi-list {
@@ -190,21 +209,21 @@ footer {
 }
 
 .list-checker {
-    font-size: 1.2em;
-   	font-family: "Mate SC";
-   	font-style: normal;
-    text-transform: none;
-    letter-spacing: 0em;
-    line-height: 1.4em;
+	font-size: 1.2em;
+	font-family: "Mate SC";
+	font-style: normal;
+	text-transform: none;
+	letter-spacing: 0em;
+	line-height: 1.4em;
 }
 
 .cuochi-list-item {
-    font-size: 20px;
-   	font-family: "Mate SC";
-   	font-style: normal;
-    text-transform: none;
-    letter-spacing: 0em;
-    line-height: 1.4em;
+	font-size: 20px;
+	font-family: "Mate SC";
+	font-style: normal;
+	text-transform: none;
+	letter-spacing: 0em;
+	line-height: 1.4em;
 	margin-bottom: 10px;
 }
 
@@ -215,10 +234,11 @@ footer {
 }
 
 .section-ricetta {
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Aggiunge un'ombra */
+	background-color: white;
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	/* Aggiunge un'ombra */
 }
 
 .ricette-list {
@@ -228,12 +248,12 @@ footer {
 }
 
 .ricette-list-item {
-    font-size: 20px;
-   	font-family: "Mate SC";
-   	font-style: normal;
-    text-transform: none;
-    letter-spacing: 0em;
-    line-height: 1.4em;
+	font-size: 20px;
+	font-family: "Mate SC";
+	font-style: normal;
+	text-transform: none;
+	letter-spacing: 0em;
+	line-height: 1.4em;
 	margin-bottom: 10px;
 }
 
@@ -242,43 +262,47 @@ footer {
 	color: rgb(0, 0, 0);
 	font-weight: normal;
 }
+
 .ingredienti-list {
 	list-style-type: decimal;
 	padding: 0;
 	margin-left: 1em;
 }
+
 .section-ingrediente {
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Aggiunge un'ombra */
+	background-color: white;
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	/* Aggiunge un'ombra */
 }
 
 .list-checker {
-    font-size: 18px;
-   	font-family: "Mate SC";
-   	font-style: normal;
-    text-transform: none;
-    letter-spacing: 0em;
-    line-height: 1.4em;
+	font-size: 18px;
+	font-family: "Mate SC";
+	font-style: normal;
+	text-transform: none;
+	letter-spacing: 0em;
+	line-height: 1.4em;
 }
+
 .list-title {
 	font-size: 22px;
 	font-weight: 600;
-   	font-family: "Mate SC";
-   	font-style: normal;
-    text-transform: none;
-    letter-spacing: 0em;
-    line-height: 1.4em;
+	font-family: "Mate SC";
+	font-style: normal;
+	text-transform: none;
+	letter-spacing: 0em;
+	line-height: 1.4em;
 }
 
 .ingredienti-list-item {
-    font-size: 20px;
-   	font-family: "Mate SC";
-   	font-style: normal;
-    text-transform: none;
-    letter-spacing: 0em;
-    line-height: 1.4em;
+	font-size: 20px;
+	font-family: "Mate SC";
+	font-style: normal;
+	text-transform: none;
+	letter-spacing: 0em;
+	line-height: 1.4em;
 	margin-bottom: 10px;
 }
 
@@ -289,18 +313,20 @@ footer {
 }
 
 .button-link button {
-    margin-top: 10px; /* Aggiunge margine in alto */
-    margin-bottom: 10px; /* Aggiunge margine in basso */
+	margin-top: 10px;
+	/* Aggiunge margine in alto */
+	margin-bottom: 10px;
+	/* Aggiunge margine in basso */
 }
 
 
 .year-text {
 	font-size: 18px;
-   	font-family: "Mate SC";
-   	font-style: normal;
-    text-transform: none;
-    letter-spacing: 0em;
-    line-height: 1.4em;
+	font-family: "Mate SC";
+	font-style: normal;
+	text-transform: none;
+	letter-spacing: 0em;
+	line-height: 1.4em;
 	margin-bottom: 10px;
 	font-weight: 450;
 }
@@ -312,11 +338,11 @@ footer {
 
 .description-text {
 	font-size: 20px;
-   	font-family: "Mate SC";
-   	font-style: normal;
-    text-transform: none;
-    letter-spacing: 0em;
-    line-height: 1.4em;
+	font-family: "Mate SC";
+	font-style: normal;
+	text-transform: none;
+	letter-spacing: 0em;
+	line-height: 1.4em;
 	margin-bottom: 10px;
 	font-weight: 450;
 	text-align: justify;
@@ -324,39 +350,47 @@ footer {
 
 
 .first-section-content {
-    display: flex;
-    justify-content: space-between; /* Allinea gli elementi ai lati opposti */
-    align-items: center;
-    margin-top: 10px;
+	display: flex;
+	justify-content: space-between;
+	/* Allinea gli elementi ai lati opposti */
+	align-items: center;
+	margin-top: 10px;
 }
 
 .first-section-background {
-	background-color:  rgb(238, 222, 208);
+	background-color: rgb(238, 222, 208);
 }
 
 .fs-text-block {
-    flex: 1;
-    padding: 0 20px; /* Aggiunge spazio tra l'immagine e il testo */
+	flex: 1;
+	padding: 0 20px;
+	/* Aggiunge spazio tra l'immagine e il testo */
 }
 
 .fs-image-block img {
-    max-height: 400px; /* Imposta l'altezza massima dell'immagine */
-    width: auto; /* Imposta la larghezza automaticamente in base all'altezza specificata */
-    margin-right: 20px; /* Aggiunge spazio tra l'immagine e il testo */
-    margin-top: 10px;
-    margin-bottom: 10px;
+	max-height: 400px;
+	/* Imposta l'altezza massima dell'immagine */
+	width: auto;
+	/* Imposta la larghezza automaticamente in base all'altezza specificata */
+	margin-right: 20px;
+	/* Aggiunge spazio tra l'immagine e il testo */
+	margin-top: 10px;
+	margin-bottom: 10px;
 }
 
-.fs-text-block h2, p {
-	
+.fs-text-block h2,
+p {
+
 	font-family: "Mate SC";
-   	font-style: normal;
-    text-transform: none;
-    letter-spacing: 0em;
-    line-height: 1.4em;
+	font-style: normal;
+	text-transform: none;
+	letter-spacing: 0em;
+	line-height: 1.4em;
 	margin-bottom: 10px;
-    flex: 1; /* Fai espandere il blocco del testo per occupare lo spazio rimanente */
+	flex: 1;
+	/* Fai espandere il blocco del testo per occupare lo spazio rimanente */
 }
+
 .fs-text-block p {
 	font-size: 18px;
 	font-weight: 400;
@@ -364,56 +398,76 @@ footer {
 }
 
 .second-section {
-    background-color: white; /* Sovrascrive il colore di sfondo della sezione */
+	background-color: white;
+	/* Sovrascrive il colore di sfondo della sezione */
 }
 
 .second-section-content {
-    display: flex;
-    justify-content: space-between; /* Disponi le immagini con spazio tra di loro */
+	display: flex;
+	justify-content: space-between;
+	/* Disponi le immagini con spazio tra di loro */
 }
 
 .ss-image-block {
-    flex: 1; /* Le immagini occupano lo stesso spazio disponibile */
-    margin: 10px; /* Aggiungi margine tra le immagini */
-    display: flex; /* Abilita il layout flessibile per le immagini */
-    justify-content: center; /* Centra le immagini lungo l'asse orizzontale */
-    align-items: center; /* Centra le immagini lungo l'asse verticale */
-    
+	flex: 1;
+	/* Le immagini occupano lo stesso spazio disponibile */
+	margin: 10px;
+	/* Aggiungi margine tra le immagini */
+	display: flex;
+	/* Abilita il layout flessibile per le immagini */
+	justify-content: center;
+	/* Centra le immagini lungo l'asse orizzontale */
+	align-items: center;
+	/* Centra le immagini lungo l'asse verticale */
+
 }
 
 .ss-block-content {
-    width: 100%; /* Imposta la larghezza delle immagini al 100% del contenitore */
-    text-align: center; /* Centra il contenuto all'interno del blocco dell'immagine */
+	width: 100%;
+	/* Imposta la larghezza delle immagini al 100% del contenitore */
+	text-align: center;
+	/* Centra il contenuto all'interno del blocco dell'immagine */
 }
 
 .ss-block-content img {
-    max-width: 80%; /* Imposta la larghezza massima dell'immagine al 100% */
-    height: auto; /* Imposta l'altezza automaticamente in base alla larghezza specificata */
+	max-width: 80%;
+	/* Imposta la larghezza massima dell'immagine al 100% */
+	height: auto;
+	/* Imposta l'altezza automaticamente in base alla larghezza specificata */
 }
 
 .links {
-    display: flex;
-    flex-direction: row; /* Disponi i link in riga */
-    justify-content: center; /* Centra i link lungo l'asse orizzontale */
-    align-items: center; /* Centra i link lungo l'asse verticale */
-    margin-top: 10px; /* Aggiungi spazio superiore tra le immagini e i link */
+	display: flex;
+	flex-direction: row;
+	/* Disponi i link in riga */
+	justify-content: center;
+	/* Centra i link lungo l'asse orizzontale */
+	align-items: center;
+	/* Centra i link lungo l'asse verticale */
+	margin-top: 10px;
+	/* Aggiungi spazio superiore tra le immagini e i link */
 }
 
 .links a {
-    color: black; /* Colore del testo dei link */
-    text-decoration: none; /* Rimuovi il sottolineato dai link */
-    padding: 5px 10px; /* Aggiungi spazio intorno ai link */
-    border: 1px solid black; /* Aggiungi un bordo ai link */
-    border-radius: 5px; /* Rendi i link arrotondati */
-    margin: 0 10px; /* Aggiungi spazio tra i link */
-    font-size: 16px;
-    font-weight: 400;
+	color: black;
+	/* Colore del testo dei link */
+	text-decoration: none;
+	/* Rimuovi il sottolineato dai link */
+	padding: 5px 10px;
+	/* Aggiungi spazio intorno ai link */
+	border: 1px solid black;
+	/* Aggiungi un bordo ai link */
+	border-radius: 5px;
+	/* Rendi i link arrotondati */
+	margin: 0 10px;
+	/* Aggiungi spazio tra i link */
+	font-size: 16px;
+	font-weight: 400;
 }
 
 .links a:hover {
-    background-color: black; /* Cambia il colore di sfondo dei link al passaggio del mouse */
-    color: white; /* Cambia il colore del testo dei link al passaggio del mouse */
+	background-color: black;
+	/* Cambia il colore di sfondo dei link al passaggio del mouse */
+	color: white;
+	/* Cambia il colore del testo dei link al passaggio del mouse */
 }
-
-
-
