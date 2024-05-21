@@ -89,7 +89,7 @@
                                 <img src="/images/ricetta.jpg" id="img2">
                                 <!-- Link "Aggiungi" e "Gestisci" per l'immagine 2 -->
                                 <div class="links" th:if="${userDetails != null}">
-									<a th:href="@{'/cuoco/formNewRicetta' + '/' + ${userDetails.username}} " class="add-link">Aggiungi Ricetta</a>
+									<a th:href="@{'/cuoco/formNewRicetta' + '/' + ${userDetails.username}}" class="add-link">Aggiungi Ricetta</a>
                                     <a href="/cuoco/manageRicette" class="add-link">Elenco Ricette</a>
                                 </div>
                             </div>

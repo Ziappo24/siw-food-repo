@@ -29,6 +29,7 @@ public class CuocoService {
 		}
 		
 		public Object findByNomeAndCognome(String nome, String cognome) {
-			return cuocoRepository.findByNomeAndCognome(nome, cognome);
+			return cuocoRepository.findByNome(nome);
 		}
+		
 }

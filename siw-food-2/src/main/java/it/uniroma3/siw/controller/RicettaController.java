@@ -3,7 +3,9 @@ package it.uniroma3.siw.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -116,14 +118,20 @@ public class RicettaController {
 	    User currentUser = tempUser.getUser();
 	    Cuoco currentCuoco = this.cuocoRepository.findByNomeAndCognome(currentUser.getNome(), currentUser.getCognome());
 		Ricetta ricetta = new Ricetta();
-		ricetta.setCuoco(currentCuoco);
-	    model.addAttribute("ricetta", ricetta);
-	    model.addAttribute("cuoco", currentUser);
+		// Passa il cuoco al modello
+	    model.addAttribute("cuoco", currentCuoco);
+		model.addAttribute("ricetta", ricetta);
 		return "cuoco/formNewRicetta.html";
 	}
 	
 	@PostMapping("/cuoco/ricetta")
 	public String newRicettaCuoco(@Valid @ModelAttribute("ricetta") Ricetta ricetta, BindingResult bindingResult, Model model) {
+		
+		// Trova il cuoco dal repository utilizzando l'ID fornito
+	    Cuoco currentCuoco = (Cuoco) model.getAttribute("cuoco");	    
+
+	    // Imposta il cuoco nella ricetta
+	    ricetta.setCuoco(currentCuoco);
 		this.ricettaValidator.validate(ricetta, bindingResult);
 		if (!bindingResult.hasErrors()) {
 			this.ricettaRepository.save(ricetta); 
