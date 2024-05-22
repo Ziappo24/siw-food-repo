@@ -58,15 +58,18 @@
 					</div>
 					<div class="content-wrapper">
 						<div class="content">
-							<div data-fluid-engine="true">
-								<div class="image-block">
-									<div class="block-content">
+							<div>
+								<div class="image-block" th:if="${ricetta.urlImage != null}">
+									<div class=" block-content">
 										<img th:if="${ricetta.urlImage.startsWith('https')}"
 											th:src="${ricetta.urlImage}" style="width: 30%; height: auto;">
 										<img th:unless="${ricetta.urlImage.startsWith('https')}"
 											th:src="@{/images/__${ricetta.urlImage}__}"
 											style="width: 30%; height: auto;">
 									</div>
+									<span class="description-text" th:if="${ricetta.urlImage == null}">
+										L'immagine non è disponibile.
+									</span>
 								</div>
 								<div class="html-block">
 									<div class="block-content-main">
@@ -93,18 +96,11 @@
 										<ul>
 											<div th:each="ingrediente: ${ricetta.ingredientiUtilizzati}">
 												<li>
-													<a class="ricette-list-link"
-														th:href="@{'/ingrediente' + '/' + ${ingrediente.id}}"
-														th:text="${ingrediente.nome} + ':' + ' '">
-													</a>
-													<div class="quantita" th:text="${ingrediente.quantita}">Quantità
-													</div>
+													<span
+														th:text="${ingrediente.nome} + ' ' + ${ingrediente.quantita} + ' ' + ${ingrediente.unitaDiMisura}"></span>
 												</li>
 											</div>
 										</ul>
-										<a th:href="@{'/cuoco/updateIngredienti/' + ${ricetta.id}}">
-											<button type="button">Modifica</button>
-										</a>
 									</div>
 								</div>
 								<div class="html-block">

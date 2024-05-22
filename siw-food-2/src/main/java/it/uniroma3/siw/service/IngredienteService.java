@@ -25,4 +25,8 @@ public class IngredienteService {
 	public Iterable<Ingrediente> findByName(String nome) {
 		return ingredienteRepository.findByNome(nome);
 	}
+	
+	public Iterable<Ingrediente> findByQuantita(Integer quantita) {
+		return ingredienteRepository.findByQuantita(quantita);
+	}
 }

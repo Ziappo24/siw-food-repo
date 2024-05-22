@@ -21,11 +21,14 @@ public class Ingrediente {
 
 	private String nome;
 
-	private String quantita;
+	private Integer quantita;
 
+	
 	private String urlImage;
 	
+	private String unitaDiMisura;
 
+	
 
 	@Column(length = 2000)
 	private String descrizione;
@@ -44,6 +47,14 @@ public class Ingrediente {
 		this.ingredientiUtilizzati = ingredientiUtilizzati;
 	}
 	
+	public String getUnitaDiMisura() {
+		return unitaDiMisura;
+	}
+
+	public void setUnitaDiMisura(String unitaDiMisura) {
+		this.unitaDiMisura = unitaDiMisura;
+	}
+	
 	public String getNome() {
 		return nome;
 	}
@@ -52,21 +63,13 @@ public class Ingrediente {
 		this.nome = nome;
 	}
 
-	public String getQuantita() {
+	public Integer getQuantita() {
 		return quantita;
 	}
 
-	public void setQuantita(String quantita) {
+	public void setQuantita(Integer quantita) {
 		this.quantita = quantita;
 	}
-
-//	public String getUdm() {
-//		return udm;
-//	}
-//
-//	public void setUdm(String udm) {
-//		this.udm = udm;
-//	}
 	
 	public long getId() {
 		return id;

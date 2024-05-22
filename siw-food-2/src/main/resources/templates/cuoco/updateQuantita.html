@@ -87,7 +87,6 @@
 										</div>
 									</div>
 								</div>
-
 								<div class="html-block">
 									<div class="block-content">
 										<strong>Lista degli ingredienti:</strong>
@@ -95,18 +94,32 @@
 											<div th:each="ingrediente: ${ricetta.ingredientiUtilizzati}">
 												<li>
 													<span
-														th:text="${ingrediente.nome} + ' ' + ${ingrediente.quantita} + ' ' + ${ingrediente.unitaDiMisura}"></span>
-													<a
-														th:href="@{'/cuoco/updateQuantita/' + ${ingrediente.id} + '/' + ${ricetta.id}}">
-														<span class="material-symbols-outlined edit-icon">
-															edit
-														</span>
-													</a>
+														th:text="${ingrediente.nome} + ' ' + ${ingrediente.quantita}"></span>
+													<form class="quantita-form" th:action="@{/cuoco/updateQuantita}"
+														method="POST">
+														<input type="hidden" name="ricettaId"
+															th:value="${ricetta.id}" />
+														<input type="hidden" name="ingredienteId"
+															th:value="${ingrediente.id}" />
+														<input class="input" type="number" id="quantitaValore"
+															name="quantitaValore" th:value="${ingrediente.quantita}"
+															min="0" required>
+														<select id="quantitaUnita" name="quantitaUnita" required>
+															<option class="option" value="grammi">Grammi</option>
+															<option class="option" value="millilitri">Millilitri
+															</option>
+															<option class="option" value="cucchiai">Cucchiai</option>
+														</select>
+														<a
+															th:href="@{'/cuoco/formUpdateRicetta/'+ ${ricetta.id} + '/' + ${userDetails.username}}">
+															<button type="submit">Fine</button></a>
+													</form>
 												</li>
 											</div>
 										</ul>
-										<a th:href="@{'/cuoco/updateIngredienti/' + ${ricetta.id}}">
-											<button type="button">Modifica</button>
+										<a
+											th:href="@{'/cuoco/formUpdateRicetta/'+ ${ricetta.id} + '/' + ${userDetails.username}}">
+											<button type="button">Torna alla pagina</button>
 										</a>
 									</div>
 								</div>

@@ -2,6 +2,7 @@ package it.uniroma3.siw.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -117,20 +118,20 @@ public class RicettaController {
 
 	@GetMapping(value = "/cuoco/formNewRicetta/{username}")
 	public String formNewRicettaCuoco(@PathVariable("username") String username, Model model) {
-	    Credentials tempUser = credentialsRepository.findByUsername(username);
-	    User currentUser = tempUser.getUser();
-	    Cuoco currentCuoco = this.cuocoRepository.findByNomeAndCognome(currentUser.getNome(), currentUser.getCognome());
-	    Ricetta ricetta = new Ricetta();
-	    model.addAttribute("cuoco", currentCuoco);
-	    model.addAttribute("cuocoId", currentCuoco.getId());
-	    model.addAttribute("ricetta", ricetta);
-	    model.addAttribute("userDetails", tempUser); // Aggiungi userDetails al modello
-	    return "cuoco/formNewRicetta.html";
+		Credentials tempUser = credentialsRepository.findByUsername(username);
+		User currentUser = tempUser.getUser();
+		Cuoco currentCuoco = this.cuocoRepository.findByNomeAndCognome(currentUser.getNome(), currentUser.getCognome());
+		Ricetta ricetta = new Ricetta();
+		model.addAttribute("cuoco", currentCuoco);
+		model.addAttribute("cuocoId", currentCuoco.getId());
+		model.addAttribute("ricetta", ricetta);
+		model.addAttribute("userDetails", tempUser); // Aggiungi userDetails al modello
+		return "cuoco/formNewRicetta.html";
 	}
 
-
 	@PostMapping("/cuoco/ricetta")
-	public String newRicettaCuoco(@Valid @ModelAttribute("ricetta") Ricetta ricetta, BindingResult bindingResult, @RequestParam("username") String username, Model model) {
+	public String newRicettaCuoco(@Valid @ModelAttribute("ricetta") Ricetta ricetta, BindingResult bindingResult,
+			@RequestParam("username") String username, Model model) {
 		Credentials tempUser = credentialsRepository.findByUsername(username);
 		User currentUser = tempUser.getUser();
 		Cuoco currentCuoco = this.cuocoRepository.findByNomeAndCognome(currentUser.getNome(), currentUser.getCognome());
@@ -295,5 +296,30 @@ public class RicettaController {
 		return ingredientiToAdd;
 	}
 
+	@GetMapping(value = "/cuoco/updateQuantita/{ingredienteId}/{ricettaId}")
+	public String formUpdateQuantita(@PathVariable("ricettaId") Long ricettaId,
+			@PathVariable("ingredienteId") Long ingredienteId, Model model) {
+		model.addAttribute("ricetta", ricettaRepository.findById(ricettaId).get());
+		model.addAttribute("ingrediente", ingredienteRepository.findById(ingredienteId).get());
+		return "/cuoco/updateQuantita.html";
+	}
+
+	@PostMapping(value = "/cuoco/updateQuantita")
+	public String updateQuantita(@RequestParam("ingredienteId") Long ingredienteId,
+								 @RequestParam("ricettaId") Long ricettaId,
+								 @RequestParam("quantitaValore") Integer quantitaValore, 
+								 @RequestParam("quantitaUnita") String quantitaUnita,
+								 Model model) {
+		Optional<Ingrediente> optionalIngrediente = ingredienteRepository.findById(ingredienteId);
+		if (optionalIngrediente.isPresent()) {
+			Ingrediente ingrediente = optionalIngrediente.get();
+			ingrediente.setQuantita(quantitaValore);
+			ingrediente.setUnitaDiMisura(quantitaUnita);
+			model.addAttribute("ingrediente", ingredienteRepository.findById(ingredienteId).get());
+			model.addAttribute("ricetta", ricettaRepository.findById(ricettaId).get());
+			ingredienteRepository.save(ingrediente);
+		}
+		return "cuoco/formUpdateRicetta.html";
+	}
 
 }
