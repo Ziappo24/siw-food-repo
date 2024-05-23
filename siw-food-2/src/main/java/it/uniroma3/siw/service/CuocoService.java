@@ -31,4 +31,8 @@ public class CuocoService {
 			return cuocoRepository.findByNome(nome);
 		}
 		
+		public void deleteById(Long id) {
+	        cuocoRepository.deleteById(id);
+	    }
+		
 }

@@ -74,7 +74,7 @@
 												<a class="ricette-list-link" th:href="@{'/cuoco' + '/' + ${cuoco.id}}"
 													th:text="${cuoco.nome} + ' ' + ${cuoco.cognome}"></a>
 												<a class="ricette-list-link"
-													th:href="@{'/admin/formUpdateCuoco' + '/' + ${cuoco.id}}">(Elimina)</a>
+													th:href="@{'/admin/deleteCuoco/' + ${cuoco.id}}">(Elimina)</a>
 											</li>
 										</ul>
 									</div>

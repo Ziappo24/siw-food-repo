@@ -29,4 +29,8 @@ public class IngredienteService {
 	public Iterable<Ingrediente> findByQuantita(Integer quantita) {
 		return ingredienteRepository.findByQuantita(quantita);
 	}
+	
+	public void deleteById(Long id) {
+        ingredienteRepository.deleteById(id);
+    }
 }

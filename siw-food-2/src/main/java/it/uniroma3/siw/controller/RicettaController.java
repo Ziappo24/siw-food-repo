@@ -321,5 +321,43 @@ public class RicettaController {
 		}
 		return "cuoco/formUpdateRicetta.html";
 	}
+	
+	@GetMapping(value = "/admin/updateQuantita/{ingredienteId}/{ricettaId}")
+	public String formUpdateQuantitaAdmin(@PathVariable("ricettaId") Long ricettaId,
+			@PathVariable("ingredienteId") Long ingredienteId, Model model) {
+		model.addAttribute("ricetta", ricettaRepository.findById(ricettaId).get());
+		model.addAttribute("ingrediente", ingredienteRepository.findById(ingredienteId).get());
+		return "/admin/updateQuantita.html";
+	}
+
+	@PostMapping(value = "/admin/updateQuantita")
+	public String updateQuantitaAdmin(@RequestParam("ingredienteId") Long ingredienteId,
+								 @RequestParam("ricettaId") Long ricettaId,
+								 @RequestParam("quantitaValore") Integer quantitaValore, 
+								 @RequestParam("quantitaUnita") String quantitaUnita,
+								 Model model) {
+		Optional<Ingrediente> optionalIngrediente = ingredienteRepository.findById(ingredienteId);
+		if (optionalIngrediente.isPresent()) {
+			Ingrediente ingrediente = optionalIngrediente.get();
+			ingrediente.setQuantita(quantitaValore);
+			ingrediente.setUnitaDiMisura(quantitaUnita);
+			model.addAttribute("ingrediente", ingredienteRepository.findById(ingredienteId).get());
+			model.addAttribute("ricetta", ricettaRepository.findById(ricettaId).get());
+			ingredienteRepository.save(ingrediente);
+		}
+		return "admin/formUpdateRicetta.html";
+	}
+	
+	@GetMapping(value = "/admin/deleteRicetta/{ricettaId}")
+	public String deleteRicettaAdmin(@PathVariable("ricettaId") Long ricettaId, Model model) {
+		ricettaService.deleteById(ricettaId);
+        return "redirect:/admin/manageRicette";
+	}
+	
+	@GetMapping(value = "/cuoco/deleteRicetta/{ricettaId}")
+	public String deleteRicettaCuoco(@PathVariable("ricettaId") Long ricettaId, Model model) {
+		ricettaService.deleteById(ricettaId);
+        return "redirect:/cuoco/manageRicette";
+	}
 
 }

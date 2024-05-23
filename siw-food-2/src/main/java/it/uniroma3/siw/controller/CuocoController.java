@@ -73,4 +73,10 @@ public class CuocoController {
 			return "/admin/formNewCuoco.html";
 		}
 	}
+	
+	@GetMapping(value = "/admin/deleteCuoco/{cuocoId}")
+	public String deleteCuocoAdmin(@PathVariable("cuocoId") Long cuocoId, Model model) {
+		cuocoService.deleteById(cuocoId);
+        return "redirect:/admin/manageCuochi";
+	}
 }

@@ -74,7 +74,8 @@
 												<a class="ricette-list-link"
 													th:href="@{'/ingrediente' + '/' + ${ingrediente.id}}"
 													th:text="${ingrediente.nome}"></a>
-												<!--											   <a class="ricette-list-link" th:href="@{'/admin/formUpdateRicetta' + '/' + ${ricetta.id}}">(Aggiorna)</a>-->
+												<a class="ricette-list-link"
+													th:href="@{'/admin/deleteIngrediente/' + ${ingrediente.id}}">(Elimina)</a>
 											</li>
 										</ul>
 									</div>

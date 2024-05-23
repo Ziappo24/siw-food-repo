@@ -119,6 +119,7 @@
 										<span th:if="${ricetta.descrizione == null}">
 											Non disponibile
 										</span>
+										<a th:href="@{'/cuoco/deleteRicetta/' + ${ricetta.id}}">Elimina</a>
 									</div>
 								</div>
 							</div>

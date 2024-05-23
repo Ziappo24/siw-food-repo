@@ -95,7 +95,7 @@
 												<li>
 													<span
 														th:text="${ingrediente.nome} + ' ' + ${ingrediente.quantita}"></span>
-													<form class="quantita-form" th:action="@{/cuoco/updateQuantita}"
+													<form class="quantita-form" th:action="@{/admin/updateQuantita}"
 														method="POST">
 														<input type="hidden" name="ricettaId"
 															th:value="${ricetta.id}" />
@@ -111,14 +111,14 @@
 															<option class="option" value="cucchiai">Cucchiai</option>
 														</select>
 														<a
-															th:href="@{'/cuoco/formUpdateRicetta/'+ ${ricetta.id} + '/' + ${userDetails.username}}">
+															th:href="@{'/admin/formUpdateRicetta/'+ ${ricetta.id} + '/' + ${userDetails.username}}">
 															<button type="submit">Fine</button></a>
 													</form>
 												</li>
 											</div>
 										</ul>
 										<a
-											th:href="@{'/cuoco/formUpdateRicetta/'+ ${ricetta.id} + '/' + ${userDetails.username}}">
+											th:href="@{'/admin/formUpdateRicetta/'+ ${ricetta.id} + '/' + ${userDetails.username}}">
 											<button type="button">Torna alla pagina</button>
 										</a>
 									</div>
