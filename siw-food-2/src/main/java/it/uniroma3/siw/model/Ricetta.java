@@ -4,7 +4,7 @@ package it.uniroma3.siw.model;
 import java.util.Objects;
 import java.util.Set;
 
-import jakarta.persistence.CascadeType;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -32,7 +32,7 @@ public class Ricetta {
 	@ManyToOne
 	private Cuoco cuoco;
 	
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany
 	private Set<Ingrediente> ingredientiUtilizzati;
 
 	public Set<Ingrediente> getIngredientiUtilizzati() {

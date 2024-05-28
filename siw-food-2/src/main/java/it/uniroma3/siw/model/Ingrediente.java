@@ -10,7 +10,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-import jakarta.persistence.ManyToMany;
 
 @Entity
 public class Ingrediente {
@@ -22,7 +21,6 @@ public class Ingrediente {
 	private String nome;
 
 	private Integer quantita;
-
 	
 	private String urlImage;
 	
@@ -35,17 +33,17 @@ public class Ingrediente {
 	
 	
 
-	@ManyToMany
-    private Set<Ingrediente> ingredientiUtilizzati;
-	
-
-	public Set<Ingrediente> getIngredientiUtilizzati() {
-		return ingredientiUtilizzati;
-	}
-
-	public void setIngredientiUtilizzati(Set<Ingrediente> ingredientiUtilizzati) {
-		this.ingredientiUtilizzati = ingredientiUtilizzati;
-	}
+//	@ManyToMany
+//    private Set<Ingrediente> ingredientiUtilizzati;
+//	
+//
+//	public Set<Ingrediente> getIngredientiUtilizzati() {
+//		return ingredientiUtilizzati;
+//	}
+//
+//	public void setIngredientiUtilizzati(Set<Ingrediente> ingredientiUtilizzati) {
+//		this.ingredientiUtilizzati = ingredientiUtilizzati;
+//	}
 	
 	public String getUnitaDiMisura() {
 		return unitaDiMisura;
