@@ -27,6 +27,7 @@ import it.uniroma3.siw.repository.CuocoRepository;
 import it.uniroma3.siw.repository.IngredienteRepository;
 import it.uniroma3.siw.repository.RicettaRepository;
 import it.uniroma3.siw.service.CuocoService;
+import it.uniroma3.siw.service.IngredienteService;
 import it.uniroma3.siw.service.RicettaService;
 
 import jakarta.validation.Valid;
@@ -51,6 +52,10 @@ public class RicettaController {
 
 	@Autowired
 	IngredienteRepository ingredienteRepository;
+	
+	@Autowired
+	IngredienteService ingredienteService;
+
 
 	@Autowired
 	CredentialsRepository credentialsRepository;
@@ -310,17 +315,30 @@ public class RicettaController {
 								 @RequestParam("quantitaValore") Integer quantitaValore, 
 								 @RequestParam("quantitaUnita") String quantitaUnita,
 								 Model model) {
-		Optional<Ingrediente> optionalIngrediente = ingredienteRepository.findById(ingredienteId);
-		if (optionalIngrediente.isPresent()) {
-			Ingrediente ingrediente = optionalIngrediente.get();
-			ingrediente.setQuantita(quantitaValore);
+		Optional<Ingrediente> ingredienteOpt = ingredienteRepository.findById(ingredienteId);
+		Optional<Ricetta> ricettaOpt = ricettaRepository.findById(ricettaId);
+
+		if (ingredienteOpt.isPresent() && ricettaOpt.isPresent()) {
+			Ingrediente ingrediente = ingredienteOpt.get();
+			Ricetta ricetta = ricettaOpt.get();
+			ingrediente.getQuantitaToRicetta().put(ricetta, quantitaValore);
 			ingrediente.setUnitaDiMisura(quantitaUnita);
-			model.addAttribute("ingrediente", ingredienteRepository.findById(ingredienteId).get());
+			ingredienteRepository.save(ingrediente); // Aggiorna l'ingrediente nel database
 			model.addAttribute("ricetta", ricettaRepository.findById(ricettaId).get());
-			ingredienteRepository.save(ingrediente);
+			model.addAttribute("ingrediente", ingredienteRepository.findById(ingredienteId).get());
 		}
 		return "cuoco/formUpdateRicetta.html";
 	}
+	
+//	@PostMapping(value = "/cuoco/updateQuantita")
+//    public String updateQuantita(@RequestParam("ingredienteId") Long ingredienteId,
+//                                 @RequestParam("ricettaId") Long ricettaId,
+//                                 @RequestParam("quantitaValore") Integer quantitaValore,
+//                                 @RequestParam("quantitaUnita") String quantitaUnita, Model model) {
+//        ingredienteService.aggiungiQuantitaPerRicetta(ingredienteId, ricettaId, quantitaValore, quantitaUnita);
+//        return "redirect:/cuoco/formUpdateRicetta.html";
+//    }
+	
 	
 	@GetMapping(value = "/admin/updateQuantita/{ingredienteId}/{ricettaId}")
 	public String formUpdateQuantitaAdmin(@PathVariable("ricettaId") Long ricettaId,
@@ -336,17 +354,43 @@ public class RicettaController {
 								 @RequestParam("quantitaValore") Integer quantitaValore, 
 								 @RequestParam("quantitaUnita") String quantitaUnita,
 								 Model model) {
-		Optional<Ingrediente> optionalIngrediente = ingredienteRepository.findById(ingredienteId);
-		if (optionalIngrediente.isPresent()) {
-			Ingrediente ingrediente = optionalIngrediente.get();
-			ingrediente.setQuantita(quantitaValore);
+		Optional<Ingrediente> ingredienteOpt = ingredienteRepository.findById(ingredienteId);
+		Optional<Ricetta> ricettaOpt = ricettaRepository.findById(ricettaId);
+
+		if (ingredienteOpt.isPresent() && ricettaOpt.isPresent()) {
+			Ingrediente ingrediente = ingredienteOpt.get();
+			Ricetta ricetta = ricettaOpt.get();
+			ingrediente.getQuantitaToRicetta().put(ricetta, quantitaValore);
 			ingrediente.setUnitaDiMisura(quantitaUnita);
-			model.addAttribute("ingrediente", ingredienteRepository.findById(ingredienteId).get());
+			ingredienteRepository.save(ingrediente); // Aggiorna l'ingrediente nel database
 			model.addAttribute("ricetta", ricettaRepository.findById(ricettaId).get());
-			ingredienteRepository.save(ingrediente);
+			model.addAttribute("ingrediente", ingredienteRepository.findById(ingredienteId).get());
 		}
 		return "admin/formUpdateRicetta.html";
 	}
+	
+	public Integer getQuantitaPerRicetta(Long ingredienteId, Long ricettaId) {
+		Optional<Ingrediente> ingredienteOpt = ingredienteRepository.findById(ingredienteId);
+		Optional<Ricetta> ricettaOpt = ricettaRepository.findById(ricettaId);
+
+		if (ingredienteOpt.isPresent() && ricettaOpt.isPresent()) {
+			Ingrediente ingrediente = ingredienteOpt.get();
+			Ricetta ricetta = ricettaOpt.get();
+			return ingrediente.getQuantitaToRicetta().getOrDefault(ricetta, 0); // Restituisce la quantità, se presente,
+																				// altrimenti 0
+		} else {
+			throw new RuntimeException("Ingrediente o Ricetta non trovati");
+		}
+	}
+	
+//	@PostMapping(value = "/admin/updateQuantita")
+//    public String updateQuantitaAdmin(@RequestParam("ingredienteId") Long ingredienteId,
+//                                 @RequestParam("ricettaId") Long ricettaId,
+//                                 @RequestParam("quantitaValore") Integer quantitaValore,
+//                                 @RequestParam("quantitaUnita") String quantitaUnita, Model model) {
+//        ingredienteService.aggiungiQuantitaPerRicetta(ingredienteId, ricettaId, quantitaValore, quantitaUnita);
+//        return "redirect:/admin/formUpdateRicetta.html";
+//    }
 	
 	@GetMapping(value = "/admin/deleteRicetta/{ricettaId}")
 	public String deleteRicettaAdmin(@PathVariable("ricettaId") Long ricettaId, Model model) {
