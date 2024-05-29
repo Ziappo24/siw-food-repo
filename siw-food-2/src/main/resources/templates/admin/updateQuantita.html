@@ -53,7 +53,7 @@
 					</div>
 					<div class="content-wrapper">
 						<div class="content">
-							<div >
+							<div>
 								<div class="image-block">
 									<div class="block-content">
 										<img th:if="${ricetta.urlImage.startsWith('https')}"
@@ -94,7 +94,7 @@
 											<div th:each="ingrediente: ${ricetta.ingredientiUtilizzati}">
 												<li>
 													<span
-														th:text="${ingrediente.nome} + ' ' + ${ingrediente.quantita}"></span>
+														th:text="${ingrediente.nome} + ' ' + ${ingrediente.quantitaToRicetta[ricetta.id]}"></span>
 													<form class="quantita-form" th:action="@{/admin/updateQuantita}"
 														method="POST">
 														<input type="hidden" name="ricettaId"
@@ -102,7 +102,8 @@
 														<input type="hidden" name="ingredienteId"
 															th:value="${ingrediente.id}" />
 														<input class="input" type="number" id="quantitaValore"
-															name="quantitaValore" th:value="${ingrediente.quantita}"
+															name="quantitaValore"
+															th:value="${ingrediente.quantitaToRicetta[ricetta.id]}"
 															min="0" required>
 														<select id="quantitaUnita" name="quantitaUnita" required>
 															<option class="option" value="grammi">Grammi</option>

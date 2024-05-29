@@ -94,11 +94,11 @@
 										<strong>Lista degli ingredienti:</strong>
 										<ul>
 											<div th:each="ingrediente: ${ricetta.ingredientiUtilizzati}">
-												<li th:each="entry : ${quantitaToRicetta}">
-													<span th:if="${entry.key == ricetta.id}"
-														th:text="${ingrediente.nome} + ' ' + ${entry.value} + ' ' + ${ingrediente.unitaDiMisura}"></span>
+												<li>
+													<span
+														th:text="${ingrediente.nome} + ' ' + ${ingrediente.quantitaToRicetta[ricetta.id]} + ' ' + ${ingrediente.unitaDiMisura}"></span>
 													<a
-														th:href="@{'/cuoco/updateQuantita/' + ${ingrediente.id} + '/' + ${ricetta.id}}">
+														th:href="@{'/admin/updateQuantita/' + ${ingrediente.id} + '/' + ${ricetta.id}}">
 														<span class="material-symbols-outlined edit-icon">edit</span>
 													</a>
 												</li>

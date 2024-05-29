@@ -2,6 +2,7 @@ package it.uniroma3.siw.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
@@ -321,11 +322,14 @@ public class RicettaController {
 		if (ingredienteOpt.isPresent() && ricettaOpt.isPresent()) {
 			Ingrediente ingrediente = ingredienteOpt.get();
 			Ricetta ricetta = ricettaOpt.get();
-			ingrediente.getQuantitaToRicetta().put(ricetta, quantitaValore);
+			Map<Long, Integer> quantitaToRicetta = ingrediente.getQuantitaToRicetta();
+			quantitaToRicetta.put(ricetta.getId(), quantitaValore);
 			ingrediente.setUnitaDiMisura(quantitaUnita);
+			ingrediente.setQuantitaToRicetta(quantitaToRicetta);
 			ingredienteRepository.save(ingrediente); // Aggiorna l'ingrediente nel database
 			model.addAttribute("ricetta", ricettaRepository.findById(ricettaId).get());
 			model.addAttribute("ingrediente", ingredienteRepository.findById(ingredienteId).get());
+			model.addAttribute("quantitaValore", quantitaValore);
 		}
 		return "cuoco/formUpdateRicetta.html";
 	}
@@ -360,11 +364,14 @@ public class RicettaController {
 		if (ingredienteOpt.isPresent() && ricettaOpt.isPresent()) {
 			Ingrediente ingrediente = ingredienteOpt.get();
 			Ricetta ricetta = ricettaOpt.get();
-			ingrediente.getQuantitaToRicetta().put(ricetta, quantitaValore);
+			Map<Long, Integer> quantitaToRicetta = ingrediente.getQuantitaToRicetta();
+			quantitaToRicetta.put(ricetta.getId(), quantitaValore);
 			ingrediente.setUnitaDiMisura(quantitaUnita);
+			ingrediente.setQuantitaToRicetta(quantitaToRicetta);
 			ingredienteRepository.save(ingrediente); // Aggiorna l'ingrediente nel database
 			model.addAttribute("ricetta", ricettaRepository.findById(ricettaId).get());
 			model.addAttribute("ingrediente", ingredienteRepository.findById(ingredienteId).get());
+			model.addAttribute("quantitaValore", quantitaValore);
 		}
 		return "admin/formUpdateRicetta.html";
 	}

@@ -163,6 +163,7 @@ footer {
 	/* Aggiunge un'ombra */
 }
 
+
 .image-block img {
 	margin-bottom: 20px;
 	border-radius: 5px;
@@ -347,7 +348,19 @@ footer {
 	font-weight: 450;
 	text-align: justify;
 }
+.html-block-description{
+	width: 60%;
+	flex: 1;
+	display: flex; /* Utilizza flexbox per allineare gli elementi */
 
+}
+
+.content-row {
+  display: flex;
+  justify-content: flex-start;
+  /* Allinea gli elementi ai lati opposti */
+  align-items: flex-start;
+}
 
 .first-section-content {
 	display: flex;

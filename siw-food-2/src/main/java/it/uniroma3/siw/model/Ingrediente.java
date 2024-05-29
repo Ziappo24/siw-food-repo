@@ -2,7 +2,7 @@ package it.uniroma3.siw.model;
 
 import java.util.Map;
 import java.util.Objects;
-
+import java.util.Set;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -38,35 +38,32 @@ public class Ingrediente {
 	 * ma deve essere trattata come una collezione di elementi incorporati (embedded) nella stessa entità. 
 	 * In altre parole, @ElementCollection dice a JPA che la mappa deve essere mappata come una collezione 
 	 * di elementi di valore associati alla classe Ingrediente.*/
-	 @CollectionTable(name = "quantita_per_ricetta", joinColumns = @JoinColumn(name = "ingrediente_id"))
+	 @CollectionTable(name = "quantita_ricetta", joinColumns = @JoinColumn(name = "ingrediente_id"))
 	/*Questa annotazione specifica il nome della tabella che verrà utilizzata per memorizzare la collezione 
 	 * di elementi. Nel nostro caso, la tabella si chiama quantita_per_ricetta. L'elemento joinColumns all'interno 
 	 * di @CollectionTable specifica la colonna che verrà utilizzata per unire (join) questa tabella con la tabella 
 	 * della classe che contiene la collezione, ovvero Ingrediente.*/
-	@MapKeyJoinColumn(name = "ricetta_id")
-	/* Questa annotazione specifica la colonna nella tabella di mapping che rappresenta la chiave della mappa. 
-	 * In questo caso, la chiave della mappa è un'istanza della classe Ricetta, quindi @MapKeyJoinColumn specifica 
-	 * che la colonna ricetta_id nella tabella di mapping rappresenta la chiave della mappa. */
+
 	@Column(name = "quantita")
-	private Map<Ricetta, Integer> quantitaToRicetta;
+	private Map<Long, Integer> quantitaToRicetta;
 
-//	@ManyToMany
-//    private Set<Ingrediente> ingredientiUtilizzati;
-//	
-//
-//	public Set<Ingrediente> getIngredientiUtilizzati() {
-//		return ingredientiUtilizzati;
-//	}
-//
-//	public void setIngredientiUtilizzati(Set<Ingrediente> ingredientiUtilizzati) {
-//		this.ingredientiUtilizzati = ingredientiUtilizzati;
-//	}
+	@ManyToMany
+    private Set<Ingrediente> ingredientiUtilizzati;
+	
 
-	public Map<Ricetta, Integer> getQuantitaToRicetta() {
+	public Set<Ingrediente> getIngredientiUtilizzati() {
+		return ingredientiUtilizzati;
+	}
+
+	public void setIngredientiUtilizzati(Set<Ingrediente> ingredientiUtilizzati) {
+		this.ingredientiUtilizzati = ingredientiUtilizzati;
+	}
+
+	public Map<Long, Integer> getQuantitaToRicetta() {
 		return quantitaToRicetta;
 	}
 
-	public void setQuantitaToRicetta(Map<Ricetta, Integer> quantitaToRicetta) {
+	public void setQuantitaToRicetta(Map<Long, Integer> quantitaToRicetta) {
 		this.quantitaToRicetta = quantitaToRicetta;
 	}
 
@@ -85,14 +82,6 @@ public class Ingrediente {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
-//	public Integer getQuantita() {
-//		return quantita;
-//	}
-//
-//	public void setQuantita(Integer quantita) {
-//		this.quantita = quantita;
-//	}
 
 	public long getId() {
 		return id;

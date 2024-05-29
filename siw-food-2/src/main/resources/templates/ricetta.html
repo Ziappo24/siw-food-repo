@@ -58,52 +58,55 @@
 					</div>
 					<div class="content-wrapper">
 						<div class="content">
-							<div>
-								<div class="image-block" th:if="${ricetta.urlImage != null}">
-									<div class=" block-content">
-										<img th:if="${ricetta.urlImage.startsWith('https')}"
-											th:src="${ricetta.urlImage}" style="width: 30%; height: auto;">
-										<img th:unless="${ricetta.urlImage.startsWith('https')}"
-											th:src="@{/images/__${ricetta.urlImage}__}"
-											style="width: 30%; height: auto;">
-									</div>
-									<span class="description-text" th:if="${ricetta.urlImage == null}">
-										L'immagine non è disponibile.
-									</span>
-								</div>
-								<div class="html-block">
-									<div class="block-content-main">
-										<div th:text="${ricetta.nome}"></div>
-									</div>
-								</div>
-								<div class="html-block">
-									<div class="block-content">
-										<div class="description-title">Cuoco:</div>
-										<div class="description-text">
-											<span th:if="${ricetta.cuoco != null}">
-												<span
-													th:text="${ricetta.cuoco.nome} + ' ' + ${ricetta.cuoco.cognome}"></span>
-											</span>
+							<div class="content-row">
+								<div class="content-column">
+									<div class="image-block" th:if="${ricetta.urlImage != null}">
+										<div class=" block-content">
+											<img th:if="${ricetta.urlImage.startsWith('https')}"
+												th:src="${ricetta.urlImage}" style="width: 30%; height: auto;">
+											<img th:unless="${ricetta.urlImage.startsWith('https')}"
+												th:src="@{/images/__${ricetta.urlImage}__}"
+												style="width: 80%; height: auto;">
 										</div>
-										<span class="description-text" th:if="${ricetta.cuoco == null}">
-											Cuoco non disponibile per questa ricetta
+										<span class="description-text" th:if="${ricetta.urlImage == null}">
+											L'immagine non è disponibile.
 										</span>
 									</div>
-								</div>
-								<div class="html-block">
-									<div class="block-content">
-										<strong>Lista degli ingredienti:</strong>
-										<ul>
-											<div th:each="ingrediente: ${ricetta.ingredientiUtilizzati}">
-												<li>
+
+									<div class="html-block">
+										<div class="block-content-main">
+											<div th:text="${ricetta.nome}"></div>
+										</div>
+									</div>
+									<div class="html-block">
+										<div class="block-content">
+											<div class="description-title">Cuoco:</div>
+											<div class="description-text">
+												<span th:if="${ricetta.cuoco != null}">
 													<span
-														th:text="${ingrediente.nome} + ' ' + ${ingrediente.quantita} + ' ' + ${ingrediente.unitaDiMisura}"></span>
-												</li>
+														th:text="${ricetta.cuoco.nome} + ' ' + ${ricetta.cuoco.cognome}"></span>
+												</span>
 											</div>
-										</ul>
+											<span class="description-text" th:if="${ricetta.cuoco == null}">
+												Cuoco non disponibile per questa ricetta
+											</span>
+										</div>
+									</div>
+									<div class="html-block">
+										<div class="block-content">
+											<strong>Lista degli ingredienti:</strong>
+											<ul>
+												<div th:each="ingrediente: ${ricetta.ingredientiUtilizzati}">
+													<li>
+														<span
+															th:text="${ingrediente.nome} + ' ' + ${ingrediente.quantitaToRicetta[ricetta.id]} + ' '+ ${ingrediente.unitaDiMisura}"></span>
+													</li>
+												</div>
+											</ul>
+										</div>
 									</div>
 								</div>
-								<div class="html-block">
+								<div class="html-block html-block-description">
 									<div class="block-content">
 										<div class="description-title">Descrizione:</div>
 										<div class="description-text">
@@ -117,28 +120,29 @@
 							</div>
 						</div>
 					</div>
-				</section>
-			</article>
-		</main>
-		<footer id="footer-sections" class="footer">
-			<div class="section-border">
-				<div class="section-background"> </div>
-			</div>
-			<div class="content-wrapper">
-				<div class="content">
-					<div class="socials">
-						<nav class="footer-nav-list">
-							<a href="https://www.instagram.com/edoardopiazzolla/">
-								<img src="/images/Instagram.png" />
-							</a>
-							<a href="https://www.youtube.com/channel/UC5LdtlfzoK9pftejCPvzWrg">
-								<img src="/images/youtube.png" />
-							</a>
-						</nav>
-					</div>
+	</div>
+	</section>
+	</article>
+	</main>
+	<footer id="footer-sections" class="footer">
+		<div class="section-border">
+			<div class="section-background"> </div>
+		</div>
+		<div class="content-wrapper">
+			<div class="content">
+				<div class="socials">
+					<nav class="footer-nav-list">
+						<a href="https://www.instagram.com/edoardopiazzolla/">
+							<img src="/images/Instagram.png" />
+						</a>
+						<a href="https://www.youtube.com/channel/UC5LdtlfzoK9pftejCPvzWrg">
+							<img src="/images/youtube.png" />
+						</a>
+					</nav>
 				</div>
 			</div>
-		</footer>
+		</div>
+	</footer>
 	</div>
 </body>
 
