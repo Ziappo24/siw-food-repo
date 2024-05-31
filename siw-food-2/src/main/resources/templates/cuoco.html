@@ -40,9 +40,9 @@
 									<a class="no-underline" href="/logout">Logout</a>
 								</div>
 							</div>
-<!--							<div class="header-nav-item" th:unless="${userDetail}">-->
-<!--								<a href="/formLogin">Login</a>-->
-<!--							</div>-->
+							<!--							<div class="header-nav-item" th:unless="${userDetail}">-->
+							<!--								<a href="/formLogin">Login</a>-->
+							<!--							</div>-->
 						</nav>
 					</div>
 				</div>
@@ -61,35 +61,42 @@
 								<div class="image-block">
 									<div class="block-content">
 										<div class="block-content">
-											<img th:if="${cuoco.urlImage.startsWith('https')}"
+											<!--											<img th:if="${cuoco.urlImage.startsWith('https')}"-->
+											<!--												th:src="${cuoco.urlImage}" style="width: 30%; height: auto;">-->
+											<!--											<img th:unless="${cuoco.urlImage.startsWith('https')}"-->
+											<!--												th:src="@{/images/__${cuoco.urlImage}__}"-->
+											<!--												style="width: 30%; height: auto;">-->
+											<img th:if="${cuoco.urlImage != null && cuoco.urlImage.startsWith('https') && cuoco.immagine == null}"
 												th:src="${cuoco.urlImage}" style="width: 30%; height: auto;">
-											<img th:unless="${cuoco.urlImage.startsWith('https')}"
+											<img th:unless="${cuoco.urlImage != null && !cuoco.urlImage.startsWith('https') && cuoco.urlImage.startsWith('/images')	&& cuoco.immagine == null}"
 												th:src="@{/images/__${cuoco.urlImage}__}"
+												style="width: 30%; height: auto;">
+											<img th:unless="${cuoco.immagine!=null && cuoco.urlImage == null}"
+												th:src="'data:image/jpeg;base64,' + ${immagine}"
 												style="width: 30%; height: auto;">
 										</div>
 									</div>
-								</div>
-								<div class="html-block">
-									<div class="block-content-main">
-										<div th:text="${cuoco.nome} + ' ' + ${cuoco.cognome}"></div>
+									<div class="html-block">
+										<div class="block-content-main">
+											<div th:text="${cuoco.nome} + ' ' + ${cuoco.cognome}"></div>
+										</div>
 									</div>
-								</div>
-								<div class="html-block">
-									<div class="block-content">
-										<div class="year-text">Anno di nascita:
-											<span th:if="${cuoco.nascita != null}">
-												<span
-													th:text="${#temporals.format(cuoco.nascita, 'dd-MM-yyyy')}"></span>
+									<div class="html-block">
+										<div class="block-content">
+											<div class="year-text">Anno di nascita:
+												<span th:if="${cuoco.nascita != null}">
+													<span
+														th:text="${#temporals.format(cuoco.nascita, 'dd-MM-yyyy')}"></span>
+												</span>
+											</div>
+											<span th:if="${cuoco.nascita == null}">
+												Non disponibile
 											</span>
 										</div>
-										<span th:if="${cuoco.nascita == null}">
-											Non disponibile
-										</span>
 									</div>
 								</div>
 							</div>
 						</div>
-					</div>
 				</section>
 			</article>
 		</main>

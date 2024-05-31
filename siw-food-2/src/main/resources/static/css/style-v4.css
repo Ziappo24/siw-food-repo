@@ -352,7 +352,8 @@ footer {
 	width: 60%;
 	flex: 1;
 	display: flex; /* Utilizza flexbox per allineare gli elementi */
-
+	position: relative;
+	top: 89px;
 }
 
 .content-row {

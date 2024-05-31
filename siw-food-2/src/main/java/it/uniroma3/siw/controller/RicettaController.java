@@ -401,13 +401,17 @@ public class RicettaController {
 	
 	@GetMapping(value = "/admin/deleteRicetta/{ricettaId}")
 	public String deleteRicettaAdmin(@PathVariable("ricettaId") Long ricettaId, Model model) {
-		ricettaService.deleteById(ricettaId);
+		Ricetta ricetta = ricettaService.findById(ricettaId);
+		ricetta.setIngredientiUtilizzati(null);
+		ricettaService.deleteById(ricetta.getId());
         return "redirect:/admin/manageRicette";
 	}
 	
 	@GetMapping(value = "/cuoco/deleteRicetta/{ricettaId}")
 	public String deleteRicettaCuoco(@PathVariable("ricettaId") Long ricettaId, Model model) {
-		ricettaService.deleteById(ricettaId);
+		Ricetta ricetta = ricettaService.findById(ricettaId);
+		ricetta.setIngredientiUtilizzati(null);
+		ricettaService.deleteById(ricetta.getId());
         return "redirect:/cuoco/manageRicette";
 	}
 

@@ -9,6 +9,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.OneToMany;
 
 @Entity
@@ -24,11 +25,22 @@ public class Cuoco {
 		
 		public String urlImage;
 		
+		@Lob
+		private byte[] immagine;
+		
 		public LocalDate nascita;
 		
 		@OneToMany(mappedBy = "cuoco")
 		private List<Ricetta> ricette;
 		
+		public byte[] getImmagine() {
+			return immagine;
+		}
+
+		public void setImmagine(byte[] immagine) {
+			this.immagine = immagine;
+		}
+
 		public Cuoco() {
 			this.ricette = new LinkedList<>();
 		}

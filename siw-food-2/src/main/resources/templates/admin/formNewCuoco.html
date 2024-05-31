@@ -43,7 +43,7 @@
 				<span>Inserisci di seguito tutte le informazioni richieste</span>
 				<input required type="text" placeholder="Nome" th:field="${cuoco.nome}">
 				<input required type="text" placeholder="Cognome" th:field="${cuoco.cognome}">
-				<input required type="text" placeholder="URL Immagine" th:field="${cuoco.urlImage}">
+				<input required type="file" placeholder="URL Immagine" th:field="${cuoco.immagine}">
 				<input type="date" placeholder="Data Di Nascita (dd-MM-yyyy)" th:field="${cuoco.nascita}">
 				<button>Inserisci</button>
 			</form>
