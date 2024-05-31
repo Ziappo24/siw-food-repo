@@ -1,9 +1,11 @@
 package it.uniroma3.siw.model;
 
 import java.time.LocalDate;
+import java.util.Base64;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
+
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -28,11 +30,21 @@ public class Cuoco {
 		@Lob
 		private byte[] immagine;
 		
+		private String immagineBase64;
+		
 		public LocalDate nascita;
 		
 		@OneToMany(mappedBy = "cuoco")
 		private List<Ricetta> ricette;
-		
+
+		public String getImmagineBase64() {
+			return immagineBase64;
+		}
+
+		public void setImmagineBase64(String immagineBase64) {
+			this.immagineBase64 = immagineBase64;
+		}
+
 		public byte[] getImmagine() {
 			return immagine;
 		}
@@ -40,6 +52,7 @@ public class Cuoco {
 		public void setImmagine(byte[] immagine) {
 			this.immagine = immagine;
 		}
+
 
 		public Cuoco() {
 			this.ricette = new LinkedList<>();
@@ -105,6 +118,9 @@ public class Cuoco {
 			Cuoco cuoco = (Cuoco) o;
 			return Objects.equals(nome, cuoco.nome) && Objects.equals(cognome, cuoco.cognome);
 		}
+
+
+		
 
 
 

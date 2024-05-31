@@ -1,6 +1,5 @@
 package it.uniroma3.siw.controller;
 
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -11,7 +10,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.Base64;
 import it.uniroma3.siw.model.Cuoco;
 import it.uniroma3.siw.repository.CuocoRepository;
@@ -28,23 +29,16 @@ public class CuocoController {
 
 	@GetMapping("/cuoco/{id}")
 	public String getCuoco(@PathVariable("id") Long id, Model model) {
-		Optional<Cuoco> optionalCuoco = cuocoRepository.findById(id);
-
-		if (optionalCuoco.isPresent()) {
-			Cuoco cuoco = optionalCuoco.get();
-			byte[] imageData = cuoco.getImmagine();
-
-			// Converte l'array di byte in una stringa base64
-			String base64Image = Base64.getEncoder().encodeToString(imageData);
-
-			// Aggiunge la stringa base64 al modello
-			model.addAttribute("immagine", base64Image);
-			
-			model.addAttribute("cuoco", this.cuocoRepository.findById(id).get());
-		}
-			return "cuoco.html";
-		}
-	
+	    Cuoco cuoco = cuocoService.findById(id);
+	    if (cuoco != null && cuoco.getImmagine() != null) {
+	        // Converti l'array di byte in una stringa Base64
+	        cuoco.setImmagineBase64(Base64.getEncoder().encodeToString(cuoco.getImmagine()));
+	        // Passa la stringa Base64 al modello
+	        model.addAttribute("base64Image", cuoco.getImmagineBase64());
+	    }
+	    model.addAttribute("cuoco", cuoco);
+	    return "cuoco.html";
+	}
 
 	@GetMapping("/cuochi")
 	public String ShowCuoco(Model model) {
@@ -82,41 +76,37 @@ public class CuocoController {
 	}
 
 	@PostMapping("/admin/cuochi")
-	public String newCuoco(@ModelAttribute("cuoco") Cuoco cuoco, Model model) {
-		if (!cuocoRepository.existsByNomeAndCognome(cuoco.getNome(), cuoco.getCognome())) {
-			this.cuocoService.save(cuoco);
-			model.addAttribute("cuoco", cuoco);
-			return "cuoco.html";
-		} else {
-			model.addAttribute("messaggioErrore", "Questo cuoco esiste già");
-			return "/admin/formNewCuoco.html";
-		}
+	public String newCuoco(@ModelAttribute("cuoco") Cuoco cuoco, @RequestParam("immagine") MultipartFile immagine,
+	        Model model) throws IOException {
+	    if (!cuocoRepository.existsByNomeAndCognome(cuoco.getNome(), cuoco.getCognome())) {
+	        // Accedi ai byte dell'immagine
+	        byte[] immagineBytes = immagine.getBytes();
+	        
+	        // Codifica i byte dell'immagine come una stringa Base64
+	        String immagineBase64 = Base64.getEncoder().encodeToString(immagineBytes);
+	        
+	        // Imposta l'immagine Base64 nel modello
+	        model.addAttribute("immagineBase64", immagineBase64);
+	        
+	        // Imposta l'immagine del cuoco
+	        cuoco.setImmagine(immagineBytes);
+	        
+	        // Salva il cuoco
+	        this.cuocoService.save(cuoco);
+	        
+	        model.addAttribute("cuochi", cuoco);
+	        return "cuoco.html";
+	    } else {
+	        model.addAttribute("messaggioErrore", "Questo cuoco esiste già");
+	        return "/admin/formNewCuoco.html";
+	    }
 	}
+
 
 	@GetMapping(value = "/admin/deleteCuoco/{cuocoId}")
 	public String deleteCuocoAdmin(@PathVariable("cuocoId") Long cuocoId, Model model) {
 		cuocoService.deleteById(cuocoId);
 		return "redirect:/admin/manageCuochi";
-	}
-
-	@GetMapping("/image/{id}")
-	public String getImageById(@PathVariable Long id, Model model) {
-		Optional<Cuoco> optionalCuoco = cuocoRepository.findById(id);
-
-		if (optionalCuoco.isPresent()) {
-			Cuoco cuoco = optionalCuoco.get();
-			byte[] imageData = cuoco.getImmagine();
-
-			// Converte l'array di byte in una stringa base64
-			String base64Image = Base64.getEncoder().encodeToString(imageData);
-
-			// Aggiunge la stringa base64 al modello
-			model.addAttribute("base64Image", base64Image);
-
-			return "viewImage";
-		} else {
-			return "imageNotFound";
-		}
 	}
 
 }

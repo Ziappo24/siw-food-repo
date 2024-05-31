@@ -6,7 +6,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=Mate+SC&display=swap" rel="stylesheet">
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Siw-Food - Cuochi</title>
+	<title>Siw-Food - Cuoco</title>
 	<link rel="stylesheet" href="/css/style-v4.css">
 </head>
 
@@ -71,9 +71,9 @@
 											<img th:unless="${cuoco.urlImage != null && !cuoco.urlImage.startsWith('https') && cuoco.urlImage.startsWith('/images')	&& cuoco.immagine == null}"
 												th:src="@{/images/__${cuoco.urlImage}__}"
 												style="width: 30%; height: auto;">
-											<img th:unless="${cuoco.immagine!=null && cuoco.urlImage == null}"
-												th:src="'data:image/jpeg;base64,' + ${immagine}"
-												style="width: 30%; height: auto;">
+											<img th:if="${base64Image != null}"
+												th:src="${cuoco.immagineBase64}">
+
 										</div>
 									</div>
 									<div class="html-block">
