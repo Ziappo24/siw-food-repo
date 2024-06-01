@@ -38,7 +38,7 @@
 	</header>
 	<div class="container" id="container">
 		<div class="form-container inserisci-cuoco">
-			<form th:action="@{/admin/cuochi}" method="POST" th:object="${cuoco}"enctype="multipart/form-data">
+			<form th:action="@{/admin/cuochi}" method="POST" th:object="${cuoco}" enctype="multipart/form-data">
 				<h1>Inserisci Cuoco</h1>
 				<span>Inserisci di seguito tutte le informazioni richieste</span>
 				<input required type="text" placeholder="Nome" th:field="${cuoco.nome}">

@@ -4,6 +4,7 @@ package it.uniroma3.siw.model;
 import java.util.Objects;
 import java.util.Set;
 
+import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,6 +13,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Transient;
 
 @Entity
 public class Ricetta {
@@ -22,7 +24,6 @@ public class Ricetta {
 	
 	private String nome;
 	
-	/* poi va modificata come lista di immagini*/
 	private String urlImage;
 	
 	/* mettere la possibilità di scrivere tanto*/
@@ -34,6 +35,9 @@ public class Ricetta {
 	
 	@ManyToMany
 	private Set<Ingrediente> ingredientiUtilizzati;
+	
+	@Transient
+	private MultipartFile immagine;
 
 	public Set<Ingrediente> getIngredientiUtilizzati() {
 		return ingredientiUtilizzati;

@@ -8,6 +8,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.util.StringUtils;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import it.uniroma3.siw.model.Ingrediente;
 import it.uniroma3.siw.repository.IngredienteRepository;
@@ -20,6 +28,8 @@ public class IngredienteController {
 	@Autowired IngredienteRepository ingredienteRepository;
 	
 	@Autowired IngredienteService ingredienteService;
+	
+	private static String UPLOAD_DIR = "C:\\Users\\EDOARDO\\Desktop\\FOR SISW\\siw-food-repo\\siw-food-2\\src\\main\\resources\\static\\images";
 	
 	
 	@GetMapping("/ingrediente/{id}")
@@ -60,16 +70,36 @@ public class IngredienteController {
 	}
 	
 	@PostMapping("/admin/ingrediente")
-	public String newIngrediente(@ModelAttribute("ingrediente") Ingrediente ingrediente, Model model) {
-		if (!ingredienteRepository.existsByNome(ingrediente.getNome())) {
-			this.ingredienteService.save(ingrediente);
-			model.addAttribute("ingrediente", ingrediente);
-			return "ingrediente.html";
-		} else {
-			model.addAttribute("messaggioErrore", "Questo ingrediente esiste già");
-			return "/admin/formNewIngrediente.html";
-		}
+	public String newIngrediente(@ModelAttribute("ingrediente") Ingrediente ingrediente, 
+	                             @RequestParam("immagine") MultipartFile file, Model model) {
+	    if (!ingredienteRepository.existsByNome(ingrediente.getNome())) {
+	        if (!file.isEmpty()) {
+	            try {
+	                // Salva il file sul server
+	                String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+	                Path path = Paths.get(UPLOAD_DIR + File.separator + fileName);
+	                Files.write(path, file.getBytes());
+	                ingrediente.setUrlImage(fileName);
+
+	                // Salva l'ingrediente
+	                this.ingredienteService.save(ingrediente);
+	                model.addAttribute("ingrediente", ingrediente);
+	                return "ingrediente.html";
+	            } catch (IOException e) {
+	                e.printStackTrace();
+	                model.addAttribute("messaggioErrore", "Errore durante il salvataggio dell'immagine");
+	                return "formNewIngrediente";
+	            }
+	        } else {
+	            model.addAttribute("messaggioErrore", "Il file dell'immagine è vuoto");
+	            return "formNewIngrediente";
+	        }
+	    } else {
+	        model.addAttribute("messaggioErrore", "Questo ingrediente esiste già");
+	        return "formNewIngrediente";
+	    }
 	}
+
 	
 	@GetMapping(value="/cuoco/formNewIngrediente")
 	public String formNewIngredienteCuoco(Model model) {
@@ -78,16 +108,36 @@ public class IngredienteController {
 	}
 	
 	@PostMapping("/cuoco/ingrediente")
-	public String newIngredienteCuoco(@ModelAttribute("ingrediente") Ingrediente ingrediente, Model model) {
-		if (!ingredienteRepository.existsByNome(ingrediente.getNome())) {
-			this.ingredienteService.save(ingrediente);
-			model.addAttribute("ingrediente", ingrediente);
-			return "ingrediente.html";
-		} else {
-			model.addAttribute("messaggioErrore", "Questo ingrediente esiste già");
-			return "/cuoco/formNewIngrediente.html";
-		}
+	public String newIngredienteCuoco(@ModelAttribute("ingrediente") Ingrediente ingrediente, 
+	                                  @RequestParam("immagine") MultipartFile file, Model model) {
+	    if (!ingredienteRepository.existsByNome(ingrediente.getNome())) {
+	        if (!file.isEmpty()) {
+	            try {
+	                // Salva il file sul server
+	                String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+	                Path path = Paths.get(UPLOAD_DIR + File.separator + fileName);
+	                Files.write(path, file.getBytes());
+	                ingrediente.setUrlImage(fileName);
+
+	                // Salva l'ingrediente
+	                this.ingredienteService.save(ingrediente);
+	                model.addAttribute("ingrediente", ingrediente);
+	                return "ingrediente.html";
+	            } catch (IOException e) {
+	                e.printStackTrace();
+	                model.addAttribute("messaggioErrore", "Errore durante il salvataggio dell'immagine");
+	                return "cuoco/formNewIngrediente";
+	            }
+	        } else {
+	            model.addAttribute("messaggioErrore", "Il file dell'immagine è vuoto");
+	            return "cuoco/formNewIngrediente";
+	        }
+	    } else {
+	        model.addAttribute("messaggioErrore", "Questo ingrediente esiste già");
+	        return "cuoco/formNewIngrediente";
+	    }
 	}
+
 	
 	@GetMapping(value = "/admin/deleteIngrediente/{ingredienteId}")
 	public String deleteIngredienteAdmin(@PathVariable("ingredienteId") Long ingredienteId, Model model) {

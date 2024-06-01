@@ -10,6 +10,7 @@ import it.uniroma3.siw.model.Ingrediente;
 
 public interface IngredienteRepository extends CrudRepository<Ingrediente, Long>{
 	
+	@Query("SELECT i FROM Ingrediente i WHERE LOWER(i.nome) = LOWER(?1)")
 	public List<Ingrediente> findByNome(String nome);
 	
 	

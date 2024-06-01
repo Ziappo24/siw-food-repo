@@ -38,12 +38,12 @@
 	</header>
 	<div class="container" id="container">
 		<div class="form-container inserisci">
-			<form th:action="@{/admin/ricetta}" method="POST" th:object="${ricetta}">
+			<form th:action="@{/admin/ricetta}" method="POST" th:object="${ricetta}" enctype="multipart/form-data">
 				<h1>Inserisci Ricetta</h1>
 				<span>Inserisci di seguito tutte le informazioni richieste</span>
 				<input required type="text" placeholder="Nome" th:field="${ricetta.nome}">
 				<input required type="text" placeholder="Descrizione" th:field="${ricetta.descrizione}">
-				<input required type="text" placeholder="URL Immagine" th:field="${ricetta.urlImage}">
+				<input required type="file" placeholder="URL Immagine" name="immagine" >
 				<button>Inserisci</button>
 			</form>
 		</div>

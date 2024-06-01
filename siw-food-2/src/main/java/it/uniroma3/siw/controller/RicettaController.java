@@ -15,7 +15,15 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.util.StringUtils;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import it.uniroma3.siw.controller.validator.RicettaValidator;
 import it.uniroma3.siw.model.Credentials;
@@ -53,13 +61,14 @@ public class RicettaController {
 
 	@Autowired
 	IngredienteRepository ingredienteRepository;
-	
+
 	@Autowired
 	IngredienteService ingredienteService;
 
-
 	@Autowired
 	CredentialsRepository credentialsRepository;
+
+	private static String UPLOAD_DIR = "C:\\Users\\EDOARDO\\Desktop\\FOR SISW\\siw-food-repo\\siw-food-2\\src\\main\\resources\\static\\images";
 
 	@GetMapping("/ricetta/{id}")
 	public String getRicetta(@PathVariable("id") Long id, Model model) {
@@ -111,14 +120,34 @@ public class RicettaController {
 
 	@PostMapping("/admin/ricetta")
 	public String newRicetta(@Valid @ModelAttribute("ricetta") Ricetta ricetta, BindingResult bindingResult,
-			Model model) {
+			@RequestParam("immagine") MultipartFile file, Model model) {
 		this.ricettaValidator.validate(ricetta, bindingResult);
+
 		if (!bindingResult.hasErrors()) {
-			this.ricettaRepository.save(ricetta);
-			model.addAttribute("ricetta", ricetta);
-			return "ricetta.html";
+			if (!file.isEmpty()) {
+				try {
+					// Salva il file sul server
+					String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+					Path path = Paths.get(UPLOAD_DIR + File.separator + fileName);
+					Files.write(path, file.getBytes());
+					ricetta.setUrlImage(fileName);
+
+					// Salva la ricetta
+					this.ricettaRepository.save(ricetta);
+
+					model.addAttribute("ricetta", ricetta);
+					return "ricetta";
+				} catch (IOException e) {
+					e.printStackTrace();
+					model.addAttribute("messaggioErrore", "Errore durante il salvataggio dell'immagine");
+					return "formNewRicetta";
+				}
+			} else {
+				model.addAttribute("messaggioErrore", "Il file dell'immagine è vuoto");
+				return "formNewRicetta";
+			}
 		} else {
-			return "/admin/formNewRicetta.html";
+			return "formNewRicetta";
 		}
 	}
 
@@ -137,7 +166,7 @@ public class RicettaController {
 
 	@PostMapping("/cuoco/ricetta")
 	public String newRicettaCuoco(@Valid @ModelAttribute("ricetta") Ricetta ricetta, BindingResult bindingResult,
-			@RequestParam("username") String username, Model model) {
+			@RequestParam("username") String username, @RequestParam("immagine") MultipartFile file, Model model) {
 		Credentials tempUser = credentialsRepository.findByUsername(username);
 		User currentUser = tempUser.getUser();
 		Cuoco currentCuoco = this.cuocoRepository.findByNomeAndCognome(currentUser.getNome(), currentUser.getCognome());
@@ -145,11 +174,30 @@ public class RicettaController {
 
 		this.ricettaValidator.validate(ricetta, bindingResult);
 		if (!bindingResult.hasErrors()) {
-			this.ricettaRepository.save(ricetta);
-			model.addAttribute("ricetta", ricetta);
-			return "ricetta.html";
+			if (!file.isEmpty()) {
+				try {
+					// Salva il file sul server
+					String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+					Path path = Paths.get(UPLOAD_DIR + File.separator + fileName);
+					Files.write(path, file.getBytes());
+					ricetta.setUrlImage(fileName);
+
+					// Salva la ricetta
+					this.ricettaRepository.save(ricetta);
+
+					model.addAttribute("ricetta", ricetta);
+					return "ricetta";
+				} catch (IOException e) {
+					e.printStackTrace();
+					model.addAttribute("messaggioErrore", "Errore durante il salvataggio dell'immagine");
+					return "formNewRicetta";
+				}
+			} else {
+				model.addAttribute("messaggioErrore", "Il file dell'immagine è vuoto");
+				return "formNewRicetta";
+			}
 		} else {
-			return "cuoco/formNewRicetta.html";
+			return "formNewRicetta";
 		}
 	}
 
@@ -312,10 +360,8 @@ public class RicettaController {
 
 	@PostMapping(value = "/cuoco/updateQuantita")
 	public String updateQuantita(@RequestParam("ingredienteId") Long ingredienteId,
-								 @RequestParam("ricettaId") Long ricettaId,
-								 @RequestParam("quantitaValore") Integer quantitaValore, 
-								 @RequestParam("quantitaUnita") String quantitaUnita,
-								 Model model) {
+			@RequestParam("ricettaId") Long ricettaId, @RequestParam("quantitaValore") Integer quantitaValore,
+			@RequestParam("quantitaUnita") String quantitaUnita, Model model) {
 		Optional<Ingrediente> ingredienteOpt = ingredienteRepository.findById(ingredienteId);
 		Optional<Ricetta> ricettaOpt = ricettaRepository.findById(ricettaId);
 
@@ -333,17 +379,7 @@ public class RicettaController {
 		}
 		return "cuoco/formUpdateRicetta.html";
 	}
-	
-//	@PostMapping(value = "/cuoco/updateQuantita")
-//    public String updateQuantita(@RequestParam("ingredienteId") Long ingredienteId,
-//                                 @RequestParam("ricettaId") Long ricettaId,
-//                                 @RequestParam("quantitaValore") Integer quantitaValore,
-//                                 @RequestParam("quantitaUnita") String quantitaUnita, Model model) {
-//        ingredienteService.aggiungiQuantitaPerRicetta(ingredienteId, ricettaId, quantitaValore, quantitaUnita);
-//        return "redirect:/cuoco/formUpdateRicetta.html";
-//    }
-	
-	
+
 	@GetMapping(value = "/admin/updateQuantita/{ingredienteId}/{ricettaId}")
 	public String formUpdateQuantitaAdmin(@PathVariable("ricettaId") Long ricettaId,
 			@PathVariable("ingredienteId") Long ingredienteId, Model model) {
@@ -354,10 +390,8 @@ public class RicettaController {
 
 	@PostMapping(value = "/admin/updateQuantita")
 	public String updateQuantitaAdmin(@RequestParam("ingredienteId") Long ingredienteId,
-								 @RequestParam("ricettaId") Long ricettaId,
-								 @RequestParam("quantitaValore") Integer quantitaValore, 
-								 @RequestParam("quantitaUnita") String quantitaUnita,
-								 Model model) {
+			@RequestParam("ricettaId") Long ricettaId, @RequestParam("quantitaValore") Integer quantitaValore,
+			@RequestParam("quantitaUnita") String quantitaUnita, Model model) {
 		Optional<Ingrediente> ingredienteOpt = ingredienteRepository.findById(ingredienteId);
 		Optional<Ricetta> ricettaOpt = ricettaRepository.findById(ricettaId);
 
@@ -375,7 +409,7 @@ public class RicettaController {
 		}
 		return "admin/formUpdateRicetta.html";
 	}
-	
+
 	public Integer getQuantitaPerRicetta(Long ingredienteId, Long ricettaId) {
 		Optional<Ingrediente> ingredienteOpt = ingredienteRepository.findById(ingredienteId);
 		Optional<Ricetta> ricettaOpt = ricettaRepository.findById(ricettaId);
@@ -389,30 +423,21 @@ public class RicettaController {
 			throw new RuntimeException("Ingrediente o Ricetta non trovati");
 		}
 	}
-	
-//	@PostMapping(value = "/admin/updateQuantita")
-//    public String updateQuantitaAdmin(@RequestParam("ingredienteId") Long ingredienteId,
-//                                 @RequestParam("ricettaId") Long ricettaId,
-//                                 @RequestParam("quantitaValore") Integer quantitaValore,
-//                                 @RequestParam("quantitaUnita") String quantitaUnita, Model model) {
-//        ingredienteService.aggiungiQuantitaPerRicetta(ingredienteId, ricettaId, quantitaValore, quantitaUnita);
-//        return "redirect:/admin/formUpdateRicetta.html";
-//    }
-	
+
 	@GetMapping(value = "/admin/deleteRicetta/{ricettaId}")
 	public String deleteRicettaAdmin(@PathVariable("ricettaId") Long ricettaId, Model model) {
 		Ricetta ricetta = ricettaService.findById(ricettaId);
 		ricetta.setIngredientiUtilizzati(null);
 		ricettaService.deleteById(ricetta.getId());
-        return "redirect:/admin/manageRicette";
+		return "redirect:/admin/manageRicette";
 	}
-	
+
 	@GetMapping(value = "/cuoco/deleteRicetta/{ricettaId}")
 	public String deleteRicettaCuoco(@PathVariable("ricettaId") Long ricettaId, Model model) {
 		Ricetta ricetta = ricettaService.findById(ricettaId);
 		ricetta.setIngredientiUtilizzati(null);
 		ricettaService.deleteById(ricetta.getId());
-        return "redirect:/cuoco/manageRicette";
+		return "redirect:/cuoco/manageRicette";
 	}
 
 }

@@ -4,11 +4,8 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import org.springframework.web.multipart.MultipartFile;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -20,7 +17,6 @@ public class Ingrediente {
 
 	private String nome;
 
-//	private Integer quantita;
 
 	private String urlImage;
 
@@ -30,7 +26,8 @@ public class Ingrediente {
 	private String descrizione;
 	
 	
-   
+	@Transient
+	private MultipartFile immagine;
     
 
 	@ElementCollection
