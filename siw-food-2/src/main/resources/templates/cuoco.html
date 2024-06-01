@@ -61,18 +61,18 @@
 								<div class="image-block">
 									<div class="block-content">
 										<div class="block-content">
-											<!--											<img th:if="${cuoco.urlImage.startsWith('https')}"-->
-											<!--												th:src="${cuoco.urlImage}" style="width: 30%; height: auto;">-->
-											<!--											<img th:unless="${cuoco.urlImage.startsWith('https')}"-->
-											<!--												th:src="@{/images/__${cuoco.urlImage}__}"-->
-											<!--												style="width: 30%; height: auto;">-->
-											<img th:if="${cuoco.urlImage != null && cuoco.urlImage.startsWith('https') && cuoco.immagine == null}"
+											<img th:if="${cuoco.urlImage.startsWith('https')}"
 												th:src="${cuoco.urlImage}" style="width: 30%; height: auto;">
-											<img th:unless="${cuoco.urlImage != null && !cuoco.urlImage.startsWith('https') && cuoco.urlImage.startsWith('/images')	&& cuoco.immagine == null}"
+											<img th:unless="${cuoco.urlImage.startsWith('https')}"
 												th:src="@{/images/__${cuoco.urlImage}__}"
 												style="width: 30%; height: auto;">
-											<img th:if="${base64Image != null}"
-												th:src="${cuoco.immagineBase64}">
+											<!--											<img th:if="${cuoco.urlImage != null && cuoco.urlImage.startsWith('https') && cuoco.immagine == null && base64Image != null}"-->
+											<!--												th:src="${cuoco.urlImage}" style="width: 30%; height: auto;">-->
+											<!--											<img th:unless="${cuoco.urlImage != null && !cuoco.urlImage.startsWith('https') && cuoco.urlImage.startsWith('/images')	&& cuoco.immagine == null && base64Image != null}"-->
+											<!--												th:src="@{/images/__${cuoco.urlImage}__}"-->
+											<!--												style="width: 30%; height: auto;">-->
+											<!--											<img th:if="${cuoco.urlImage == null && cuoco.immagine != null && base64Image != null}"-->
+											<!--												th:src="'data:image/jpeg;base64,' + ${cuoco.immagineBase64}">-->
 
 										</div>
 									</div>

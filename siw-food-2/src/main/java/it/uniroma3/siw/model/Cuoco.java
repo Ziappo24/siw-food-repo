@@ -1,18 +1,18 @@
 package it.uniroma3.siw.model;
 
 import java.time.LocalDate;
-import java.util.Base64;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
-
+import org.springframework.web.multipart.MultipartFile;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Lob;
+
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Transient;
 
 @Entity
 public class Cuoco {
@@ -27,31 +27,16 @@ public class Cuoco {
 		
 		public String urlImage;
 		
-		@Lob
-		private byte[] immagine;
 		
-		private String immagineBase64;
+		@Transient
+		private MultipartFile immagine;
 		
 		public LocalDate nascita;
 		
 		@OneToMany(mappedBy = "cuoco")
 		private List<Ricetta> ricette;
 
-		public String getImmagineBase64() {
-			return immagineBase64;
-		}
 
-		public void setImmagineBase64(String immagineBase64) {
-			this.immagineBase64 = immagineBase64;
-		}
-
-		public byte[] getImmagine() {
-			return immagine;
-		}
-
-		public void setImmagine(byte[] immagine) {
-			this.immagine = immagine;
-		}
 
 
 		public Cuoco() {

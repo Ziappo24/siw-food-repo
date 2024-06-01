@@ -1,6 +1,5 @@
 package it.uniroma3.siw.controller;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
@@ -9,17 +8,27 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.util.StringUtils;
 
+
+import java.io.File;
 import java.io.IOException;
-import java.util.Base64;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+
 import it.uniroma3.siw.model.Cuoco;
 import it.uniroma3.siw.repository.CuocoRepository;
 import it.uniroma3.siw.service.CuocoService;
 
 @Controller
 public class CuocoController {
+
+	private static String UPLOAD_DIR = "C:\\Users\\EDOARDO\\Desktop\\FOR SISW\\siw-food-repo\\siw-food-2\\src\\main\\resources\\static\\images";
 
 	@Autowired
 	CuocoRepository cuocoRepository;
@@ -29,15 +38,9 @@ public class CuocoController {
 
 	@GetMapping("/cuoco/{id}")
 	public String getCuoco(@PathVariable("id") Long id, Model model) {
-	    Cuoco cuoco = cuocoService.findById(id);
-	    if (cuoco != null && cuoco.getImmagine() != null) {
-	        // Converti l'array di byte in una stringa Base64
-	        cuoco.setImmagineBase64(Base64.getEncoder().encodeToString(cuoco.getImmagine()));
-	        // Passa la stringa Base64 al modello
-	        model.addAttribute("base64Image", cuoco.getImmagineBase64());
-	    }
-	    model.addAttribute("cuoco", cuoco);
-	    return "cuoco.html";
+		Cuoco cuoco = cuocoService.findById(id);
+		model.addAttribute("cuoco", cuoco);
+		return "cuoco.html";
 	}
 
 	@GetMapping("/cuochi")
@@ -76,31 +79,37 @@ public class CuocoController {
 	}
 
 	@PostMapping("/admin/cuochi")
-	public String newCuoco(@ModelAttribute("cuoco") Cuoco cuoco, @RequestParam("immagine") MultipartFile immagine,
-	        Model model) throws IOException {
+	public String newCuoco(@ModelAttribute("cuoco") Cuoco cuoco, @RequestParam("immagine") MultipartFile file, Model model) {
 	    if (!cuocoRepository.existsByNomeAndCognome(cuoco.getNome(), cuoco.getCognome())) {
-	        // Accedi ai byte dell'immagine
-	        byte[] immagineBytes = immagine.getBytes();
-	        
-	        // Codifica i byte dell'immagine come una stringa Base64
-	        String immagineBase64 = Base64.getEncoder().encodeToString(immagineBytes);
-	        
-	        // Imposta l'immagine Base64 nel modello
-	        model.addAttribute("immagineBase64", immagineBase64);
-	        
-	        // Imposta l'immagine del cuoco
-	        cuoco.setImmagine(immagineBytes);
-	        
-	        // Salva il cuoco
-	        this.cuocoService.save(cuoco);
-	        
-	        model.addAttribute("cuochi", cuoco);
-	        return "cuoco.html";
+	        if (!file.isEmpty()) {
+	            try {
+	                // Salva il file sul server
+	                String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+	                Path path = Paths.get(UPLOAD_DIR + File.separator + fileName);
+	                Files.write(path, file.getBytes());
+	                cuoco.setUrlImage(fileName);
+	                
+	                // Salva il cuoco
+	                this.cuocoService.save(cuoco);
+	                
+	                model.addAttribute("cuoco", cuoco);
+	                return "cuoco";
+	            } catch (IOException e) {
+	                e.printStackTrace();
+	                model.addAttribute("messaggioErrore", "Errore durante il salvataggio dell'immagine");
+	                return "formNewCuoco";
+	            }
+	        } else {
+	            model.addAttribute("messaggioErrore", "Il file dell'immagine è vuoto");
+	            return "formNewCuoco";
+	        }
 	    } else {
 	        model.addAttribute("messaggioErrore", "Questo cuoco esiste già");
-	        return "/admin/formNewCuoco.html";
+	        return "formNewCuoco";
 	    }
 	}
+
+
 
 
 	@GetMapping(value = "/admin/deleteCuoco/{cuocoId}")
