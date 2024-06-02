@@ -7,6 +7,7 @@ import java.util.Objects;
 
 import org.springframework.web.multipart.MultipartFile;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -33,11 +34,9 @@ public class Cuoco {
 		
 		public LocalDate nascita;
 		
-		@OneToMany(mappedBy = "cuoco")
+		/* esegue un joincolumn standard con la tabella ricetta, che avrà una colonna cuoco_id*/
+		@OneToMany(mappedBy = "cuoco", fetch = FetchType.EAGER)
 		private List<Ricetta> ricette;
-
-
-
 
 		public Cuoco() {
 			this.ricette = new LinkedList<>();

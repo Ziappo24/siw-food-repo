@@ -2,7 +2,6 @@ package it.uniroma3.siw.model;
 
 import java.util.Map;
 import java.util.Objects;
-import java.util.Set;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -44,17 +43,6 @@ public class Ingrediente {
 	@Column(name = "quantita")
 	private Map<Long, Integer> quantitaToRicetta;
 
-	@ManyToMany
-    private Set<Ingrediente> ingredientiUtilizzati;
-	
-
-	public Set<Ingrediente> getIngredientiUtilizzati() {
-		return ingredientiUtilizzati;
-	}
-
-	public void setIngredientiUtilizzati(Set<Ingrediente> ingredientiUtilizzati) {
-		this.ingredientiUtilizzati = ingredientiUtilizzati;
-	}
 
 	public Map<Long, Integer> getQuantitaToRicetta() {
 		return quantitaToRicetta;
