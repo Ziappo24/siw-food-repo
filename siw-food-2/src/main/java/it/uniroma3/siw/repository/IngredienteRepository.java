@@ -19,9 +19,9 @@ public interface IngredienteRepository extends CrudRepository<Ingrediente, Long>
 	@Query(value="select * "
 	        + "from ingrediente i "
 	        + "where i.id not in "
-	        + "(select ir.ingredienti_utilizzati_id "
-	        + "from ingrediente_ricette ir "
-	        + "where ir.ricette_id = :ricettaId)", nativeQuery=true)
+	        + "(select ri.ingredienti_utilizzati_id "
+	        + "from ricetta_ingredienti_utilizzati ri "
+	        + "where ri.ricetta_id = :ricettaId)", nativeQuery=true)
 	public Iterable<Ingrediente> findIngredientiNotInRicetta(@Param("ricettaId") Long ricettaId);
 
 }
