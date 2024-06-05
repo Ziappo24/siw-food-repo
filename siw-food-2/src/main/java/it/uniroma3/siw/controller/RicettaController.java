@@ -202,7 +202,7 @@ public class RicettaController {
 	}
 
 	@GetMapping(value = "/admin/addCuoco/{idRicetta}")
-	public String addArtist(@PathVariable("idRicetta") Long ricettaId, Model model) {
+	public String addCuoco(@PathVariable("idRicetta") Long ricettaId, Model model) {
 		model.addAttribute("cuochi", cuocoService.findAll());
 		model.addAttribute("ricetta", ricettaRepository.findById(ricettaId).get());
 		// Ritorna il nome della pagina HTML da visualizzare
@@ -240,7 +240,7 @@ public class RicettaController {
 	}
 
 	@GetMapping(value = "/admin/setCuocoToRicetta/{cuocoId}/{ricettaId}")
-	public String setDirectorToMovie(@PathVariable("cuocoId") Long cuocoId, @PathVariable("ricettaId") Long ricettaId,
+	public String setCuocoToRicetta(@PathVariable("cuocoId") Long cuocoId, @PathVariable("ricettaId") Long ricettaId,
 			Model model) {
 
 		Cuoco cuoco = this.cuocoService.findById(cuocoId);

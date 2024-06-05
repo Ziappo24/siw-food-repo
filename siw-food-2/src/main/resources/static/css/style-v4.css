@@ -348,19 +348,20 @@ footer {
 	font-weight: 450;
 	text-align: justify;
 }
-.html-block-description{
+
+.html-block-description {
 	width: 60%;
-	flex: 1;
-	display: flex; /* Utilizza flexbox per allineare gli elementi */
-	position: relative;
-	top: 89px;
+	display: flex;
+	justify-content: center;
+	align-items: start;
 }
 
 .content-row {
-  display: flex;
-  justify-content: flex-start;
-  /* Allinea gli elementi ai lati opposti */
-  align-items: flex-start;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	/* Allinea gli elementi ai lati opposti */
+	align-items: flex-start;
 }
 
 .first-section-content {

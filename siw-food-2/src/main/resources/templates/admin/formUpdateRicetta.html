@@ -1,3 +1,155 @@
+<!--<!DOCTYPE html>-->
+<!--<html>-->
+
+<!--<head>-->
+<!--	<link rel="preconnect" href="https://fonts.googleapis.com">-->
+<!--	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>-->
+<!--	<link href="https://fonts.googleapis.com/css2?family=Mate+SC&display=swap" rel="stylesheet">-->
+<!--	<link rel="stylesheet"-->
+<!--		href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />-->
+<!--	<meta charset="UTF-8">-->
+<!--	<meta charset="UTF-8">-->
+<!--	<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--	<title>Siw-Food - Cuochi</title>-->
+<!--	<link rel="stylesheet" href="/css/style-v4.css">-->
+<!--</head>-->
+
+<!--<body>-->
+<!--	<div id="site-wrapper" class="site-wrapper">-->
+<!--		<header>-->
+<!--			 Background -->
+<!--			<div class="header-background"></div>-->
+<!--			<div class="header-display-desktop">-->
+<!--			</div>-->
+<!--			 Title and Nav wrapper-->
+<!--			<div class="header-title-nav-wrapper">-->
+<!--				<div class="header-title">-->
+<!--					<div class="header-title-text">-->
+<!--						<a id="site-title" href="/">Siw-Food</a>-->
+<!--					</div>-->
+<!--				</div>-->
+<!--				<div class="header-nav">-->
+<!--					<div class="header-nav-wrapper">-->
+<!--						<nav class="header-nav-list">-->
+<!--							<div class="header-nav-item" th:if="${userDetails}">-->
+<!--								<div class="inline-flex-container">-->
+<!--									<div class="username" th:text="${userDetails.username}"></div>-->
+<!--									<a class="no-underline" href="/logout">Logout</a>-->
+<!--								</div>-->
+<!--							</div>-->
+<!--														<div class="header-nav-item" th:unless="${userDetail}">-->
+<!--															<a href="/formLogin">Login</a>-->
+<!--														</div>-->
+<!--						</nav>-->
+<!--					</div>-->
+<!--				</div>-->
+<!--			</div>-->
+<!--		</header>-->
+<!--		<main>-->
+<!--			<article class="sections" id="sections">-->
+<!--				 inserire sezioni per alcuni articoli presi da database -->
+<!--				<section class="section-cuoco">-->
+<!--					<div class="section-border">-->
+<!--						<div class="section-background"> </div>-->
+<!--					</div>-->
+<!--					<div class="content-wrapper">-->
+<!--						<div class="content">-->
+<!--							<div data-fluid-engine="true">-->
+<!--								<div class="image-block">-->
+<!--									<div class="block-content">-->
+<!--										<img th:if="${ricetta.urlImage.startsWith('https')}"-->
+<!--											th:src="${ricetta.urlImage}" style="width: 30%; height: auto;">-->
+<!--										<img th:unless="${ricetta.urlImage.startsWith('https')}"-->
+<!--											th:src="@{/images/__${ricetta.urlImage}__}"-->
+<!--											style="width: 30%; height: auto;">-->
+<!--									</div>-->
+<!--								</div>-->
+<!--								<div class="html-block">-->
+<!--									<div class="block-content-main">-->
+<!--										<div th:text="${ricetta.nome}"></div>-->
+<!--									</div>-->
+<!--								</div>-->
+<!--								<div class="html-block">-->
+<!--									<div class="block-content">-->
+<!--										<div th:if="${ricetta.cuoco}">-->
+<!--											<strong>Cuoco:</strong>-->
+<!--											<span-->
+<!--												th:text="${ricetta.cuoco.nome} + ' ' + ${ricetta.cuoco.cognome}"></span>-->
+<!--											<br>-->
+<!--											<a th:href="@{'/admin/addCuoco' + '/' + ${ricetta.id}}" class="button-link">-->
+<!--												<button type="button">Modifica cuoco</button>-->
+<!--											</a>-->
+<!--										</div>-->
+<!--										<div th:unless="${ricetta.cuoco}">-->
+<!--											<p>Non c'è nessun cuoco per questa ricetta.</p>-->
+<!--											<a th:href="@{'/admin/addCuoco' + '/' + ${ricetta.id}}" class="button-link">-->
+<!--												<button type="button">Aggiungi cuoco</button>-->
+<!--											</a>-->
+<!--										</div>-->
+<!--									</div>-->
+<!--								</div>-->
+
+<!--								<div class="html-block">-->
+<!--									<div class="block-content">-->
+<!--										<strong>Lista degli ingredienti:</strong>-->
+<!--										<ul>-->
+<!--											<div th:each="ingrediente: ${ricetta.ingredientiUtilizzati}">-->
+<!--												<li>-->
+<!--													<span-->
+<!--														th:text="${ingrediente.nome} + ' ' + ${ingrediente.quantitaToRicetta[ricetta.id]} + ' ' + ${ingrediente.unitaDiMisura}"></span>-->
+<!--													<a-->
+<!--														th:href="@{'/admin/updateQuantita/' + ${ingrediente.id} + '/' + ${ricetta.id}}">-->
+<!--														<span class="material-symbols-outlined edit-icon">edit</span>-->
+<!--													</a>-->
+<!--												</li>-->
+<!--											</div>-->
+<!--										</ul>-->
+<!--										<a th:href="@{'/admin/updateIngredienti/' + ${ricetta.id}}">-->
+<!--											<button type="button">Modifica</button>-->
+<!--										</a>-->
+<!--									</div>-->
+<!--								</div>-->
+<!--								<div class="html-block">-->
+<!--									<div class="block-content">-->
+<!--										<div class="description-title">Descrizione:</div>-->
+<!--										<div class="description-text">-->
+<!--											<span th:text="${ricetta.descrizione}"></span>-->
+<!--										</div>-->
+<!--										<span th:if="${ricetta.descrizione == null}">-->
+<!--											Non disponibile-->
+<!--										</span>-->
+<!--										<a th:href="@{'/admin/deleteRicetta/' + ${ricetta.id}}">Elimina</a>-->
+<!--									</div>-->
+<!--								</div>-->
+<!--							</div>-->
+<!--						</div>-->
+<!--					</div>-->
+<!--				</section>-->
+<!--			</article>-->
+<!--		</main>-->
+<!--		<footer id="footer-sections" class="footer">-->
+<!--			<div class="section-border">-->
+<!--				<div class="section-background"> </div>-->
+<!--			</div>-->
+<!--			<div class="content-wrapper">-->
+<!--				<div class="content">-->
+<!--					<div class="socials">-->
+<!--						<nav class="footer-nav-list">-->
+<!--							<a href="https://www.instagram.com/edoardopiazzolla/">-->
+<!--								<img src="/images/Instagram.png" />-->
+<!--							</a>-->
+<!--							<a href="https://www.youtube.com/channel/UC5LdtlfzoK9pftejCPvzWrg">-->
+<!--								<img src="/images/youtube.png" />-->
+<!--							</a>-->
+<!--						</nav>-->
+<!--					</div>-->
+<!--				</div>-->
+<!--			</div>-->
+<!--		</footer>-->
+<!--	</div>-->
+<!--</body>-->
+
+<!--</html>-->
 <!DOCTYPE html>
 <html>
 
@@ -7,7 +159,6 @@
 	<link href="https://fonts.googleapis.com/css2?family=Mate+SC&display=swap" rel="stylesheet">
 	<link rel="stylesheet"
 		href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-	<meta charset="UTF-8">
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Siw-Food - Cuochi</title>
@@ -19,8 +170,7 @@
 		<header>
 			<!-- Background -->
 			<div class="header-background"></div>
-			<div class="header-display-desktop">
-			</div>
+			<div class="header-display-desktop"></div>
 			<!-- Title and Nav wrapper-->
 			<div class="header-title-nav-wrapper">
 				<div class="header-title">
@@ -37,9 +187,11 @@
 									<a class="no-underline" href="/logout">Logout</a>
 								</div>
 							</div>
-							<!--							<div class="header-nav-item" th:unless="${userDetail}">-->
-							<!--								<a href="/formLogin">Login</a>-->
-							<!--							</div>-->
+							<!--
+							<div class="header-nav-item" th:unless="${userDetail}">
+								<a href="/formLogin">Login</a>
+							</div>
+							-->
 						</nav>
 					</div>
 				</div>
@@ -48,80 +200,99 @@
 		<main>
 			<article class="sections" id="sections">
 				<!-- inserire sezioni per alcuni articoli presi da database -->
-				<section class="section-cuoco">
+				<section>
 					<div class="section-border">
 						<div class="section-background"> </div>
 					</div>
-					<div class="content-wrapper">
-						<div class="content">
-							<div data-fluid-engine="true">
-								<div class="image-block">
+					<div class="content-wrapper" style="padding: 100px;">
+						<div class="content-row" style="align-items: center;">
+							<div class="content-column">
+								<div class="image-block" th:if="${ricetta.urlImage != null}">
 									<div class="block-content">
 										<img th:if="${ricetta.urlImage.startsWith('https')}"
-											th:src="${ricetta.urlImage}" style="width: 30%; height: auto;">
+											th:src="${ricetta.urlImage}"
+											style="width: 100%; height: auto; max-width: 500px; max-height: 500px;">
 										<img th:unless="${ricetta.urlImage.startsWith('https')}"
 											th:src="@{/images/__${ricetta.urlImage}__}"
-											style="width: 30%; height: auto;">
+											style="width: 80%; height: auto; max-width: 500px; max-height: 500px;">
 									</div>
+									<span class="description-text" th:if="${ricetta.urlImage == null}">L'immagine
+										non è disponibile.</span>
 								</div>
-								<div class="html-block">
+							</div>
+							<div class="html-block html-block-description"
+								style="display: flex; flex-direction: column;">
+								<div class="html-block" style="margin: unset;">
 									<div class="block-content-main">
 										<div th:text="${ricetta.nome}"></div>
 									</div>
 								</div>
-								<div class="html-block">
-									<div class="block-content">
-										<div th:if="${ricetta.cuoco}">
-											<strong>Cuoco:</strong>
-											<span
-												th:text="${ricetta.cuoco.nome} + ' ' + ${ricetta.cuoco.cognome}"></span>
-											<br>
-											<a th:href="@{'/admin/addCuoco' + '/' + ${ricetta.id}}" class="button-link">
-												<button type="button">Modifica cuoco</button>
-											</a>
-										</div>
-										<div th:unless="${ricetta.cuoco}">
-											<p>Non c'è nessun cuoco per questa ricetta.</p>
-											<a th:href="@{'/admin/addCuoco' + '/' + ${ricetta.id}}" class="button-link">
-												<button type="button">Aggiungi cuoco</button>
-											</a>
-										</div>
+								<div class="block-content">
+									<div class="description-title">Descrizione:</div>
+									<div class="description-text">
+										<span th:text="${ricetta.descrizione}"></span>
 									</div>
-								</div>
-
-								<div class="html-block">
-									<div class="block-content">
-										<strong>Lista degli ingredienti:</strong>
-										<ul>
-											<div th:each="ingrediente: ${ricetta.ingredientiUtilizzati}">
-												<li>
-													<span
-														th:text="${ingrediente.nome} + ' ' + ${ingrediente.quantitaToRicetta[ricetta.id]} + ' ' + ${ingrediente.unitaDiMisura}"></span>
-													<a
-														th:href="@{'/admin/updateQuantita/' + ${ingrediente.id} + '/' + ${ricetta.id}}">
-														<span class="material-symbols-outlined edit-icon">edit</span>
-													</a>
-												</li>
+									<span th:if="${ricetta.descrizione == null}">Non disponibile</span>
+									<div class="html-block">
+										<div class="block-content">
+											<div th:if="${ricetta.cuoco}">
+												<strong>Cuoco:</strong>
+												<span
+													th:text="${ricetta.cuoco.nome} + ' ' + ${ricetta.cuoco.cognome}"></span>
+												<br>
+												<a th:href="@{'/admin/addCuoco' + '/' + ${ricetta.id}}"
+													class="button-link">
+													<button type="button">Modifica cuoco</button>
+												</a>
 											</div>
-										</ul>
-										<a th:href="@{'/admin/updateIngredienti/' + ${ricetta.id}}">
-											<button type="button">Modifica</button>
-										</a>
-									</div>
-								</div>
-								<div class="html-block">
-									<div class="block-content">
-										<div class="description-title">Descrizione:</div>
-										<div class="description-text">
-											<span th:text="${ricetta.descrizione}"></span>
+											<div th:unless="${ricetta.cuoco}">
+												<p>Non c'è nessun cuoco per questa ricetta.</p>
+												<a th:href="@{'/admin/addCuoco' + '/' + ${ricetta.id}}"
+													class="button-link">
+													<button type="button">Aggiungi cuoco</button>
+												</a>
+											</div>
 										</div>
-										<span th:if="${ricetta.descrizione == null}">
-											Non disponibile
-										</span>
-										<a th:href="@{'/admin/deleteRicetta/' + ${ricetta.id}}">Elimina</a>
 									</div>
+									<a th:href="@{'/admin/deleteRicetta/' + ${ricetta.id}}">Elimina</a>
 								</div>
 							</div>
+						</div>
+					</div>
+				</section>
+				<section class="section-cuoco"
+					style="padding: 100px; display: flex; flex-direction: row; align-items: start; justify-content: space-evenly;">
+					<div class="html-block" style="justify-content: center; width: 100%;">
+						<div class="block-content" style="display: flex; flex-direction: column; align-items: center;">
+							<strong style="font-size: 30px;">Lista degli ingredienti:</strong>
+							<ul
+								style="display: flex; flex-wrap: wrap; flex-direction: row; align-items: start; text-align: justify; justify-content: space-evenly; list-style: none; width: 100%;">
+								<div th:each="ingrediente: ${ricetta.ingredientiUtilizzati}"
+									style="justify-content: center; align-items: center; padding: 20px;">
+									<li
+										style="width: 313px; height: 300px; display: flex; flex-direction: column; justify-content: center; align-items: center; border: 1px solid rgb(0, 0, 0);">
+										<div th:if="${ingrediente.urlImage != null}"
+											style="display: flex; flex-direction: column; align-items: center;">
+											<img th:if="${ingrediente.urlImage.startsWith('https')}"
+												th:src="${ingrediente.urlImage}"
+												style="width: 100%; height: auto; max-width: 200px; max-height: 200px; margin-top: 15px; padding: 20px; display: flex; align-items: center; justify-content: center;">
+											<img th:unless="${ingrediente.urlImage.startsWith('https')}"
+												th:src="@{/images/__${ingrediente.urlImage}__}"
+												style="width: 100%; height: auto; max-width: 200px; max-height: 200px; margin-top: 15px; padding: 20px; display: flex; align-items: center; justify-content: center;">
+										</div>
+										<span
+											th:text="${ingrediente.nome} + ' ' + ${ingrediente.quantitaToRicetta[ricetta.id]} + ' '+ ${ingrediente.unitaDiMisura}"
+											style="justify-content: center; text-align: center;"></span>
+										<a
+											th:href="@{'/admin/updateQuantita/' + ${ingrediente.id} + '/' + ${ricetta.id}}">
+											<span class="material-symbols-outlined edit-icon">edit</span>
+										</a>
+									</li>
+								</div>
+							</ul>
+							<a th:href="@{'/admin/updateIngredienti/' + ${ricetta.id}}">
+								<button type="button">Modifica</button>
+							</a>
 						</div>
 					</div>
 				</section>
