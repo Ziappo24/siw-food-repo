@@ -44,6 +44,8 @@ public class IngredienteController {
 		return "ingredienti.html";
 	}
 	
+	// manca cuoco search ingredienti
+	
 	@PostMapping("/searchIngredienti")
 	public String searchIngredienti(Model model, @RequestParam String nome) {
 		model.addAttribute("ingredienti", this.ingredienteRepository.findByNome(nome));
