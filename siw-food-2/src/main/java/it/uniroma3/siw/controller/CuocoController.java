@@ -61,7 +61,7 @@ public class CuocoController {
 		return "/admin/manageCuochi.html";
 	}
 
-	@GetMapping(value = "/admin/indexCuco")
+	@GetMapping(value = "/admin/indexCuoco")
 	public String indexCuoco() {
 		return "admin/indexCuoco.html";
 	}
