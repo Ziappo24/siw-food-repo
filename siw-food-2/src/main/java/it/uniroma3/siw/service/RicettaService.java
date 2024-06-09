@@ -28,6 +28,10 @@ public class RicettaService {
 		return ricettaRepository.findByCuoco(cuoco);
 	}
 	
+	public Ricetta findByCuocoId(Long id) {
+		return ricettaRepository.findByCuocoId(id);
+	}
+	
 	public void deleteById(Long id) {
         ricettaRepository.deleteById(id);
     }

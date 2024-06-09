@@ -51,6 +51,16 @@ public class UserService {
     public User getUserByCognome(String cognome) {
         return this.userRepository.findByNome(cognome);
     }
+    
+    /**
+     * This method retrieves a User from the DB based on its name and surname.
+     * @param nome the name, cognome the surname of the User to retrieve from the DB
+     * @return the retrieved User, or null if no User with the passed name could be found in the DB
+     */
+    @Transactional
+    public User getUserByNomeAndCognome(String nome, String cognome) {
+        return this.userRepository.findByNomeAndCognome(nome, cognome);
+    }
 
     /**
      * This method saves a User in the DB.

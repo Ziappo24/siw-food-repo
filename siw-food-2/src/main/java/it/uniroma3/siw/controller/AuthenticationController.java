@@ -1,5 +1,11 @@
 package it.uniroma3.siw.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -7,10 +13,13 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import it.uniroma3.siw.model.Credentials;
 import it.uniroma3.siw.model.Cuoco;
@@ -22,6 +31,8 @@ import jakarta.validation.Valid;
 
 @Controller
 public class AuthenticationController {
+	
+	private static String UPLOAD_DIR = "C:\\Users\\EDOARDO\\Desktop\\FOR SISW\\siw-food-repo\\siw-food-2\\src\\main\\resources\\static\\images";
 	
 	@Autowired
 	private CredentialsService credentialsService;
@@ -103,27 +114,49 @@ public class AuthenticationController {
 //        return "registerUser";
 //    }
 	
-	@PostMapping(value = { "/register" })
+    @PostMapping(value = { "/register" })
     public String registerUser(@Valid @ModelAttribute("user") User user,
                  BindingResult userBindingResult, @Valid
                  @ModelAttribute("credentials") Credentials credentials,
-                 BindingResult credentialsBindingResult,
+                 BindingResult credentialsBindingResult, @RequestParam("immagine") MultipartFile file,
                  Model model) {
 
 		// se user e credential hanno entrambi contenuti validi, memorizza User e the Credentials nel DB
-        if(!userBindingResult.hasErrors() && !credentialsBindingResult.hasErrors()) {
-            userService.saveUser(user);
-            credentials.setUser(user);
-            credentialsService.saveCredentials(credentials);
-            model.addAttribute("user", user);
-            Cuoco nuovoCuoco = new Cuoco();
-            nuovoCuoco.nome = user.getNome();
-            nuovoCuoco.cognome = user.getCognome();
-            nuovoCuoco.nascita = user.getNascita();
-            nuovoCuoco.urlImage = user.getUrlImage();
-            this.cuocoService.save(nuovoCuoco);
-            return "registrationSuccessful";
-        }
-        return "registerUser";
-    }
+		 if (!userBindingResult.hasErrors() && !credentialsBindingResult.hasErrors()) {
+	            if (!file.isEmpty()) {
+	                try {
+	                    // Salva il file sul server
+	                    String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+	                    Path path = Paths.get(UPLOAD_DIR + File.separator + fileName);
+	                    Files.write(path, file.getBytes());
+	                    user.setUrlImage(fileName);  // Assumi che l'entità User abbia un campo urlImage
+	                } catch (IOException e) {
+	                    e.printStackTrace();
+	                    model.addAttribute("errorMessage", "Errore durante il salvataggio dell'immagine");
+	                    return "registrationForm";
+	                }
+	            } else {
+	                model.addAttribute("errorMessage", "Il file dell'immagine è vuoto");
+	                return "registrationForm";
+	            }
+
+	            // Salva l'utente e le credenziali
+	            userService.saveUser(user);
+	            credentials.setUser(user);
+	            credentialsService.saveCredentials(credentials);
+
+	            // Crea e salva un nuovo Cuoco
+	            Cuoco nuovoCuoco = new Cuoco();
+	            nuovoCuoco.setNome(user.getNome());
+	            nuovoCuoco.setCognome(user.getCognome());
+	            nuovoCuoco.setNascita(user.getNascita());
+	            nuovoCuoco.setUrlImage(user.getUrlImage());
+	            cuocoService.save(nuovoCuoco);
+
+	            model.addAttribute("user", user);
+	            return "registrationSuccessful";
+	        } else {
+	            return "registerUser";
+	        }
+	    }
 }

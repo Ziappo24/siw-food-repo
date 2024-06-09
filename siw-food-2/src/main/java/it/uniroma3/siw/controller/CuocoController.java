@@ -13,16 +13,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.util.StringUtils;
 
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-
+import it.uniroma3.siw.model.User;
+import it.uniroma3.siw.model.Credentials;
 import it.uniroma3.siw.model.Cuoco;
+import it.uniroma3.siw.model.Ricetta;
+import it.uniroma3.siw.repository.CredentialsRepository;
 import it.uniroma3.siw.repository.CuocoRepository;
+import it.uniroma3.siw.repository.RicettaRepository;
+import it.uniroma3.siw.repository.UserRepository;
 import it.uniroma3.siw.service.CuocoService;
 
 @Controller
@@ -34,7 +38,16 @@ public class CuocoController {
 	CuocoRepository cuocoRepository;
 
 	@Autowired
+	UserRepository userRepository;
+
+	@Autowired
 	CuocoService cuocoService;
+
+	@Autowired
+	CredentialsRepository credentialsRepository;
+
+	@Autowired
+	RicettaRepository ricettaRepository;
 
 	@GetMapping("/cuoco/{id}")
 	public String getCuoco(@PathVariable("id") Long id, Model model) {
@@ -79,42 +92,56 @@ public class CuocoController {
 	}
 
 	@PostMapping("/admin/cuochi")
-	public String newCuoco(@ModelAttribute("cuoco") Cuoco cuoco, @RequestParam("immagine") MultipartFile file, Model model) {
-	    if (!cuocoRepository.existsByNomeAndCognome(cuoco.getNome(), cuoco.getCognome())) {
-	        if (!file.isEmpty()) {
-	            try {
-	                // Salva il file sul server
-	                String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-	                Path path = Paths.get(UPLOAD_DIR + File.separator + fileName);
-	                Files.write(path, file.getBytes());
-	                cuoco.setUrlImage(fileName);
-	                
-	                // Salva il cuoco
-	                this.cuocoService.save(cuoco);
-	                
-	                model.addAttribute("cuoco", cuoco);
-	                return "cuoco";
-	            } catch (IOException e) {
-	                e.printStackTrace();
-	                model.addAttribute("messaggioErrore", "Errore durante il salvataggio dell'immagine");
-	                return "formNewCuoco";
-	            }
-	        } else {
-	            model.addAttribute("messaggioErrore", "Il file dell'immagine è vuoto");
-	            return "formNewCuoco";
-	        }
-	    } else {
-	        model.addAttribute("messaggioErrore", "Questo cuoco esiste già");
-	        return "formNewCuoco";
-	    }
+	public String newCuoco(@ModelAttribute("cuoco") Cuoco cuoco, @RequestParam("immagine") MultipartFile file,
+			Model model) {
+		if (!cuocoRepository.existsByNomeAndCognome(cuoco.getNome(), cuoco.getCognome())) {
+			if (!file.isEmpty()) {
+				try {
+					// Salva il file sul server
+					String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+					Path path = Paths.get(UPLOAD_DIR + File.separator + fileName);
+					Files.write(path, file.getBytes());
+					cuoco.setUrlImage(fileName);
+
+					// Salva il cuoco
+					this.cuocoService.save(cuoco);
+
+					model.addAttribute("cuoco", cuoco);
+					return "cuoco";
+				} catch (IOException e) {
+					e.printStackTrace();
+					model.addAttribute("messaggioErrore", "Errore durante il salvataggio dell'immagine");
+					return "formNewCuoco";
+				}
+			} else {
+				model.addAttribute("messaggioErrore", "Il file dell'immagine è vuoto");
+				return "formNewCuoco";
+			}
+		} else {
+			model.addAttribute("messaggioErrore", "Questo cuoco esiste già");
+			return "formNewCuoco";
+		}
 	}
-
-
-
 
 	@GetMapping(value = "/admin/deleteCuoco/{cuocoId}")
 	public String deleteCuocoAdmin(@PathVariable("cuocoId") Long cuocoId, Model model) {
-		cuocoService.deleteById(cuocoId);
+		Cuoco cuoco = cuocoService.findById(cuocoId);
+		User userAssociato = userRepository.findByNomeAndCognome(cuoco.getNome(), cuoco.getCognome());
+
+		if (userAssociato != null) {
+			Credentials credentialsAssociate = credentialsRepository.findById(userAssociato.getId()).get();
+			if (credentialsAssociate.getRole().toString() == "CUOCO") {
+				if (cuoco.getRicette() != null) {
+					Ricetta ricetta = ricettaRepository.findByCuocoId(cuocoId);
+					ricetta.setCuoco(null);
+				}
+				userRepository.deleteById(userAssociato.getId());
+				credentialsRepository.deleteById(credentialsAssociate.getId());
+			}
+			cuocoRepository.deleteById(cuocoId);
+		} else {
+			cuocoRepository.deleteById(cuocoId);
+		}
 		return "redirect:/admin/manageCuochi";
 	}
 
