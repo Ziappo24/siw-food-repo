@@ -37,7 +37,7 @@ public class Cuoco {
 		public LocalDate nascita;
 		
 		/* esegue un joincolumn standard con la tabella ricetta, che avrà una colonna cuoco_id*/
-		@OneToMany(mappedBy = "cuoco", fetch = FetchType.EAGER /*, cascade = CascadeType.ALL, orphanRemoval = true*/)
+		@OneToMany(mappedBy = "cuoco", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
 		private List<Ricetta> ricette;
 
 		public Cuoco() {

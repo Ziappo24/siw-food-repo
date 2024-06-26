@@ -6,8 +6,10 @@ import java.util.Set;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -30,10 +32,10 @@ public class Ricetta {
 	@Column(length = 2000)
 	private String descrizione;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
 	private Cuoco cuoco;
 	
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
 	private Set<Ingrediente> ingredientiUtilizzati;
 	
 	@Transient
