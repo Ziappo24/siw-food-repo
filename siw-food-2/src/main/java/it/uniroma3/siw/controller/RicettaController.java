@@ -68,8 +68,8 @@ public class RicettaController {
 	@Autowired
 	CredentialsRepository credentialsRepository;
 
-	private static String UPLOAD_DIR = "C:\\Users\\EDOARDO\\Desktop\\FOR SISW\\siw-food-repo\\siw-food-2\\src\\main\\resources\\static\\images";
-
+//	private static String UPLOAD_DIR = "C:\\Users\\EDOARDO\\Desktop\\FOR SISW\\siw-food-repo\\siw-food-2\\src\\main\\resources\\static\\images";
+	private static String UPLOAD_DIR = "C:\\Users\\UTENTE\\Documents\\workspace-spring-tool-suite-4-4.22.0.RELEASE\\siw-food-repo\\siw-food-2\\src\\main\\resources\\static\\images";
 	@GetMapping("/ricetta/{id}")
 	public String getRicetta(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("ricetta", this.ricettaRepository.findById(id).get());

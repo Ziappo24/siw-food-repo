@@ -32,8 +32,8 @@ import it.uniroma3.siw.service.CuocoService;
 @Controller
 public class CuocoController {
 
-	private static String UPLOAD_DIR = "C:\\Users\\EDOARDO\\Desktop\\FOR SISW\\siw-food-repo\\siw-food-2\\src\\main\\resources\\static\\images";
-
+//	private static String UPLOAD_DIR = "C:\\Users\\EDOARDO\\Desktop\\FOR SISW\\siw-food-repo\\siw-food-2\\src\\main\\resources\\static\\images";
+	private static String UPLOAD_DIR = "C:\\Users\\UTENTE\\Documents\\workspace-spring-tool-suite-4-4.22.0.RELEASE\\siw-food-repo\\siw-food-2\\src\\main\\resources\\static\\images";
 	@Autowired
 	CuocoRepository cuocoRepository;
 
