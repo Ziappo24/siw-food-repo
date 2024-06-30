@@ -22,8 +22,6 @@
   
 - <strong>Visualizzazione Ricette</strong>: Esplora e cerca ricette condivise da altri utenti.
   
-- <strong>Interazione Sociale</strong>: Commenta e valuta le ricette degli altri utenti.
-  
 </p>
 
 ## Tecnologie Utilizzate
