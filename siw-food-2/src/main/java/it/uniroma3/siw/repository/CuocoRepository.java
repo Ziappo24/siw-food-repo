@@ -18,5 +18,6 @@ public interface CuocoRepository extends CrudRepository<Cuoco, Long> {
 	public Cuoco findByNomeAndCognome(String nome, String cognome);
 
 	public boolean existsByNomeAndCognome(String nome, String cognome);
+	
 
 }
